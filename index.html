@@ -120,37 +120,321 @@
             padding: 14px;
             font-size: 13px;
         }
-/* Menu inicial compacto quando o Modo Celular estiver ativado */
-body.mobile-mode #start-menu .pastel-gray-card {
-    max-width: 95vw;
-    padding: 16px;
-    gap: 12px;
-    border-radius: 16px;
+/* Mobile mode compact layout */
+body.mobile-mode {
+    padding-top: 62px;
 }
 
-body.mobile-mode #start-menu h1 {
-    font-size: 1.8rem !important;
+body.mobile-mode header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    padding: 0.4rem 0.55rem;
+    gap: 0.45rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+body.mobile-mode header > div:first-child h1 {
+    font-size: 0.88rem;
     line-height: 1;
 }
 
-body.mobile-mode #start-menu p {
-    font-size: 0.75rem;
-    max-width: 100%;
+body.mobile-mode header > div:first-child {
+    gap: 0.45rem;
+    flex-shrink: 0;
 }
 
-body.mobile-mode #start-menu button {
-    padding: 10px 12px !important;
-    font-size: 0.7rem !important;
+body.mobile-mode header > div:nth-child(2) {
+    gap: 0.3rem;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+body.mobile-mode header > div:nth-child(2) > div {
+    padding: 0.35rem 0.55rem;
+    border-radius: 0.45rem;
+    font-size: 0.65rem;
+    line-height: 1;
+}
+
+body.mobile-mode header > div:last-child {
+    gap: 0.35rem;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+body.mobile-mode header button {
+    padding: 0.35rem 0.45rem;
+    font-size: 0.62rem;
+    border-radius: 0.45rem;
+}
+
+body.mobile-mode header button svg {
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+body.mobile-mode #start-wave-label,
+body.mobile-mode #autoskip-label,
+body.mobile-mode #sound-label,
+body.mobile-mode #speed-label {
+    font-size: 0.62rem;
+}
+
+body.mobile-mode main {
+    padding: 0.45rem;
+    gap: 0.45rem;
+    max-width: 100vw;
+}
+
+body.mobile-mode main > div,
+body.mobile-mode main > aside {
+    border-radius: 0.6rem;
+}
+
+body.mobile-mode main > div {
+    min-height: 270px;
+    padding: 0.35rem;
+}
+
+body.mobile-mode #gameCanvas {
+    border-radius: 0.45rem;
+}
+
+body.mobile-mode aside {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.35rem;
+    gap: 0.35rem;
+}
+
+body.mobile-mode #inspector-panel {
+    padding: 0.55rem;
+    gap: 0.4rem;
+}
+
+body.mobile-mode #inspect-title,
+body.mobile-mode #inspect-subtitle {
+    font-size: 0.64rem;
+}
+
+body.mobile-mode #inspect-details,
+body.mobile-mode #status-notice {
+    font-size: 0.62rem;
+    line-height: 1.25;
+}
+
+body.mobile-mode #inspect-actions {
+    gap: 0.35rem;
+}
+
+body.mobile-mode #inspect-actions button {
+    padding: 0.42rem 0.55rem;
+    font-size: 0.62rem;
+}
+
+body.mobile-mode footer {
+    bottom: 0.45rem;
+    padding: 0.35rem;
+    gap: 0.35rem;
+    border-radius: 0.7rem;
+    max-width: 97vw;
+    transform: translateX(-50%) scale(0.86);
+    transform-origin: bottom center;
+}
+
+body.mobile-mode .btn-tool-square {
+    width: 50px;
+    height: 50px;
+}
+
+body.mobile-mode .btn-tool-square svg {
+    width: 18px;
+    height: 18px;
+}
+
+body.mobile-mode .btn-tool-square span {
+    font-size: 8px;
+    margin-top: 0.2rem;
+}
+
+body.mobile-mode #floating-inspector {
+    min-width: 190px;
+    padding: 10px;
+    font-size: 12px;
+}
+
+body.mobile-mode #start-menu {
+    padding: 0.75rem;
+}
+
+body.mobile-mode #start-menu .pastel-gray-card {
+    max-width: 92vw;
+    width: 100%;
+    padding: 0.95rem;
+    gap: 0.7rem;
+    border-radius: 1rem;
 }
 
 body.mobile-mode #start-menu .animate-tilt {
     margin: 0;
 }
 
-body.mobile-mode #start-menu .pastel-gray-card > * {
-    margin-top: 0;
-    margin-bottom: 0;
+body.mobile-mode #start-menu h1 {
+    font-size: 1.45rem !important;
+    line-height: 1;
 }
+
+body.mobile-mode #start-menu p {
+    font-size: 0.7rem;
+    max-width: 100%;
+    line-height: 1.25;
+}
+
+body.mobile-mode #start-menu .w-full.bg-slate-900\/80 {
+    padding: 0.6rem;
+    gap: 0.5rem;
+}
+
+body.mobile-mode #start-menu .w-full.flex.flex-col.gap-3.mt-2 {
+    gap: 0.45rem;
+    margin-top: 0.25rem;
+}
+
+body.mobile-mode #start-menu button {
+    padding: 0.62rem 0.7rem !important;
+    font-size: 0.62rem !important;
+    line-height: 1.05;
+    border-radius: 0.75rem;
+}
+
+body.mobile-mode #start-menu button svg {
+    width: 0.85rem;
+    height: 0.85rem;
+}
+
+body.mobile-mode {
+    overflow: hidden !important;
+    height: 100dvh;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+body.mobile-mode header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    padding: 0.4rem 0.55rem;
+    gap: 0.45rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+body.mobile-mode main {
+    margin-top: var(--mobile-header-h, 62px);
+    height: calc(100dvh - var(--mobile-header-h, 62px) - var(--mobile-footer-h, 78px));
+    padding: 0.35rem;
+    gap: 0.35rem;
+    max-width: 100vw;
+    overflow: hidden;
+    min-height: 0;
+}
+
+body.mobile-mode main > div,
+body.mobile-mode main > aside {
+    border-radius: 0.6rem;
+    min-height: 0;
+}
+
+body.mobile-mode main > div {
+    flex: 1 1 auto;
+    padding: 0.3rem;
+    min-height: 0;
+}
+
+body.mobile-mode #gameCanvas {
+    border-radius: 0.45rem;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+body.mobile-mode aside {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.3rem;
+    gap: 0.3rem;
+    flex: 0 0 auto;
+    max-height: 20dvh;
+    overflow: auto;
+}
+
+body.mobile-mode #inspector-panel {
+    padding: 0.5rem;
+    gap: 0.35rem;
+}
+
+body.mobile-mode #inspect-title,
+body.mobile-mode #inspect-subtitle {
+    font-size: 0.64rem;
+}
+
+body.mobile-mode #inspect-details,
+body.mobile-mode #status-notice {
+    font-size: 0.62rem;
+    line-height: 1.25;
+}
+
+body.mobile-mode #inspect-actions {
+    gap: 0.35rem;
+}
+
+body.mobile-mode #inspect-actions button {
+    padding: 0.42rem 0.55rem;
+    font-size: 0.62rem;
+}
+
+body.mobile-mode footer {
+    bottom: 0.45rem;
+    padding: 0.35rem;
+    gap: 0.35rem;
+    border-radius: 0.7rem;
+    max-width: 97vw;
+    transform: translateX(-50%) scale(0.86);
+    transform-origin: bottom center;
+}
+
+body.mobile-mode .btn-tool-square {
+    width: 50px;
+    height: 50px;
+}
+
+body.mobile-mode .btn-tool-square svg {
+    width: 18px;
+    height: 18px;
+}
+
+body.mobile-mode .btn-tool-square span {
+    font-size: 8px;
+    margin-top: 0.2rem;
+}
+
+body.mobile-mode #floating-inspector {
+    min-width: 190px;
+    padding: 10px;
+    font-size: 12px;
+}
+
     </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col justify-between overflow-x-hidden pb-20">
@@ -450,6 +734,22 @@ body.mobile-mode #start-menu .pastel-gray-card > * {
             restartGame();
         }
 
+        function syncMobileLayoutVars() {
+            const root = document.documentElement;
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+
+            if (isMobileMode) {
+                const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 62;
+                const footerH = footer ? Math.ceil(footer.getBoundingClientRect().height) : 78;
+                root.style.setProperty('--mobile-header-h', `${headerH}px`);
+                root.style.setProperty('--mobile-footer-h', `${footerH}px`);
+            } else {
+                root.style.removeProperty('--mobile-header-h');
+                root.style.removeProperty('--mobile-footer-h');
+            }
+        }
+
         function toggleMobileMode() {
             isMobileMode = !isMobileMode;
             const lbl = document.getElementById('mobile-toggle-label');
@@ -460,7 +760,10 @@ body.mobile-mode #start-menu .pastel-gray-card > * {
                 document.body.classList.remove('mobile-mode');
                 lbl.innerText = 'MODO CELULAR: DESATIVADO 💻';
             }
-            resizeCanvas();
+            requestAnimationFrame(() => {
+                syncMobileLayoutVars();
+                resizeCanvas();
+            });
         }
 
         function closeInspector() {
@@ -2179,12 +2482,22 @@ body.mobile-mode #start-menu .pastel-gray-card > * {
             const container = canvas.parentElement;
             if (!container) return;
 
-            const containerWidth = container.clientWidth - 16;
-            if (containerWidth <= 0) return;
-
             const aspect = COLS / ROWS;
-            canvas.width = Math.floor(containerWidth);
-            canvas.height = Math.floor(containerWidth / aspect);
+            const containerWidth = Math.max(0, container.clientWidth - 16);
+            const containerHeight = Math.max(0, container.clientHeight - 16);
+
+            if (containerWidth <= 0 || containerHeight <= 0) return;
+
+            let targetWidth = containerWidth;
+            let targetHeight = targetWidth / aspect;
+
+            if (isMobileMode && targetHeight > containerHeight) {
+                targetHeight = containerHeight;
+                targetWidth = targetHeight * aspect;
+            }
+
+            canvas.width = Math.floor(targetWidth);
+            canvas.height = Math.floor(targetHeight);
 
             cellWidth = canvas.width / COLS;
             cellHeight = canvas.height / ROWS;
@@ -2194,8 +2507,12 @@ body.mobile-mode #start-menu .pastel-gray-card > * {
             canvas = document.getElementById('gameCanvas');
             ctx = canvas.getContext('2d');
 
+            syncMobileLayoutVars();
             resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('resize', () => {
+                syncMobileLayoutVars();
+                resizeCanvas();
+            });
 
             canvas.addEventListener('mousedown', (e) => {
                 isMouseDown = true;
