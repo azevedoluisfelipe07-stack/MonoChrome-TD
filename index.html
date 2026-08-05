@@ -105,7 +105,7 @@
         }
 
         /* ========================================================= */
-        /* CRITICAL MOBILE MODE REFINEMENTS (NO SCROLL, FIXED TOP) */
+        /* MOBILE MODE REFINEMENTS */
         /* ========================================================= */
         body.mobile-mode {
             height: 100vh;
@@ -114,7 +114,6 @@
             padding-bottom: 0 !important;
         }
 
-        /* Fixed & flattened top header */
         body.mobile-mode header {
             position: fixed;
             top: 0;
@@ -122,7 +121,7 @@
             right: 0;
             z-index: 40;
             padding: 4px 8px !important;
-            gap: 6px !important;
+            gap: 4px !important;
             background-color: rgba(5, 5, 5, 0.95);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid #262626;
@@ -130,34 +129,33 @@
         }
 
         body.mobile-mode header h1 {
-            font-size: 0.85rem !important;
+            font-size: 0.75rem !important;
         }
 
         body.mobile-mode header .stat-box {
-            padding: 2px 6px !important;
+            padding: 2px 4px !important;
             border-radius: 4px !important;
         }
 
         body.mobile-mode header .stat-box span:first-child {
-            font-size: 9px !important;
+            font-size: 8px !important;
         }
 
         body.mobile-mode header .stat-box span:last-child {
-            font-size: 0.75rem !important;
+            font-size: 0.7rem !important;
         }
 
         body.mobile-mode header button {
-            padding: 3px 6px !important;
-            font-size: 9px !important;
+            padding: 2px 4px !important;
+            font-size: 8px !important;
             border-radius: 4px !important;
         }
 
         body.mobile-mode header svg {
-            width: 12px !important;
-            height: 12px !important;
+            width: 10px !important;
+            height: 10px !important;
         }
 
-        /* Main container scaled to fit viewport tightly */
         body.mobile-mode main {
             margin-top: 42px !important;
             margin-bottom: 56px !important;
@@ -169,7 +167,6 @@
             overflow: hidden !important;
         }
 
-        /* Sidebar hidden in mobile mode (handled by floating inspector to save full space) */
         body.mobile-mode aside {
             display: none !important;
         }
@@ -181,7 +178,6 @@
             border-radius: 6px !important;
         }
 
-        /* Compacted bottom floating tools bar */
         body.mobile-mode footer {
             bottom: 4px !important;
             padding: 3px 6px !important;
@@ -192,49 +188,26 @@
         }
 
         body.mobile-mode .btn-tool-square {
-            width: 40px !important;
-            height: 40px !important;
+            width: 38px !important;
+            height: 38px !important;
             border-radius: 6px !important;
         }
 
         body.mobile-mode .btn-tool-square svg {
-            width: 18px !important;
-            height: 18px !important;
+            width: 16px !important;
+            height: 16px !important;
         }
 
         body.mobile-mode .btn-tool-square span {
-            font-size: 8px !important;
+            font-size: 7px !important;
             margin-top: 1px !important;
         }
 
         body.mobile-mode #floating-inspector {
-            min-width: 180px;
-            padding: 8px 10px;
-            font-size: 11px;
+            min-width: 170px;
+            padding: 6px 8px;
+            font-size: 10px;
             border-radius: 8px;
-        }
-
-        /* Mobile start menu compacting */
-        body.mobile-mode #start-menu .pastel-gray-card {
-            max-width: 92vw;
-            padding: 14px;
-            gap: 10px;
-            border-radius: 14px;
-        }
-
-        body.mobile-mode #start-menu h1 {
-            font-size: 1.6rem !important;
-            line-height: 1;
-        }
-
-        body.mobile-mode #start-menu p {
-            font-size: 0.7rem;
-            max-width: 100%;
-        }
-
-        body.mobile-mode #start-menu button {
-            padding: 8px 10px !important;
-            font-size: 0.65rem !important;
         }
     </style>
 </head>
@@ -242,54 +215,79 @@
 
     <!-- Start Menu Overlay -->
     <div id="start-menu" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center p-4">
-        <div class="pastel-gray-card p-6 md:p-10 rounded-2xl max-w-lg w-full text-center flex flex-col items-center gap-6 border border-slate-700/60 shadow-2xl relative">
+        <div class="pastel-gray-card p-6 md:p-8 rounded-2xl max-w-lg w-full text-center flex flex-col items-center gap-5 border border-slate-700/60 shadow-2xl relative">
             
-            <!-- Title with swaying animation -->
-            <div class="animate-tilt my-2 select-none">
-                <div class="inline-flex items-center gap-3 mb-2">
-                    <div class="w-5 h-5 bg-purple-200 rotate-45 border border-slate-900 shadow-md"></div>
-                    <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Defesa Tática</span>
+            <div class="animate-tilt my-1 select-none">
+                <div class="inline-flex items-center gap-3 mb-1">
+                    <div class="w-4 h-4 bg-purple-200 rotate-45 border border-slate-900 shadow-md"></div>
+                    <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Defesa Tática</span>
                 </div>
-                <h1 class="text-3xl md:text-5xl font-black tracking-widest text-slate-100 uppercase drop-shadow-md">
+                <h1 class="text-3xl md:text-4xl font-black tracking-widest text-slate-100 uppercase drop-shadow-md">
                     MONOCHROME<span class="text-pink-300">TD</span>
                 </h1>
             </div>
 
-            <p class="text-xs md:text-sm text-slate-400 max-w-xs leading-relaxed">
-                Construa estradas, armadilhas e torres minimalistas para proteger a base.
+            <p class="text-xs text-slate-400 max-w-xs leading-relaxed">
+                Construa estradas, armadilhas, mísseis e torres para proteger sua base.
             </p>
 
-            <!-- Best Score / Local Stats -->
-            <div class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-3 flex justify-around items-center text-xs">
+            <div class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-2.5 flex justify-around items-center text-xs">
                 <div class="flex flex-col items-center">
-                    <span class="text-slate-400 font-medium">MELHOR ONDA</span>
-                    <span id="stat-best-wave" class="text-emerald-300 font-black text-lg">Onda 1</span>
+                    <span class="text-slate-400 font-medium text-[10px]">MELHOR ONDA</span>
+                    <span id="stat-best-wave" class="text-emerald-300 font-black text-base">Onda 1</span>
                 </div>
                 <div class="h-8 w-[1px] bg-slate-800"></div>
                 <div class="flex flex-col items-center">
-                    <span class="text-slate-400 font-medium">RECORDE PONTOS</span>
-                    <span id="stat-best-score" class="text-amber-200 font-black text-lg">0 pts</span>
+                    <span class="text-slate-400 font-medium text-[10px]">RECORDE PONTOS</span>
+                    <span id="stat-best-score" class="text-amber-200 font-black text-base">0 pts</span>
                 </div>
             </div>
 
-            <!-- Start Menu Actions -->
-            <div class="w-full flex flex-col gap-3 mt-2">
-                <button id="btn-continue-game" onclick="continueGame()" class="hidden w-full py-3.5 px-4 bg-emerald-200 text-slate-900 font-extrabold rounded-xl text-xs uppercase tracking-wider hover:bg-emerald-100 transition shadow-lg flex items-center justify-center gap-2">
+            <div class="w-full flex flex-col gap-2.5 mt-1">
+                <button id="btn-continue-game" onclick="continueGame()" class="hidden w-full py-3 px-4 bg-emerald-200 text-slate-900 font-extrabold rounded-xl text-xs uppercase tracking-wider hover:bg-emerald-100 transition shadow-lg flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     CONTINUAR PARTIDA ATIVA
                 </button>
 
-                <button onclick="startNewGame()" class="btn-pastel-primary w-full py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2">
+                <button onclick="startNewGame()" class="btn-pastel-primary w-full py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 5v14l11-7z"/></svg>
                     JOGAR NOVA PARTIDA
                 </button>
 
-                <!-- Mobile / PC Layout Toggle -->
-                <button id="btn-toggle-mobile" onclick="toggleMobileMode()" class="w-full py-3 px-4 bg-slate-800/90 border border-slate-700 text-slate-300 font-bold rounded-xl text-xs uppercase tracking-wider hover:bg-slate-700 transition flex items-center justify-center gap-2">
+                <!-- Saves Menu Toggle -->
+                <button onclick="openSavesModal()" class="w-full py-2.5 px-4 bg-slate-800 border border-slate-700 text-cyan-300 font-bold rounded-xl text-xs uppercase tracking-wider hover:bg-slate-700 transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    📂 PARTIDAS SALVAS
+                </button>
+
+                <button id="btn-toggle-mobile" onclick="toggleMobileMode()" class="w-full py-2.5 px-4 bg-slate-900 border border-slate-800 text-slate-300 font-semibold rounded-xl text-xs uppercase tracking-wider hover:bg-slate-800 transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
                     <span id="mobile-toggle-label">MODO CELULAR: DESATIVADO</span>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal: Saves List -->
+    <div id="saves-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="pastel-gray-card p-5 rounded-2xl max-w-md w-full flex flex-col gap-4 border border-slate-700">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                <h3 class="font-extrabold text-white text-sm uppercase tracking-wider flex items-center gap-2">
+                    <svg class="w-4 h-4 text-cyan-400 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    SALVAMENTOS GUARDADOS
+                </h3>
+                <button onclick="closeSavesModal()" class="text-slate-400 hover:text-white p-1">
+                    <svg class="w-4 h-4 stroke-current" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <div id="saves-list" class="max-h-60 overflow-y-auto flex flex-col gap-2 pr-1">
+                <!-- Save items populated dynamically -->
+            </div>
+
+            <button onclick="closeSavesModal()" class="w-full py-2 bg-slate-800 text-slate-300 font-bold rounded-xl text-xs uppercase hover:bg-slate-700">
+                VOLTAR
+            </button>
         </div>
     </div>
 
@@ -302,46 +300,51 @@
         </div>
 
         <!-- Dynamic Game Stats -->
-        <div class="flex flex-wrap items-center gap-1.5 md:gap-4 text-xs">
-            <div class="stat-box flex items-center gap-1.5 bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-md">
+        <div class="flex flex-wrap items-center gap-1.5 md:gap-3 text-xs">
+            <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
                 <span class="text-neutral-500 font-bold text-[10px]">VIDA:</span>
-                <span id="stat-lives" class="text-red-400 font-extrabold text-xs md:text-base">20</span>
+                <span id="stat-lives" class="text-red-400 font-extrabold text-xs md:text-sm">20</span>
             </div>
 
-            <div class="stat-box flex items-center gap-1.5 bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-md">
+            <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
                 <span class="text-neutral-500 font-bold text-[10px]">MOEDAS:</span>
-                <span id="stat-gold" class="text-yellow-300 font-extrabold text-xs md:text-base">$200</span>
+                <span id="stat-gold" class="text-yellow-300 font-extrabold text-xs md:text-sm">$200</span>
             </div>
 
-            <div class="stat-box flex items-center gap-1.5 bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-md">
+            <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
                 <span class="text-neutral-500 font-bold text-[10px]">ONDA:</span>
-                <span id="stat-wave" class="text-cyan-300 font-extrabold text-xs md:text-base">1 / 30</span>
+                <span id="stat-wave" class="text-cyan-300 font-extrabold text-xs md:text-sm">1 / 30</span>
             </div>
 
-            <div class="stat-box flex items-center gap-1.5 bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-md">
+            <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
                 <span class="text-neutral-500 font-bold text-[10px]">INIMIGOS:</span>
-                <span id="stat-enemies" class="text-white font-extrabold text-xs md:text-base">0</span>
+                <span id="stat-enemies" class="text-white font-extrabold text-xs md:text-sm">0</span>
             </div>
         </div>
 
-        <!-- Controls (Wave / Audio / Speed / Auto-Skip) -->
-        <div class="flex flex-wrap items-center gap-1.5">
-            <button id="btn-sound" onclick="toggleAudio()" class="p-1.5 border border-neutral-700 hover:border-white rounded text-[10px] uppercase tracking-wider font-semibold transition flex items-center gap-1">
+        <!-- Controls -->
+        <div class="flex flex-wrap items-center gap-1">
+            <button onclick="saveCurrentMatchPrompt()" class="p-1.5 border border-cyan-800 bg-cyan-950/40 hover:border-cyan-400 text-cyan-300 rounded text-[10px] uppercase font-bold transition flex items-center gap-1">
+                <svg class="w-3 h-3 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17a5 5 0 01-.916-9.916 5.002 5.002 0 019.832 0A5.002 5.002 0 0116 17m-7-5l3 3m0 0l3-3m-3 3V8"/></svg>
+                <span>SALVAR</span>
+            </button>
+
+            <button id="btn-sound" onclick="toggleAudio()" class="p-1.5 border border-neutral-700 hover:border-white rounded text-[10px] uppercase font-semibold transition flex items-center gap-1">
                 <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
                 <span id="sound-label">SOM: ON</span>
             </button>
 
-            <button id="btn-speed" onclick="toggleGameSpeed()" class="p-1.5 border border-neutral-700 hover:border-white rounded text-[10px] uppercase tracking-wider font-semibold transition flex items-center gap-1">
+            <button id="btn-speed" onclick="toggleGameSpeed()" class="p-1.5 border border-neutral-700 hover:border-white rounded text-[10px] uppercase font-semibold transition flex items-center gap-1">
                 <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
                 <span id="speed-label">1x</span>
             </button>
 
-            <button id="btn-auto-skip" onclick="toggleAutoSkip()" class="p-1.5 border border-neutral-700 hover:border-white rounded text-[10px] uppercase tracking-wider font-semibold transition flex items-center gap-1 text-neutral-400">
+            <button id="btn-auto-skip" onclick="toggleAutoSkip()" class="p-1.5 border border-neutral-700 hover:border-white rounded text-[10px] uppercase font-semibold transition flex items-center gap-1 text-neutral-400">
                 <svg class="w-3 h-3 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
                 <span id="autoskip-label">AUTO: OFF</span>
             </button>
 
-            <button id="btn-start-wave" onclick="startWave()" class="pulse-btn px-3 py-1.5 bg-white text-black hover:bg-neutral-200 font-extrabold text-[10px] uppercase tracking-widest rounded transition flex items-center gap-1">
+            <button id="btn-start-wave" onclick="startWave()" class="pulse-btn px-2.5 py-1.5 bg-white text-black hover:bg-neutral-200 font-extrabold text-[10px] uppercase tracking-widest rounded transition flex items-center gap-1">
                 <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 <span id="start-wave-label">INICIAR</span>
             </button>
@@ -354,7 +357,7 @@
         <div id="canvas-wrapper" class="flex-1 w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2 flex items-center justify-center relative min-h-[300px]">
             <canvas id="gameCanvas" class="block cursor-crosshair max-w-full h-auto bg-black border border-neutral-900 rounded select-none"></canvas>
 
-            <!-- Pop-up Floating Inspector (Edge-Clamped & Fully Readable Anywhere) -->
+            <!-- Pop-up Floating Inspector -->
             <div id="floating-inspector" class="hidden bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-xl p-3 text-xs min-w-[200px] flex flex-col gap-2">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-1">
                     <div>
@@ -366,9 +369,7 @@
                     </button>
                 </div>
 
-                <div id="float-inspect-details" class="text-[10px] text-slate-300 flex flex-col gap-1 my-0.5">
-                    <!-- Dynamic Stats -->
-                </div>
+                <div id="float-inspect-details" class="text-[10px] text-slate-300 flex flex-col gap-1 my-0.5"></div>
 
                 <div id="float-inspect-actions" class="flex flex-col gap-1.5 pt-1 border-t border-slate-800">
                     <button id="float-btn-upgrade" onclick="upgradeSelectedTile()" class="w-full bg-emerald-200 text-slate-900 py-1.5 px-2 font-extrabold hover:bg-emerald-100 rounded-lg text-[10px] uppercase transition flex items-center justify-center gap-1 shadow">
@@ -394,7 +395,7 @@
             </div>
         </div>
 
-        <!-- Dynamic Inspector Panel (Hidden in mobile mode) -->
+        <!-- Dynamic Inspector Panel -->
         <aside class="w-full lg:w-72 bg-neutral-950 border border-neutral-800 rounded-lg p-3 flex flex-col gap-2 select-none text-xs">
             <div id="inspector-panel" class="bg-neutral-900 border border-neutral-800 rounded p-3 flex flex-col gap-2 h-full justify-between">
                 <div>
@@ -405,7 +406,6 @@
                     <div id="inspect-details" class="text-neutral-400 text-[11px] leading-relaxed mt-2">
                         Arraste ou clique para construir. Selecione qualquer elemento para ver opções de upgrade ou remoção.
                     </div>
-                    <!-- Status Notice -->
                     <div id="status-notice" class="text-yellow-400 text-[10px] hidden font-semibold bg-neutral-950 p-2 rounded border border-neutral-800 mt-2"></div>
                 </div>
 
@@ -423,7 +423,8 @@
         </aside>
     </main>
 
-    <footer class="fixed bottom-3 left-1/2 -translate-x-1/2 z-30 bg-neutral-950/95 backdrop-blur-md border border-neutral-800 p-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[95vw] overflow-x-auto select-none">
+    <!-- Toolbar Footer -->
+    <footer class="fixed bottom-3 left-1/2 -translate-x-1/2 z-30 bg-neutral-950/95 backdrop-blur-md border border-neutral-800 p-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[98vw] overflow-x-auto select-none">
         
         <!-- Tool: Path -->
         <button onclick="selectTool('path')" id="tool-path" title="Pista ($10)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
@@ -458,9 +459,15 @@
         </button>
 
         <!-- Tool: Drone Tower -->
-        <button onclick="selectTool('tower_drone')" id="tool-tower_drone" title="Torre Drone ($120)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
+        <button onclick="selectTool('tool-tower_drone')" onclick="selectTool('tower_drone')" id="tool-tower_drone" title="Torre Drone ($120)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="#FFFFFF"/><path d="M6 6l4 4M18 6l-4 4M6 18l4-4M18 18l-4-4"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$120</span>
+        </button>
+
+        <!-- NEW Tool: Missile Tower -->
+        <button onclick="selectTool('tower_missile')" id="tool-tower_missile" title="Torre Míssil ($150)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
+            <svg class="w-5 h-5 stroke-red-400 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M8 7l4-5 4 5M8 17l4 5 4-5"/><path d="M9 12h6"/></svg>
+            <span class="text-[9px] font-extrabold text-red-400 mt-1">$150</span>
         </button>
 
         <!-- Tool: Farm -->
@@ -487,6 +494,8 @@
         let isMobileMode = false;
         let gameHasStarted = false;
 
+        const STORAGE_KEY_SAVES = 'mono_td_saved_matches';
+
         function loadStats() {
             try {
                 const bWave = parseInt(sessionStorage.getItem('mono_td_best_wave') || '1');
@@ -505,12 +514,147 @@
             if (currentScore > bestScoreValue) bestScoreValue = currentScore;
 
             try {
-                sessionStorage.setItem('mono_td_best_wave', bestWaveReached.toString());
-                sessionStorage.setItem('mono_td_best_score', bestScoreValue.toString());
+                sessionStorage.getItem('mono_td_best_wave', bestWaveReached.toString());
+                sessionStorage.getItem('mono_td_best_score', bestScoreValue.toString());
             } catch(e) {}
 
             document.getElementById('stat-best-wave').innerText = `Onda ${bestWaveReached}`;
             document.getElementById('stat-best-score').innerText = `${bestScoreValue} pts`;
+        }
+
+        /* LocalStorage Game Saves System */
+        function getSavedMatches() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY_SAVES) || '[]');
+            } catch(e) {
+                return [];
+            }
+        }
+
+        function saveCurrentMatchPrompt() {
+            if (gameOver) {
+                showNotice("Não é possível salvar em Fim de Jogo.");
+                return;
+            }
+            const matchName = prompt("Nome do salvamento:", `Partida Onda ${wave}`);
+            if (!matchName) return;
+
+            const saveData = {
+                id: Date.now().toString(),
+                name: matchName,
+                date: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}),
+                gold,
+                lives,
+                wave,
+                maxWaves,
+                grid: grid.map(row => row.map(cell => ({
+                    type: cell.type,
+                    isUpgradedPath: cell.isUpgradedPath
+                }))),
+                towers: towers.map(t => ({
+                    col: t.col,
+                    row: t.row,
+                    type: t.type,
+                    level: t.level
+                }))
+            };
+
+            const saves = getSavedMatches();
+            saves.unshift(saveData);
+            localStorage.setItem(STORAGE_KEY_SAVES, JSON.stringify(saves));
+            showNotice("Partida salva com sucesso!");
+        }
+
+        function loadMatch(saveId) {
+            const saves = getSavedMatches();
+            const match = saves.find(s => s.id === saveId);
+            if (!match) return;
+
+            restartGame();
+
+            gold = match.gold;
+            lives = match.lives;
+            wave = match.wave;
+            maxWaves = match.maxWaves || 30;
+
+            towers = [];
+            grid = [];
+
+            for (let r = 0; r < ROWS; r++) {
+                let row = [];
+                for (let c = 0; c < COLS; c++) {
+                    const savedCell = match.grid[r][c];
+                    row.push({
+                        type: savedCell.type,
+                        isUpgradedPath: savedCell.isUpgradedPath || false,
+                        structure: null,
+                        parentCell: null
+                    });
+                }
+                grid.push(row);
+            }
+
+            match.towers.forEach(tData => {
+                const newT = new Tower(tData.col, tData.row, tData.type);
+                newT.level = tData.level;
+                grid[tData.row][tData.col].structure = newT;
+                towers.push(newT);
+
+                if (newT.type === CELL_TYPES.FARM && newT.level >= 2 && tData.col + 1 < COLS) {
+                    grid[tData.row][tData.col + 1].type = CELL_TYPES.FARM_EXTENSION;
+                    grid[tData.row][tData.col + 1].parentCell = grid[tData.row][tData.col];
+                }
+            });
+
+            recalculatePath();
+            gameHasStarted = true;
+            closeSavesModal();
+            document.getElementById('start-menu').classList.add('hidden');
+            showNotice("Partida carregada!");
+        }
+
+        function deleteMatch(saveId) {
+            let saves = getSavedMatches();
+            saves = saves.filter(s => s.id !== saveId);
+            localStorage.setItem(STORAGE_KEY_SAVES, JSON.stringify(saves));
+            renderSavesList();
+        }
+
+        function openSavesModal() {
+            renderSavesList();
+            document.getElementById('saves-modal').classList.remove('hidden');
+        }
+
+        function closeSavesModal() {
+            document.getElementById('saves-modal').classList.add('hidden');
+        }
+
+        function renderSavesList() {
+            const listEl = document.getElementById('saves-list');
+            const saves = getSavedMatches();
+
+            if (saves.length === 0) {
+                listEl.innerHTML = `<div class="text-slate-500 text-xs text-center py-4">Nenhuma partida salva encontrada.</div>`;
+                return;
+            }
+
+            listEl.innerHTML = saves.map(s => `
+                <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-xl flex items-center justify-between text-xs">
+                    <div class="flex flex-col gap-0.5">
+                        <span class="font-bold text-white">${s.name}</span>
+                        <span class="text-[10px] text-slate-400">Onda ${s.wave} | $${s.gold} | Vida: ${s.lives}</span>
+                        <span class="text-[9px] text-slate-500">${s.date}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="loadMatch('${s.id}')" class="px-2.5 py-1 bg-emerald-300 text-slate-950 font-black rounded hover:bg-emerald-200 text-[10px] uppercase">
+                            CARREGAR
+                        </button>
+                        <button onclick="deleteMatch('${s.id}')" class="p-1 text-slate-500 hover:text-red-400">
+                            <svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function openStartMenu() {
@@ -580,6 +724,7 @@
             tower_long: 60,
             tower_summon: 90,
             tower_drone: 120,
+            tower_missile: 150,
             farm: 100
         };
 
@@ -592,7 +737,8 @@
             TOWER_SUMMON: 5,
             TOWER_DRONE: 6,
             FARM: 7,
-            FARM_EXTENSION: 8
+            FARM_EXTENSION: 8,
+            TOWER_MISSILE: 9
         };
 
         let canvas, ctx;
@@ -662,6 +808,14 @@
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
                     osc.start(now);
                     osc.stop(now + 0.08);
+                } else if (type === 'missile') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(150, now);
+                    osc.frequency.linearRampToValueAtTime(600, now + 0.15);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
                 } else if (type === 'build') {
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(300, now);
@@ -753,8 +907,7 @@
 
             const containerWidth = container.clientWidth - 8;
             const containerHeight = container.clientHeight - 8;
-
-            const aspectRatio = COLS / ROWS; // 20 / 12 = 1.666...
+            const aspectRatio = COLS / ROWS;
 
             let w = containerWidth;
             let h = w / aspectRatio;
@@ -905,6 +1058,10 @@
                     this.droneHealth = 30;
                     this.droneSpeed = 1.4;
                     this.droneDamage = 12;
+                } else if (type === CELL_TYPES.TOWER_MISSILE) {
+                    this.baseRange = 9999;
+                    this.fireRate = 300; // 5s @ 60fps
+                    this.damage = 180;
                 } else if (type === CELL_TYPES.FARM) {
                     this.baseRange = 0;
                     this.income = 2;
@@ -919,7 +1076,8 @@
                 const baseCosts = {
                     [CELL_TYPES.TOWER_LONG]: 55,
                     [CELL_TYPES.TOWER_SUMMON]: 80,
-                    [CELL_TYPES.TOWER_DRONE]: 110
+                    [CELL_TYPES.TOWER_DRONE]: 110,
+                    [CELL_TYPES.TOWER_MISSILE]: 130
                 };
                 return (baseCosts[this.type] || 60) * this.level;
             }
@@ -944,6 +1102,7 @@
 
             getEffectiveRange() {
                 if (this.type === CELL_TYPES.FARM) return 0;
+                if (this.type === CELL_TYPES.TOWER_MISSILE) return 9999;
                 let range = this.baseRange * (1 + (this.level - 1) * 0.25);
                 if (this.hasWallBuff()) range *= 1.5;
                 return range;
@@ -964,6 +1123,12 @@
                     const names = ['Drone', 'Fortificado', 'Veloz', 'Heli'];
                     powerStr = `${names[this.level - 1]} (${Math.round(this.droneDamage * (1 + (this.level - 1) * 0.6))} Dmg)`;
                     speedStr = `1/ ${(Math.max(120, this.spawnRate * (1 - (this.level - 1) * 0.15)) / 60).toFixed(1)}s`;
+                } else if (this.type === CELL_TYPES.TOWER_MISSILE) {
+                    rangeStr = 'GLOBAL';
+                    const dmgs = [180, 320, 320, 450];
+                    const cooldowns = [5, 2.5, 1, 1];
+                    powerStr = `${dmgs[this.level - 1]} Dano ${this.level === 4 ? '(2x)' : ''}`;
+                    speedStr = `1/ ${cooldowns[this.level - 1]}s`;
                 } else if (this.type === CELL_TYPES.FARM) {
                     rangeStr = 'N/A';
                     powerStr = `+$${this.income}/s`;
@@ -1006,6 +1171,36 @@
                             const rateBonus = 1 - (this.level - 1) * 0.15;
                             this.cooldown = Math.max(8, this.fireRate * rateBonus);
                             playSound('laser');
+                        }
+                    }
+                } else if (this.type === CELL_TYPES.TOWER_MISSILE) {
+                    if (this.cooldown <= 0 && enemies.length > 0) {
+                        let target = null;
+                        let maxPathIdx = -1;
+
+                        for (let e of enemies) {
+                            if (e.pathIndex > maxPathIdx) {
+                                maxPathIdx = e.pathIndex;
+                                target = e;
+                            }
+                        }
+
+                        if (target) {
+                            if (this.level === 1) {
+                                projectiles.push(new MissileProjectile(posX, posY, target, 180, false, 12));
+                                this.cooldown = 300;
+                            } else if (this.level === 2) {
+                                projectiles.push(new MissileProjectile(posX, posY, target, 320, true, 12));
+                                this.cooldown = 150;
+                            } else if (this.level === 3) {
+                                projectiles.push(new MissileProjectile(posX, posY, target, 320, true, 12));
+                                this.cooldown = 60;
+                            } else if (this.level === 4) {
+                                projectiles.push(new MissileProjectile(posX - 6, posY, target, 450, true, 7));
+                                projectiles.push(new MissileProjectile(posX + 6, posY, target, 450, true, 7));
+                                this.cooldown = 60;
+                            }
+                            playSound('missile');
                         }
                     }
                 } else if (this.type === CELL_TYPES.TOWER_SUMMON) {
@@ -1091,6 +1286,23 @@
                     ctx.arc(0, 0, cellWidth * 0.16, 0, Math.PI * 2);
                     ctx.fill();
 
+                } else if (this.type === CELL_TYPES.TOWER_MISSILE) {
+                    const w = cellWidth * 0.65;
+                    const h = cellHeight * 0.65;
+                    ctx.fillStyle = '#262626';
+                    ctx.fillRect(-w/2, -h/2, w, h);
+                    ctx.strokeStyle = '#f87171';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(-w/2, -h/2, w, h);
+
+                    ctx.fillStyle = accentColor;
+                    ctx.fillRect(-3, -h/2 - 2, 6, 6);
+
+                    if (this.level === 4) {
+                        ctx.fillStyle = '#f43f5e';
+                        ctx.fillRect(-w/2 + 2, -2, 4, 4);
+                        ctx.fillRect(w/2 - 6, -2, 4, 4);
+                    }
                 } else if (this.type === CELL_TYPES.TOWER_SUMMON) {
                     const w = cellWidth * 0.6;
                     const h = cellHeight * 0.6;
@@ -1182,6 +1394,13 @@
                     this.reward = 12;
                     this.color = '#38bdf8';
                     this.baseDamage = Math.floor(1 + wave / 5);
+                } else if (type === 'mini_boss') {
+                    this.speed = 1.1;
+                    this.maxHealth = 90 * healthMultiplier * 5; // 5x normal soldier health
+                    this.size = cellWidth * 0.38;
+                    this.reward = 50;
+                    this.color = '#f97316';
+                    this.baseDamage = Math.floor(3 + wave / 4);
                 } else if (type === 'torpedo') {
                     this.speed = 0.7;
                     this.maxHealth = 220 * healthMultiplier;
@@ -1558,6 +1777,79 @@
             }
         }
 
+        class MissileProjectile {
+            constructor(x, y, target, damage, isBig = false, speed = 12) {
+                this.x = x;
+                this.y = y;
+                this.target = target;
+                this.damage = damage;
+                this.isBig = isBig;
+                this.speed = speed;
+                this.angle = 0;
+            }
+
+            update() {
+                if (!this.target || this.target.health <= 0) {
+                    let closest = null;
+                    let minDist = Infinity;
+                    for (let e of enemies) {
+                        const d = Math.hypot(e.x - this.x, e.y - this.y);
+                        if (d < minDist) {
+                            minDist = d;
+                            closest = e;
+                        }
+                    }
+                    if (closest) this.target = closest;
+                    else return false;
+                }
+
+                const dx = this.target.x - this.x;
+                const dy = this.target.y - this.y;
+                const dist = Math.hypot(dx, dy);
+                this.angle = Math.atan2(dy, dx);
+
+                const step = this.speed * gameSpeed;
+
+                if (dist <= step) {
+                    this.target.health -= this.damage;
+                    createParticles(this.target.x, this.target.y, this.isBig ? 14 : 8, '#f87171');
+                    playSound('hit');
+                    return false;
+                }
+
+                this.x += (dx / dist) * step;
+                this.y += (dy / dist) * step;
+
+                if (Math.random() < 0.6) {
+                    createParticles(this.x, this.y, 1, '#f97316');
+                }
+
+                return true;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+
+                const size = this.isBig ? 12 : 7;
+                ctx.fillStyle = '#ef4444';
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+
+                ctx.beginPath();
+                ctx.moveTo(size, 0);
+                ctx.lineTo(-size, -size / 2);
+                ctx.lineTo(-size / 2, 0);
+                ctx.lineTo(-size, size / 2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
         class Particle {
             constructor(x, y, color) {
                 this.x = x;
@@ -1698,19 +1990,25 @@
                 ctx.lineWidth = 1.5;
                 ctx.strokeRect(hx, hy, cellWidth, cellHeight);
 
-                if (['tower_long', 'tower_summon', 'tower_drone'].includes(activeTool)) {
-                    const dummyType = activeTool === 'tower_long' ? CELL_TYPES.TOWER_LONG : (activeTool === 'tower_summon' ? CELL_TYPES.TOWER_SUMMON : CELL_TYPES.TOWER_DRONE);
-                    const dummyTower = new Tower(hoverCell.col, hoverCell.row, dummyType);
+                if (['tower_long', 'tower_summon', 'tower_drone', 'tower_missile'].includes(activeTool)) {
+                    const dummyMap = {
+                        tower_long: CELL_TYPES.TOWER_LONG,
+                        tower_summon: CELL_TYPES.TOWER_SUMMON,
+                        tower_drone: CELL_TYPES.TOWER_DRONE,
+                        tower_missile: CELL_TYPES.TOWER_MISSILE
+                    };
+                    const dummyTower = new Tower(hoverCell.col, hoverCell.row, dummyMap[activeTool]);
                     const range = dummyTower.getEffectiveRange();
-                    const isBuffed = dummyTower.hasWallBuff();
-
-                    ctx.strokeStyle = isBuffed ? COLORS.buffedRangeIndicator : COLORS.rangeIndicator;
-                    ctx.fillStyle = isBuffed ? 'rgba(56, 189, 248, 0.05)' : 'transparent';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.arc(hx + cellWidth / 2, hy + cellHeight / 2, range, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.stroke();
+                    if (range < 5000) {
+                        const isBuffed = dummyTower.hasWallBuff();
+                        ctx.strokeStyle = isBuffed ? COLORS.buffedRangeIndicator : COLORS.rangeIndicator;
+                        ctx.fillStyle = isBuffed ? 'rgba(56, 189, 248, 0.05)' : 'transparent';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.arc(hx + cellWidth / 2, hy + cellHeight / 2, range, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.stroke();
+                    }
                 }
             }
 
@@ -1726,7 +2024,7 @@
                     selectedCell = selectedCell.parentCell;
                 }
 
-                if (selectedCell.structure && selectedCell.structure.baseRange > 0) {
+                if (selectedCell.structure && selectedCell.structure.baseRange > 0 && selectedCell.structure.baseRange < 5000) {
                     const range = selectedCell.structure.getEffectiveRange();
                     ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
                     ctx.setLineDash([3, 3]);
@@ -1745,6 +2043,11 @@
 
             let isSuperBossWave = (waveNum === 10 || waveNum === 20);
             let isNormalBossWave = (waveNum === 5 || waveNum === 15 || waveNum === 25 || waveNum === 30);
+
+            // POST WAVE 5 DIFFICULTY: Guaranteed Mini Boss EVERY round
+            if (waveNum > 5) {
+                list.push(new Enemy('mini_boss', healthMult));
+            }
 
             for (let i = 0; i < count; i++) {
                 if (isSuperBossWave && i === count - 1) {
@@ -1881,12 +2184,13 @@
                     } else {
                         if (!isDrag) showNotice('Espinhos só podem ser construídos sobre a PISTA.');
                     }
-                } else if (['tower_long', 'tower_summon', 'tower_drone', 'farm'].includes(activeTool)) {
+                } else if (['tower_long', 'tower_summon', 'tower_drone', 'tower_missile', 'farm'].includes(activeTool)) {
                     if (cell.type === CELL_TYPES.EMPTY) {
                         let towerType;
                         if (activeTool === 'tower_long') towerType = CELL_TYPES.TOWER_LONG;
                         else if (activeTool === 'tower_summon') towerType = CELL_TYPES.TOWER_SUMMON;
                         else if (activeTool === 'tower_drone') towerType = CELL_TYPES.TOWER_DRONE;
+                        else if (activeTool === 'tower_missile') towerType = CELL_TYPES.TOWER_MISSILE;
                         else towerType = CELL_TYPES.FARM;
 
                         cell.type = towerType;
@@ -1971,6 +2275,7 @@
                         [CELL_TYPES.TOWER_LONG]: 'tower_long',
                         [CELL_TYPES.TOWER_SUMMON]: 'tower_summon',
                         [CELL_TYPES.TOWER_DRONE]: 'tower_drone',
+                        [CELL_TYPES.TOWER_MISSILE]: 'tower_missile',
                         [CELL_TYPES.FARM]: 'farm'
                     };
                     refund = Math.floor((COSTS[costKeyMap[cell.structure.type]] || 50) * 0.75);
@@ -2043,6 +2348,7 @@
                     [CELL_TYPES.TOWER_LONG]: 'TORRE LONGA',
                     [CELL_TYPES.TOWER_SUMMON]: 'TORRE SUMONADORA',
                     [CELL_TYPES.TOWER_DRONE]: t.level === 4 ? 'TORRE HELI' : 'TORRE DRONE',
+                    [CELL_TYPES.TOWER_MISSILE]: 'TORRE MÍSSIL',
                     [CELL_TYPES.FARM]: 'FAZENDA'
                 };
 
@@ -2095,6 +2401,7 @@
                     [CELL_TYPES.TOWER_LONG]: 'tower_long',
                     [CELL_TYPES.TOWER_SUMMON]: 'tower_summon',
                     [CELL_TYPES.TOWER_DRONE]: 'tower_drone',
+                    [CELL_TYPES.TOWER_MISSILE]: 'tower_missile',
                     [CELL_TYPES.FARM]: 'farm'
                 };
                 const sellVal = Math.floor((COSTS[costKeyMap[t.type]] || 50) * 0.75);
@@ -2167,7 +2474,6 @@
                 return;
             }
 
-            // Smart Edge-Detection for Popup Position
             if (floatInspector && canvas) {
                 floatInspector.classList.remove('hidden');
 
@@ -2183,19 +2489,14 @@
                 const screenW = window.innerWidth;
                 const screenH = window.innerHeight;
 
-                // Position above tile by default
                 let posX = tileCenterX - inspectorWidth / 2;
                 let posY = tileTopY - inspectorHeight - 8;
 
-                // If popup goes off top screen edge, flip to display below tile
                 if (posY < margin) {
                     posY = tileBottomY + 8;
                 }
 
-                // Clamp Y position so it never overflows bottom/top screen bounds
                 posY = Math.max(margin, Math.min(screenH - inspectorHeight - margin, posY));
-
-                // Clamp X position so it never overflows left/right screen bounds
                 posX = Math.max(margin, Math.min(screenW - inspectorWidth - margin, posX));
 
                 floatInspector.style.left = `${posX}px`;
@@ -2263,7 +2564,11 @@
             if (isWaveActive) {
                 if (waveEnemiesToSpawn.length > 0) {
                     spawnTimer += gameSpeed;
-                    if (spawnTimer >= 38) {
+
+                    // ACCELERATED SPAWN DIFFICULTY AFTER WAVE 5
+                    const baseSpawnInterval = wave > 5 ? Math.max(12, 38 - Math.floor((wave - 5) * 1.8)) : 38;
+
+                    if (spawnTimer >= baseSpawnInterval) {
                         enemies.push(waveEnemiesToSpawn.shift());
                         spawnTimer = 0;
                     }
@@ -2357,7 +2662,6 @@
 
             window.addEventListener('resize', resizeCanvas);
 
-            // Mouse & Touch Interaction Handlers
             canvas.addEventListener('mousedown', (e) => {
                 isMouseDown = true;
                 const { col, row } = getGridCoordinates(e);
@@ -2384,7 +2688,6 @@
                 hoverCell = null;
             });
 
-            // Touch Support for Mobile
             canvas.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 isMouseDown = true;
