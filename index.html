@@ -114,101 +114,37 @@
             padding-bottom: 0 !important;
         }
 
-        body.mobile-mode header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 40;
-            padding: 4px 8px !important;
-            gap: 4px !important;
-            background-color: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #262626;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
+/* Menu inicial compacto quando o Modo Celular estiver ativado */
+body.mobile-mode #start-menu .pastel-gray-card {
+    max-width: 95vw;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+}
 
-        body.mobile-mode header h1 {
-            font-size: 0.75rem !important;
-        }
+body.mobile-mode #start-menu h1 {
+    font-size: 1.8rem !important;
+    line-height: 1;
+}
 
-        body.mobile-mode header .stat-box {
-            padding: 2px 4px !important;
-            border-radius: 4px !important;
-        }
+body.mobile-mode #start-menu p {
+    font-size: 0.75rem;
+    max-width: 100%;
+}
 
-        body.mobile-mode header .stat-box span:first-child {
-            font-size: 8px !important;
-        }
+body.mobile-mode #start-menu button {
+    padding: 10px 12px !important;
+    font-size: 0.7rem !important;
+}
 
-        body.mobile-mode header .stat-box span:last-child {
-            font-size: 0.7rem !important;
-        }
+body.mobile-mode #start-menu .animate-tilt {
+    margin: 0;
+}
 
-        body.mobile-mode header button {
-            padding: 2px 4px !important;
-            font-size: 8px !important;
-            border-radius: 4px !important;
-        }
-
-        body.mobile-mode header svg {
-            width: 10px !important;
-            height: 10px !important;
-        }
-
-        body.mobile-mode main {
-            margin-top: 42px !important;
-            margin-bottom: 56px !important;
-            padding: 4px !important;
-            height: calc(100dvh - 98px) !important;
-            max-height: calc(100dvh - 98px) !important;
-            flex-direction: column !important;
-            gap: 0 !important;
-            overflow: hidden !important;
-        }
-
-        body.mobile-mode aside {
-            display: none !important;
-        }
-
-        body.mobile-mode #canvas-wrapper {
-            height: 100% !important;
-            min-height: 0 !important;
-            padding: 2px !important;
-            border-radius: 6px !important;
-        }
-
-        body.mobile-mode footer {
-            bottom: 4px !important;
-            padding: 3px 6px !important;
-            gap: 4px !important;
-            border-radius: 10px !important;
-            max-width: 98vw !important;
-            background-color: rgba(10, 10, 10, 0.95);
-        }
-
-        body.mobile-mode .btn-tool-square {
-            width: 38px !important;
-            height: 38px !important;
-            border-radius: 6px !important;
-        }
-
-        body.mobile-mode .btn-tool-square svg {
-            width: 16px !important;
-            height: 16px !important;
-        }
-
-        body.mobile-mode .btn-tool-square span {
-            font-size: 7px !important;
-            margin-top: 1px !important;
-        }
-
-        body.mobile-mode #floating-inspector {
-            min-width: 170px;
-            padding: 6px 8px;
-            font-size: 10px;
-            border-radius: 8px;
-        }
+body.mobile-mode #start-menu .pastel-gray-card > * {
+    margin-top: 0;
+    margin-bottom: 0;
+}
     </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col justify-between overflow-x-hidden pb-20">
