@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" class="h-full bg-blue">
 <head>
@@ -181,6 +180,19 @@
         body.mobile-mode aside {
             display: none !important;
         }
+
+        @keyframes rainbowGlow {
+            0% { filter: drop-shadow(0 0 6px rgba(244,63,94,0.8)); }
+            33% { filter: drop-shadow(0 0 6px rgba(56,189,248,0.8)); }
+            66% { filter: drop-shadow(0 0 6px rgba(250,204,21,0.8)); }
+            100% { filter: drop-shadow(0 0 6px rgba(244,63,94,0.8)); }
+        }
+        .rainbow-text {
+            background: linear-gradient(90deg, #f43f5e, #38bdf8, #facc15, #a855f7, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowGlow 4s infinite linear;
+        }
     </style>
 </head>
 <body class="bg-black text-white min-h-screen flex flex-col justify-between overflow-x-hidden pb-20">
@@ -200,7 +212,7 @@
             </div>
 
             <p class="text-xs text-slate-400 max-w-xs leading-relaxed">
-                Construa estradas, armadilhas, mísseis, santuários e torres para proteger sua base.
+                Construa estradas, armadilhas, mísseis, santuários, torres de prisma e proteja sua base contra chefes colossais.
             </p>
 
             <div class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-2.5 flex justify-around items-center text-xs">
@@ -285,7 +297,7 @@
 
             <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
                 <span class="text-neutral-500 font-bold text-[10px]">ONDA:</span>
-                <span id="stat-wave" class="text-cyan-300 font-extrabold text-xs md:text-sm">1 / 30</span>
+                <span id="stat-wave" class="text-cyan-300 font-extrabold text-xs md:text-sm">1 / 50</span>
             </div>
 
             <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
@@ -326,8 +338,42 @@
     <main class="flex-1 flex flex-col lg:flex-row gap-3 p-3 items-stretch w-full max-w-7xl mx-auto overflow-hidden">
         
         <!-- Canvas Container Area -->
-        <div id="canvas-wrapper" class="flex-1 w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2 flex items-center justify-center relative min-h-[300px]">
+        <div id="canvas-wrapper" class="flex-1 w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2 flex items-center justify-center relative min-h-[300px] overflow-hidden">
+            
+            <!-- Top Final Boss Bar Overlay -->
+            <div id="boss-bar-container" class="hidden absolute top-3 left-1/2 -translate-x-1/2 z-30 w-11/12 max-w-lg bg-black/90 border border-purple-500/80 rounded-xl p-2.5 shadow-2xl backdrop-blur-md flex flex-col gap-1">
+                <div class="flex justify-between items-center text-[11px] font-black tracking-wider uppercase">
+                    <span id="boss-bar-name" class="text-purple-300 flex items-center gap-1.5">
+                        <span class="inline-block w-2.5 h-2.5 bg-red-500 rotate-45 animate-ping"></span>
+                        CORAÇÃO DA MONOCROMIA
+                    </span>
+                    <span id="boss-bar-hp-text" class="text-rose-400 font-mono">1.500.000 / 1.500.000</span>
+                </div>
+                <div class="w-full bg-neutral-900 border border-neutral-800 h-3 rounded-full overflow-hidden p-0.5 relative">
+                    <div id="boss-bar-fill" class="h-full bg-gradient-to-r from-purple-600 via-rose-500 to-amber-400 rounded-full transition-all duration-150 w-full"></div>
+                </div>
+            </div>
+
             <canvas id="gameCanvas" class="block cursor-crosshair max-w-full h-auto bg-black border border-neutral-900 rounded select-none"></canvas>
+
+            <!-- Final Victory Full-screen Overlay -->
+            <div id="victory-modal" class="hidden absolute inset-0 z-40 bg-white transition-opacity duration-1000 flex flex-col items-center justify-center p-6 text-center text-slate-900">
+                <div id="victory-content" class="max-w-md flex flex-col items-center gap-4 opacity-0 transition-opacity duration-1000">
+                    <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">MISSÃO CUMPRIDA</span>
+                    <h2 class="text-3xl md:text-5xl font-black rainbow-text uppercase tracking-widest drop-shadow-lg">
+                        PARABÉNS!
+                    </h2>
+                    <p class="text-sm font-extrabold text-slate-800 leading-relaxed uppercase tracking-wider border-y border-slate-200 py-3">
+                        As cores retornaram ao mundo.
+                    </p>
+                    <p class="text-xs text-slate-600 leading-relaxed max-w-sm">
+                        Você derrotou o <strong class="text-purple-700">Coração da Monocromia</strong> e restaurou todas as cores. Obrigado por jogar Monochrome TD!
+                    </p>
+                    <button onclick="closeVictoryAndReturnMenu()" class="mt-3 px-6 py-3 bg-slate-900 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:bg-slate-800 transition shadow-xl flex items-center gap-2">
+                        VOLTAR AO MENU PRINCIPAL
+                    </button>
+                </div>
+            </div>
 
             <!-- Pop-up Floating Inspector -->
             <div id="floating-inspector" class="hidden bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-xl p-3 text-xs min-w-[200px] flex flex-col gap-2">
@@ -454,6 +500,12 @@
             <span class="text-[9px] font-extrabold text-red-400 mt-1">$150</span>
         </button>
 
+        <!-- Tool: Prisma Tower (NEW) -->
+        <button onclick="selectTool('tower_prisma')" id="tool-tower_prisma" title="Torre Prisma ($3000)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
+            <svg class="w-5 h-5 stroke-fuchsia-400 fill-none" stroke-width="2" viewBox="0 0 24 24"><polygon points="12,2 20,20 4,20" fill="#e879f9" opacity="0.3"/><polygon points="12,2 20,20 4,20"/><line x1="12" y1="2" x2="12" y2="20" stroke="#f43f5e"/><line x1="12" y1="10" x2="18" y2="15" stroke="#38bdf8"/><line x1="12" y1="10" x2="6" y2="15" stroke="#facc15"/></svg>
+            <span class="text-[9px] font-extrabold text-fuchsia-400 mt-1">$3000</span>
+        </button>
+
         <!-- Tool: Farm -->
         <button onclick="selectTool('farm')" id="tool-farm" title="Fazenda ($100)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg>
@@ -559,7 +611,7 @@
             gold = match.gold;
             lives = match.lives;
             wave = match.wave;
-            maxWaves = match.maxWaves || 30;
+            maxWaves = match.maxWaves || 50;
 
             towers = [];
             grid = [];
@@ -711,6 +763,7 @@
             tower_drone: 120,
             tower_sanctuary: 130,
             tower_missile: 150,
+            tower_prisma: 3000,
             farm: 100
         };
 
@@ -726,7 +779,8 @@
             FARM_EXTENSION: 8,
             TOWER_MISSILE: 9,
             TOWER_MOSS: 10,
-            TOWER_SANCTUARY: 11
+            TOWER_SANCTUARY: 11,
+            TOWER_PRISMA: 12
         };
 
         let canvas, ctx;
@@ -736,7 +790,7 @@
         let gold = 200;
         let lives = 20;
         let wave = 1;
-        let maxWaves = 30;
+        let maxWaves = 50;
         let isWaveActive = false;
         let allWaveEnemiesSpawned = false;
         let autoSkip = false;
@@ -762,12 +816,20 @@
         let allies = [];
         let drones = [];
         let projectiles = [];
+        let prismBeams = [];
         let particles = [];
         let waveEnemiesToSpawn = [];
         let spawnTimer = 0;
 
         let hoverCell = null;
         let audioCtx = null;
+
+        /* Visual State Variables for Final Boss & Victory Sequence */
+        let bossAudioThemeActive = false;
+        let colorRestorationProgress = 0; // 0 = monochrome, 1 = full color restored
+        let isVictorySequenceActive = false;
+        let victoryWhiteFlashRadius = 0;
+        let finalBossRef = null;
 
         function initAudio() {
             if (!audioCtx) {
@@ -796,6 +858,14 @@
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
                     osc.start(now);
                     osc.stop(now + 0.08);
+                } else if (type === 'prisma_beam') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(1200, now);
+                    osc.frequency.linearRampToValueAtTime(400, now + 0.2);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
                 } else if (type === 'missile') {
                     osc.type = 'triangle';
                     osc.frequency.setValueAtTime(150, now);
@@ -844,6 +914,14 @@
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
                     osc.start(now);
                     osc.stop(now + 0.2);
+                } else if (type === 'boss_roar') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(80, now);
+                    osc.frequency.linearRampToValueAtTime(30, now + 0.8);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                    osc.start(now);
+                    osc.stop(now + 0.8);
                 }
             } catch (e) {}
         }
@@ -1034,7 +1112,7 @@
                 this.row = row;
                 this.type = type;
                 this.level = 1;
-                this.maxLevel = (type === CELL_TYPES.FARM || type === CELL_TYPES.TOWER_MOSS || type === CELL_TYPES.TOWER_SANCTUARY) ? 3 : 4;
+                this.maxLevel = (type === CELL_TYPES.FARM || type === CELL_TYPES.TOWER_MOSS || type === CELL_TYPES.TOWER_SANCTUARY) ? 3 : (type === CELL_TYPES.TOWER_PRISMA ? 5 : 4);
                 this.cooldown = 0;
                 this.disabledTimer = 0;
                 this.farmTimer = 0;
@@ -1064,6 +1142,10 @@
                     this.baseRangeCells = 999;
                     this.fireRate = 300;
                     this.damage = 180;
+                } else if (type === CELL_TYPES.TOWER_PRISMA) {
+                    this.baseRangeCells = 5.5;
+                    this.fireRate = 72; // Lv1: 1.2s (72 ticks)
+                    this.damage = 180;
                 } else if (type === CELL_TYPES.FARM) {
                     this.baseRangeCells = 0;
                     this.income = 2;
@@ -1080,6 +1162,10 @@
                 }
                 if (this.type === CELL_TYPES.TOWER_SANCTUARY) {
                     return this.level === 1 ? 100 : 180;
+                }
+                if (this.type === CELL_TYPES.TOWER_PRISMA) {
+                    const prismaCosts = [2000, 3000, 4500, 6500];
+                    return prismaCosts[this.level - 1] || 2000;
                 }
                 const baseCosts = {
                     [CELL_TYPES.TOWER_LONG]: 55,
@@ -1134,7 +1220,7 @@
                     const rangeCells = 1 + this.level; // Nível 1: 2 blocos, Nível 2: 3, Nível 3: 4
                     return rangeCells * cellWidth;
                 }
-                let rangeCells = this.baseRangeCells * (1 + (this.level - 1) * 0.25);
+                let rangeCells = this.baseRangeCells * (1 + (this.level - 1) * 0.2);
                 if (this.hasWallBuff()) rangeCells *= 1.5;
                 return rangeCells * cellWidth;
             }
@@ -1171,6 +1257,18 @@
                     const cooldowns = [5, 2.5, 1, 1];
                     powerStr = `${dmgs[this.level - 1]} Dano ${this.level === 4 ? '(2x)' : ''}`;
                     speedStr = `1/ ${cooldowns[this.level - 1]}s`;
+                } else if (this.type === CELL_TYPES.TOWER_PRISMA) {
+                    const prismaDmgs = [180, 260, 380, 550, 800];
+                    const prismaSpeeds = ['1.2s', '1.0s', '0.8s', '0.65s', '0.5s'];
+                    const prismaEffects = [
+                        'Atravessa até 3 inimigos',
+                        'Atravessa até 5 inimigos',
+                        'Atravessa TODOS em linha',
+                        'AoE 30% nos alvos',
+                        'AoE 50% + Igno. 40% Def'
+                    ];
+                    powerStr = `${prismaDmgs[this.level - 1]} Dano (${prismaEffects[this.level - 1]})`;
+                    speedStr = `Feixe 1/ ${prismaSpeeds[this.level - 1]}`;
                 } else if (this.type === CELL_TYPES.FARM) {
                     rangeStr = 'N/A';
                     powerStr = `+$${this.income}/s`;
@@ -1246,6 +1344,87 @@
                             const rateBonus = 1 - (this.level - 1) * 0.15;
                             this.cooldown = Math.max(8, this.fireRate * rateBonus);
                             playSound('laser');
+                        }
+                    }
+                } else if (this.type === CELL_TYPES.TOWER_PRISMA) {
+                    if (this.cooldown <= 0 && enemies.length > 0) {
+                        let primaryTarget = null;
+                        let minTargetDist = Infinity;
+
+                        for (let enemy of enemies) {
+                            const d = Math.hypot(enemy.x - posX, enemy.y - posY);
+                            if (d <= effectiveRange && d < minTargetDist) {
+                                minTargetDist = d;
+                                primaryTarget = enemy;
+                            }
+                        }
+
+                        if (primaryTarget) {
+                            const fireIntervals = [72, 60, 48, 39, 30]; // 1.2s, 1.0s, 0.8s, 0.65s, 0.5s
+                            const prismaDmgs = [180, 260, 380, 550, 800];
+                            const pierceCap = [3, 5, 999, 999, 999];
+
+                            const baseDmg = prismaDmgs[this.level - 1];
+                            const maxHits = pierceCap[this.level - 1];
+                            const splashRatio = this.level >= 5 ? 0.50 : (this.level === 4 ? 0.30 : 0);
+                            const ignoreArmor = this.level >= 5;
+
+                            const dx = primaryTarget.x - posX;
+                            const dy = primaryTarget.y - posY;
+                            const angle = Math.atan2(dy, dx);
+
+                            const endX = posX + Math.cos(angle) * (effectiveRange * 1.5);
+                            const endY = posY + Math.sin(angle) * (effectiveRange * 1.5);
+
+                            let hitEnemies = [];
+
+                            for (let enemy of enemies) {
+                                if (hitEnemies.length >= maxHits) break;
+
+                                const ex = enemy.x;
+                                const ey = enemy.y;
+
+                                const lineDist = Math.abs((endY - posY) * ex - (endX - posX) * ey + endX * posY - endY * posX) / Math.hypot(endY - posY, endX - posX);
+
+                                if (lineDist <= enemy.size + 8) {
+                                    const dot = (ex - posX) * (endX - posX) + (ey - posY) * (endY - posY);
+                                    if (dot > 0) {
+                                        hitEnemies.push(enemy);
+                                    }
+                                }
+                            }
+
+                            hitEnemies.forEach(e => {
+                                let finalDmg = baseDmg;
+
+                                if (e.aoeResistance > 0 && splashRatio > 0) {
+                                    finalDmg *= (1 - e.aoeResistance);
+                                }
+
+                                if (ignoreArmor) {
+                                    e.health -= finalDmg;
+                                } else {
+                                    e.health -= finalDmg;
+                                }
+
+                                createParticles(e.x, e.y, 6, '#f0abfc');
+
+                                if (splashRatio > 0) {
+                                    const splashRadius = cellWidth * 1.6;
+                                    for (let other of enemies) {
+                                        if (other !== e && Math.hypot(other.x - e.x, other.y - e.y) <= splashRadius) {
+                                            let sDmg = baseDmg * splashRatio;
+                                            if (other.aoeResistance > 0) sDmg *= (1 - other.aoeResistance);
+                                            other.health -= sDmg;
+                                            createParticles(other.x, other.y, 3, '#c084fc');
+                                        }
+                                    }
+                                }
+                            });
+
+                            prismBeams.push(new PrismBeamEffect(posX, posY, endX, endY, this.level));
+                            this.cooldown = fireIntervals[this.level - 1];
+                            playSound('prisma_beam');
                         }
                     }
                 } else if (this.type === CELL_TYPES.TOWER_MISSILE) {
@@ -1331,7 +1510,7 @@
                 ctx.save();
                 ctx.translate(cx, cy);
 
-                const levelColors = ['#FFFFFF', '#38bdf8', '#facc15', '#f43f5e'];
+                const levelColors = ['#FFFFFF', '#38bdf8', '#facc15', '#f43f5e', '#a855f7'];
                 const accentColor = levelColors[this.level - 1];
 
                 if (this.type === CELL_TYPES.TOWER_MOSS) {
@@ -1389,7 +1568,6 @@
                     const r = cellWidth * 0.38;
 
                     if (this.level === 1) {
-                        // Nível 1: Cinza, com pequeno cristal central
                         ctx.fillStyle = '#334155';
                         ctx.beginPath();
                         ctx.arc(0, 0, r, 0, Math.PI * 2);
@@ -1398,7 +1576,6 @@
                         ctx.lineWidth = 1.5;
                         ctx.stroke();
 
-                        // Cristal Cinza/Prata
                         ctx.fillStyle = '#cbd5e1';
                         ctx.beginPath();
                         ctx.moveTo(0, -cellWidth * 0.12);
@@ -1412,7 +1589,6 @@
                         ctx.stroke();
 
                     } else if (this.level === 2) {
-                        // Nível 2: Azul pastel, cristal maior e anel luminoso
                         ctx.fillStyle = '#1e3a8a';
                         ctx.beginPath();
                         ctx.arc(0, 0, r, 0, Math.PI * 2);
@@ -1424,7 +1600,6 @@
                         ctx.arc(0, 0, r * 0.75, 0, Math.PI * 2);
                         ctx.stroke();
 
-                        // Cristal Azul Pastel
                         ctx.fillStyle = '#bfdbfe';
                         ctx.beginPath();
                         ctx.moveTo(0, -cellWidth * 0.18);
@@ -1438,7 +1613,6 @@
                         ctx.stroke();
 
                     } else if (this.level === 3) {
-                        // Nível 3: Azul vivo e saturado com brilho suave e aura
                         const pulse = Math.sin(Date.now() / 250) * 2;
 
                         ctx.fillStyle = '#1d4ed8';
@@ -1446,7 +1620,6 @@
                         ctx.arc(0, 0, r, 0, Math.PI * 2);
                         ctx.fill();
 
-                        // Anel luminoso pulsante neon
                         ctx.strokeStyle = '#60a5fa';
                         ctx.lineWidth = 3;
                         ctx.shadowColor = '#3b82f6';
@@ -1456,7 +1629,6 @@
                         ctx.stroke();
                         ctx.shadowBlur = 0;
 
-                        // Cristal Grande Radiante
                         ctx.fillStyle = '#60a5fa';
                         ctx.beginPath();
                         ctx.moveTo(0, -cellWidth * 0.22);
@@ -1468,6 +1640,143 @@
                         ctx.strokeStyle = '#ffffff';
                         ctx.lineWidth = 2;
                         ctx.stroke();
+                    }
+
+                } else if (this.type === CELL_TYPES.TOWER_PRISMA) {
+                    const r = cellWidth * 0.42;
+
+                    // Base escura tática
+                    ctx.fillStyle = '#18181b';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, r, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (this.level === 1) {
+                        // Nível 1: Cristal cinza
+                        ctx.strokeStyle = '#71717a';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#9ca3af';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.28);
+                        ctx.lineTo(cellWidth * 0.18, cellWidth * 0.18);
+                        ctx.lineTo(-cellWidth * 0.18, cellWidth * 0.18);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#e4e4e7';
+                        ctx.stroke();
+
+                    } else if (this.level === 2) {
+                        // Nível 2: Cristal com tom pastel brilhante
+                        ctx.strokeStyle = '#a5f3fc';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#67e8f9';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.30);
+                        ctx.lineTo(cellWidth * 0.20, cellWidth * 0.20);
+                        ctx.lineTo(-cellWidth * 0.20, cellWidth * 0.20);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#f472b6';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                    } else if (this.level === 3) {
+                        // Nível 3: Prisma colorido
+                        ctx.strokeStyle = '#facc15';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        const rot = Date.now() / 600;
+                        ctx.rotate(rot);
+
+                        const grad = ctx.createLinearGradient(-cellWidth * 0.2, -cellWidth * 0.2, cellWidth * 0.2, cellWidth * 0.2);
+                        grad.addColorStop(0, '#f43f5e');
+                        grad.addColorStop(0.5, '#38bdf8');
+                        grad.addColorStop(1, '#facc15');
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.32);
+                        ctx.lineTo(cellWidth * 0.22, cellWidth * 0.22);
+                        ctx.lineTo(-cellWidth * 0.22, cellWidth * 0.22);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                    } else if (this.level === 4) {
+                        // Nível 4: Prisma maior com anel luminoso
+                        const rot = Date.now() / 400;
+
+                        ctx.strokeStyle = '#c084fc';
+                        ctx.lineWidth = 2.5;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r * 1.1, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        ctx.rotate(rot);
+                        const grad = ctx.createLinearGradient(-cellWidth * 0.25, -cellWidth * 0.25, cellWidth * 0.25, cellWidth * 0.25);
+                        grad.addColorStop(0, '#ec4899');
+                        grad.addColorStop(0.33, '#8b5cf6');
+                        grad.addColorStop(0.66, '#06b6d4');
+                        grad.addColorStop(1, '#10b981');
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.35);
+                        ctx.lineTo(cellWidth * 0.24, cellWidth * 0.24);
+                        ctx.lineTo(-cellWidth * 0.24, cellWidth * 0.24);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                    } else if (this.level === 5) {
+                        // Nível 5: Prisma Ultra Bright Multicolorido com Halo e Partículas
+                        const pulse = Math.sin(Date.now() / 150) * 3;
+                        const rot = Date.now() / 250;
+
+                        ctx.shadowColor = '#e879f9';
+                        ctx.shadowBlur = 12 + pulse;
+
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r * 1.25, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        ctx.rotate(rot);
+
+                        const grad = ctx.createConicGradient(rot, 0, 0);
+                        grad.addColorStop(0, '#f43f5e');
+                        grad.addColorStop(0.2, '#38bdf8');
+                        grad.addColorStop(0.4, '#a855f7');
+                        grad.addColorStop(0.6, '#facc15');
+                        grad.addColorStop(0.8, '#34d399');
+                        grad.addColorStop(1, '#f43f5e');
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.38);
+                        ctx.lineTo(cellWidth * 0.26, cellWidth * 0.26);
+                        ctx.lineTo(-cellWidth * 0.26, cellWidth * 0.26);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 2.5;
+                        ctx.stroke();
+
+                        ctx.shadowBlur = 0;
+
+                        if (Math.random() < 0.4) {
+                            createParticles(cx + (Math.random() - 0.5) * cellWidth, cy + (Math.random() - 0.5) * cellHeight, 1, '#f0abfc');
+                        }
                     }
 
                 } else if (this.type === CELL_TYPES.TOWER_MISSILE) {
@@ -1581,6 +1890,13 @@
                 this.isShadow = (type === 'sombra');
                 this.empCooldown = 0;
 
+                // Resistências e temporizadores especiais
+                this.slowResistance = 0;
+                this.aoeResistance = 0;
+                this.shockwaveTimer = 0; // Colosso de Ferro
+                this.disableTowerTimer = 0; // Devorador Cromático
+                this.summonMinionsTimer = 0; // Coração da Monocromia
+
                 if (type === 'scout') {
                     this.speed = 2.2;
                     this.maxHealth = 45 * healthMultiplier;
@@ -1623,6 +1939,56 @@
                     this.reward = 200;
                     this.color = '#f43f5e';
                     this.baseDamage = Math.floor(6 + wave / 2);
+
+                /* ========================
+                   NOVOS BOSSES DO JOGO
+                   ======================== */
+                } else if (type === 'colosso_ferro') {
+                    // Boss Onda 40
+                    this.speed = 0.55;
+                    this.maxHealth = 40000;
+                    this.sizeRatio = 0.58;
+                    this.reward = 1000;
+                    this.color = '#71717a';
+                    this.baseDamage = 20;
+                    this.slowResistance = 0.50; // 50% de resistência à lentidão
+                    this.aoeResistance = 0.20;  // 20% a menos de dano em área
+                    this.shockwaveTimer = 0;
+
+                } else if (type === 'devorador_cromatico') {
+                    // Boss Onda 45
+                    this.speed = 1.0;
+                    this.maxHealth = 120000;
+                    this.sizeRatio = 0.62;
+                    this.reward = 2500;
+                    this.color = '#ec4899';
+                    this.baseDamage = 50;
+                    this.slowResistance = 1.0;  // Totalmente imune à lentidão
+                    this.aoeResistance = 0.50;  // Metade do dano de explosões
+                    this.disableTowerTimer = 0;
+
+                } else if (type === 'coracao_monocromia') {
+                    // Chefe Final
+                    this.speed = 0.35;
+                    this.maxHealth = 1500000;
+                    this.sizeRatio = 0.75;
+                    this.reward = 10000;
+                    this.color = '#9333ea';
+                    this.baseDamage = 9999;     // Derrota instantânea na base
+                    this.slowResistance = 1.0;  // Imune a lentidão/stun
+                    this.aoeResistance = 0.30;  // 30% resistência a AoE
+                    this.summonMinionsTimer = 0;
+                    finalBossRef = this;
+
+                } else if (type === 'eco_monocromatico') {
+                    // Minion do Chefe Final
+                    this.speed = 2.4;
+                    this.maxHealth = 1;
+                    this.sizeRatio = 0.20;
+                    this.reward = 1;
+                    this.color = '#334155';
+                    this.baseDamage = 0;        // Apenas distração
+
                 } else {
                     this.speed = 1.3;
                     this.maxHealth = 90 * healthMultiplier;
@@ -1637,8 +2003,11 @@
             }
 
             applyMossSlow(factor, duration) {
-                if (factor >= this.mossSlowFactor || this.mossSlowTimer <= 0) {
-                    this.mossSlowFactor = factor;
+                if (this.slowResistance >= 1.0) return; // Imune total
+
+                const effectiveFactor = factor * (1 - this.slowResistance);
+                if (effectiveFactor >= this.mossSlowFactor || this.mossSlowTimer <= 0) {
+                    this.mossSlowFactor = effectiveFactor;
                     this.mossSlowTimer = duration;
                 } else {
                     this.mossSlowTimer = Math.max(this.mossSlowTimer, duration);
@@ -1667,10 +2036,10 @@
                 if (currentGridCol >= 0 && currentGridCol < COLS && currentGridRow >= 0 && currentGridRow < ROWS) {
                     const tile = grid[currentGridRow][currentGridCol];
                     if (tile.type === CELL_TYPES.SPIKES) {
-                        tileSlow = 0.5;
+                        tileSlow = 1.0 - (0.5 * (1 - this.slowResistance));
                         this.health -= 0.35 * gameSpeed;
                     } else if (tile.isUpgradedPath) {
-                        tileSlow = 0.7;
+                        tileSlow = 1.0 - (0.3 * (1 - this.slowResistance));
                     }
                 }
                 let mossSlow = 1.0;
@@ -1685,9 +2054,128 @@
 
                 if (this.health <= 0) {
                     gold += this.reward;
-                    createParticles(this.x, this.y, this.type.includes('boss') ? 18 : 8, this.color);
+                    createParticles(this.x, this.y, this.type.includes('boss') || this.type.includes('colosso') || this.type.includes('devorador') || this.type.includes('coracao') ? 25 : 8, this.color);
                     playSound('hit');
+
+                    // Morte do Chefe Final despoja a Sequência Épica de Vitória
+                    if (this.type === 'coracao_monocromia') {
+                        startVictorySequence(this.x, this.y);
+                    }
+
                     return false;
+                }
+
+                /* ================================
+                   HABILIDADES ESPECIAIS DOS BOSSES
+                   ================================ */
+
+                // Colosso de Ferro: Onda de Choque a cada 10s (600 ticks)
+                if (this.type === 'colosso_ferro') {
+                    this.shockwaveTimer += gameSpeed;
+                    if (this.shockwaveTimer >= 600) {
+                        this.shockwaveTimer = 0;
+                        playSound('emp');
+                        const shockRadius = cellWidth * 3.5;
+
+                        createParticles(this.x, this.y, 20, '#94a3b8');
+
+                        // Empurra/destrói helicópteros e tanques próximos
+                        for (let i = allies.length - 1; i >= 0; i--) {
+                            if (Math.hypot(allies[i].x - this.x, allies[i].y - this.y) <= shockRadius) {
+                                allies[i].health -= 80;
+                            }
+                        }
+                        for (let i = drones.length - 1; i >= 0; i--) {
+                            if (Math.hypot(drones[i].x - this.x, drones[i].y - this.y) <= shockRadius) {
+                                drones[i].health -= 80;
+                            }
+                        }
+                        showNotice("Colosso de Ferro lançou uma Onda de Choque!");
+                    }
+                }
+
+                // Devorador Cromático: Regeneração e Desativação de Torres a cada 8s (480 ticks)
+                if (this.type === 'devorador_cromatico') {
+                    this.disableTowerTimer += gameSpeed;
+                    if (this.disableTowerTimer >= 480) {
+                        this.disableTowerTimer = 0;
+                        if (towers.length > 0) {
+                            const randomTower = towers[Math.floor(Math.random() * towers.length)];
+                            randomTower.disabledTimer = 300; // 5 segundos
+                            createParticles((randomTower.col + 0.5) * cellWidth, (randomTower.row + 0.5) * cellHeight, 12, '#ec4899');
+                            playSound('emp');
+                            showNotice("Devorador Cromático desativou uma torre!");
+                        }
+                    }
+
+                    // Recupera 500 HP/s se existir qualquer outro inimigo comum vivo
+                    const otherEnemiesAlive = enemies.some(e => e !== this && e.type !== 'eco_monocromatico');
+                    if (otherEnemiesAlive && this.health < this.maxHealth) {
+                        this.health = Math.min(this.maxHealth, this.health + (500 / 60) * gameSpeed);
+                        if (Math.random() < 0.2) {
+                            createParticles(this.x, this.y, 1, '#10b981');
+                        }
+                    }
+                }
+
+                // Coração da Monocromia: Invocação de Ecos e Aura da Ruína
+                if (this.type === 'coracao_monocromia') {
+                    // Atualiza Barra Superior do Boss
+                    const bossBar = document.getElementById('boss-bar-container');
+                    const bossFill = document.getElementById('boss-bar-fill');
+                    const bossHpText = document.getElementById('boss-bar-hp-text');
+
+                    if (bossBar && bossFill && bossHpText) {
+                        bossBar.classList.remove('hidden');
+                        const pct = Math.max(0, (this.health / this.maxHealth) * 100);
+                        bossFill.style.width = `${pct}%`;
+                        bossHpText.innerText = `${Math.ceil(this.health).toLocaleString('pt-BR')} / 1.500.000`;
+                    }
+
+                    // Invocação a cada 15 segundos (900 ticks)
+                    this.summonMinionsTimer += gameSpeed;
+                    if (this.summonMinionsTimer >= 900) {
+                        this.summonMinionsTimer = 0;
+                        for (let i = 0; i < 6; i++) {
+                            const eco = new Enemy('eco_monocromatico', 1);
+                            eco.x = this.x + (Math.random() - 0.5) * 30;
+                            eco.y = this.y + (Math.random() - 0.5) * 30;
+                            eco.pathIndex = this.pathIndex;
+                            enemies.push(eco);
+                        }
+                        playSound('boss_roar');
+                        showNotice("Coração da Monocromia invocou 6 Ecos!");
+                    }
+
+                    // Destrói instantaneamente tanques e drones que se aproximam
+                    const killRadius = this.size + 10;
+                    for (let a of allies) {
+                        if (Math.hypot(a.x - this.x, a.y - this.y) <= killRadius) a.health = 0;
+                    }
+                    for (let d of drones) {
+                        if (Math.hypot(d.x - this.x, d.y - this.y) <= killRadius) d.health = 0;
+                    }
+
+                    // Aura da Ruína: Destrói qualquer torre dentro de um raio de 2 blocos
+                    const auraDist = cellWidth * 2.2;
+                    for (let r = 0; r < ROWS; r++) {
+                        for (let c = 0; c < COLS; c++) {
+                            const tile = grid[r][c];
+                            if (tile.structure) {
+                                const tx = (c + 0.5) * cellWidth;
+                                const ty = (r + 0.5) * cellHeight;
+                                if (Math.hypot(tx - this.x, ty - this.y) <= auraDist) {
+                                    const index = towers.indexOf(tile.structure);
+                                    if (index > -1) towers.splice(index, 1);
+                                    tile.structure = null;
+                                    tile.type = CELL_TYPES.EMPTY;
+                                    createParticles(tx, ty, 15, '#a855f7');
+                                    playSound('hit');
+                                    showNotice("Uma torre foi destruída pela Aura da Ruína!");
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if (this.type === 'torpedo') {
@@ -1738,7 +2226,84 @@
                 ctx.save();
                 ctx.translate(this.x, this.y);
 
-                if (this.type === 'super_boss') {
+                if (this.type === 'colosso_ferro') {
+                    // Colosso de Ferro: Robô gigante blindado cinza com núcleo vermelho
+                    ctx.fillStyle = '#3f3f46';
+                    ctx.strokeStyle = '#71717a';
+                    ctx.lineWidth = 3;
+
+                    const size = this.size;
+                    ctx.fillRect(-size, -size, size * 2, size * 2);
+                    ctx.strokeRect(-size, -size, size * 2, size * 2);
+
+                    // Núcleo vermelho pulsante
+                    const pulse = Math.sin(Date.now() / 150) * 2;
+                    ctx.fillStyle = '#ef4444';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, size * 0.4 + pulse, 0, Math.PI * 2);
+                    ctx.fill();
+
+                } else if (this.type === 'devorador_cromatico') {
+                    // Devorador Cromático: Cristal flutuante gigante com anéis coloridos
+                    const size = this.size;
+                    const rot = Date.now() / 300;
+
+                    ctx.rotate(rot);
+                    ctx.strokeStyle = '#f43f5e';
+                    ctx.lineWidth = 2.5;
+                    ctx.strokeRect(-size * 0.8, -size * 0.8, size * 1.6, size * 1.6);
+
+                    ctx.rotate(-rot * 2);
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.strokeRect(-size * 0.6, -size * 0.6, size * 1.2, size * 1.2);
+
+                    // Cristal Central Rainbow
+                    const grad = ctx.createLinearGradient(-size, -size, size, size);
+                    grad.addColorStop(0, '#f43f5e');
+                    grad.addColorStop(0.5, '#38bdf8');
+                    grad.addColorStop(1, '#facc15');
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -size);
+                    ctx.lineTo(size * 0.7, 0);
+                    ctx.lineTo(0, size);
+                    ctx.lineTo(-size * 0.7, 0);
+                    ctx.closePath();
+                    ctx.fill();
+
+                } else if (this.type === 'coracao_monocromia') {
+                    // Coração da Monocromia: Coração escuro pulsante com energia roxa
+                    const size = this.size;
+                    const pulse = Math.sin(Date.now() / 120) * 4;
+
+                    ctx.fillStyle = '#18181b';
+                    ctx.strokeStyle = '#a855f7';
+                    ctx.lineWidth = 3.5;
+
+                    ctx.shadowColor = '#9333ea';
+                    ctx.shadowBlur = 15 + pulse;
+
+                    // Forma do Coração Escuro
+                    ctx.beginPath();
+                    ctx.moveTo(0, size * 0.6);
+                    ctx.bezierCurveTo(-size * 1.2, -size * 0.2, -size * 0.8, -size * 1.1, 0, -size * 0.5);
+                    ctx.bezierCurveTo(size * 0.8, -size * 1.1, size * 1.2, -size * 0.2, 0, size * 0.6);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.shadowBlur = 0;
+
+                } else if (this.type === 'eco_monocromatico') {
+                    ctx.fillStyle = '#000000';
+                    ctx.strokeStyle = '#64748b';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                } else if (this.type === 'super_boss') {
                     const pulse = Math.sin(Date.now() / 200) * 4;
                     ctx.strokeStyle = this.color;
                     ctx.lineWidth = 2;
@@ -1766,7 +2331,7 @@
 
                 ctx.fillStyle = COLORS.enemy;
                 ctx.strokeStyle = this.color;
-                ctx.lineWidth = this.type.includes('boss') ? 3 : 2;
+                ctx.lineWidth = this.type.includes('boss') || this.type.includes('colosso') ? 3 : 2;
 
                 if (this.type === 'scout') {
                     ctx.beginPath();
@@ -1784,7 +2349,7 @@
                     ctx.stroke();
                     ctx.fillStyle = '#a855f7';
                     ctx.fillRect(-this.size * 0.3, -this.size * 0.3, this.size * 0.6, this.size * 0.6);
-                } else {
+                } else if (!['colosso_ferro', 'devorador_cromatico', 'coracao_monocromia', 'eco_monocromatico'].includes(this.type)) {
                     ctx.beginPath();
                     ctx.moveTo(this.size * 1.3, 0);
                     ctx.lineTo(-this.size, -this.size * 0.85);
@@ -1798,8 +2363,8 @@
                 ctx.restore();
 
                 if (this.health < this.maxHealth) {
-                    const barW = cellWidth * (this.type.includes('boss') ? 1.0 : 0.6);
-                    const barH = this.type.includes('boss') ? 6 : 4;
+                    const barW = cellWidth * (this.type.includes('boss') || this.type.includes('colosso') ? 1.2 : 0.6);
+                    const barH = this.type.includes('boss') || this.type.includes('colosso') ? 6 : 4;
                     const hRatio = Math.max(0, this.health / this.maxHealth);
 
                     ctx.fillStyle = '#000000';
@@ -2026,6 +2591,52 @@
             }
         }
 
+        class PrismBeamEffect {
+            constructor(startX, startY, endX, endY, level) {
+                this.startX = startX;
+                this.startY = startY;
+                this.endX = endX;
+                this.endY = endY;
+                this.level = level;
+                this.life = 1.0;
+            }
+
+            update() {
+                this.life -= 0.12 * gameSpeed;
+                return this.life > 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.life);
+
+                const widths = [3, 4, 5, 7, 9];
+                const w = widths[this.level - 1] || 4;
+
+                const grad = ctx.createLinearGradient(this.startX, this.startY, this.endX, this.endY);
+                grad.addColorStop(0, '#f43f5e');
+                grad.addColorStop(0.33, '#38bdf8');
+                grad.addColorStop(0.66, '#facc15');
+                grad.addColorStop(1, '#e879f9');
+
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = w;
+                ctx.beginPath();
+                ctx.moveTo(this.startX, this.startY);
+                ctx.lineTo(this.endX, this.endY);
+                ctx.stroke();
+
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = Math.max(1, w * 0.4);
+                ctx.beginPath();
+                ctx.moveTo(this.startX, this.startY);
+                ctx.lineTo(this.endX, this.endY);
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
         class MissileProjectile {
             constructor(x, y, target, damage, isBig = false, speed = 12) {
                 this.x = x;
@@ -2060,7 +2671,10 @@
                 const step = this.speed * gameSpeed;
 
                 if (dist <= step) {
-                    this.target.health -= this.damage;
+                    let finalDmg = this.damage;
+                    if (this.target.aoeResistance > 0) finalDmg *= (1 - this.target.aoeResistance);
+                    this.target.health -= finalDmg;
+
                     createParticles(this.target.x, this.target.y, this.isBig ? 14 : 8, '#f87171');
                     playSound('hit');
                     return false;
@@ -2187,7 +2801,7 @@
             ctx.fillStyle = COLORS.bg;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Renderização de Auras de Torres de Santuário de Nível 3
+            // Renderização de Auras de Torres de Santuário
             towers.forEach(t => {
                 if (t.type === CELL_TYPES.TOWER_SANCTUARY && t.level === 3) {
                     const cx = (t.col + 0.5) * cellWidth;
@@ -2316,14 +2930,15 @@
                 ctx.lineWidth = 1.5;
                 ctx.strokeRect(hx, hy, cellWidth, cellHeight);
 
-                if (['tower_moss', 'tower_long', 'tower_summon', 'tower_drone', 'tower_sanctuary', 'tower_missile'].includes(activeTool)) {
+                if (['tower_moss', 'tower_long', 'tower_summon', 'tower_drone', 'tower_sanctuary', 'tower_missile', 'tower_prisma'].includes(activeTool)) {
                     const dummyMap = {
                         tower_moss: CELL_TYPES.TOWER_MOSS,
                         tower_long: CELL_TYPES.TOWER_LONG,
                         tower_summon: CELL_TYPES.TOWER_SUMMON,
                         tower_drone: CELL_TYPES.TOWER_DRONE,
                         tower_sanctuary: CELL_TYPES.TOWER_SANCTUARY,
-                        tower_missile: CELL_TYPES.TOWER_MISSILE
+                        tower_missile: CELL_TYPES.TOWER_MISSILE,
+                        tower_prisma: CELL_TYPES.TOWER_PRISMA
                     };
                     const dummyTower = new Tower(hoverCell.col, hoverCell.row, dummyMap[activeTool]);
                     const range = dummyTower.getEffectiveRange();
@@ -2366,10 +2981,28 @@
 
         function generateWaveEnemies(waveNum) {
             let list = [];
+
+            // ONDAS ESPECIAIS COM OS NOVOS BOSSES
+            if (waveNum === 40) {
+                list.push(new Enemy('colosso_ferro', 1));
+                return list;
+            }
+
+            if (waveNum === 45) {
+                list.push(new Enemy('devorador_cromatico', 1));
+                return list;
+            }
+
+            if (waveNum === 50) {
+                // Chefe Final
+                list.push(new Enemy('coracao_monocromia', 1));
+                return list;
+            }
+
             let count = 8 + waveNum * 3;
             let healthMult = Math.pow(1.3, waveNum - 1);
 
-            let isSuperBossWave = (waveNum === 10 || waveNum === 20);
+            let isSuperBossWave = (waveNum === 10 || waveNum === 20 || waveNum === 35);
             let isNormalBossWave = (waveNum === 5 || waveNum === 15 || waveNum === 25 || waveNum === 30);
 
             if (waveNum > 5) {
@@ -2407,6 +3040,23 @@
                 return;
             }
 
+            // ONDA DO CHEFE FINAL (ONDA 50): remove os inimigos restantes e ajusta a tela
+            if (wave === 50) {
+                enemies = [];
+                waveEnemiesToSpawn = [new Enemy('coracao_monocromia', 1)];
+                isWaveActive = true;
+                allWaveEnemiesSpawned = false;
+                spawnTimer = 0;
+                playSound('boss_roar');
+                showNotice("O Coração da Monocromia despertou!");
+
+                const btn = document.getElementById('btn-start-wave');
+                const lbl = document.getElementById('start-wave-label');
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                lbl.innerText = 'ONDA FINAL';
+                return;
+            }
+
             waveEnemiesToSpawn = generateWaveEnemies(wave);
             isWaveActive = true;
             allWaveEnemiesSpawned = false;
@@ -2428,7 +3078,10 @@
             allWaveEnemiesSpawned = false;
             gold += 60 + wave * 14;
 
-            // Regeneração da vida da Base proporcionada por Torres de Santuário
+            // Esconde barra do boss se estivesse ativa
+            const bossBar = document.getElementById('boss-bar-container');
+            if (bossBar) bossBar.classList.add('hidden');
+
             towers.forEach(t => {
                 if (t.type === CELL_TYPES.TOWER_SANCTUARY && t.disabledTimer <= 0) {
                     const interval = t.level === 1 ? 5 : (t.level === 2 ? 3 : 2);
@@ -2455,6 +3108,66 @@
                     if (!gameOver && !isWaveActive) startWave();
                 }, 1000);
             }
+        }
+
+        /* ========================================================
+           SEQUÊNCIA DE VITÓRIA DO CHEFE FINAL (CORAÇÃO DA MONOCROMIA)
+           ======================================================== */
+        function startVictorySequence(centerX, centerY) {
+            isVictorySequenceActive = true;
+            isWaveActive = false;
+            allWaveEnemiesSpawned = true;
+
+            // Para inimigos, partículas e limpa projeções
+            enemies = [];
+            projectiles = [];
+            prismBeams = [];
+            particles = [];
+
+            const bossBar = document.getElementById('boss-bar-container');
+            if (bossBar) bossBar.classList.add('hidden');
+
+            let flashRadius = 10;
+            const maxRadius = Math.hypot(canvas.width, canvas.height) * 1.5;
+
+            const interval = setInterval(() => {
+                flashRadius += 25;
+                victoryWhiteFlashRadius = flashRadius;
+
+                // Desenha feixe radiante branco a partir da posição do boss
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, flashRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                if (flashRadius >= maxRadius) {
+                    clearInterval(interval);
+                    showVictoryOverlay();
+                }
+            }, 20);
+        }
+
+        function showVictoryOverlay() {
+            saveStats();
+            const modal = document.getElementById('victory-modal');
+            const content = document.getElementById('victory-content');
+
+            if (modal && content) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('opacity-0');
+                    content.classList.add('opacity-100');
+                }, 300);
+            }
+        }
+
+        function closeVictoryAndReturnMenu() {
+            const modal = document.getElementById('victory-modal');
+            if (modal) modal.classList.add('hidden');
+            openStartMenu();
+            restartGame();
         }
 
         function selectTool(toolName) {
@@ -2523,7 +3236,7 @@
                     } else {
                         if (!isDrag) showNotice('Espinhos só podem ser construídos sobre a PISTA.');
                     }
-                } else if (['tower_moss', 'tower_long', 'tower_summon', 'tower_drone', 'tower_sanctuary', 'tower_missile', 'farm'].includes(activeTool)) {
+                } else if (['tower_moss', 'tower_long', 'tower_summon', 'tower_drone', 'tower_sanctuary', 'tower_missile', 'tower_prisma', 'farm'].includes(activeTool)) {
                     if (cell.type === CELL_TYPES.EMPTY) {
                         let towerType;
                         if (activeTool === 'tower_moss') towerType = CELL_TYPES.TOWER_MOSS;
@@ -2532,6 +3245,7 @@
                         else if (activeTool === 'tower_drone') towerType = CELL_TYPES.TOWER_DRONE;
                         else if (activeTool === 'tower_sanctuary') towerType = CELL_TYPES.TOWER_SANCTUARY;
                         else if (activeTool === 'tower_missile') towerType = CELL_TYPES.TOWER_MISSILE;
+                        else if (activeTool === 'tower_prisma') towerType = CELL_TYPES.TOWER_PRISMA;
                         else towerType = CELL_TYPES.FARM;
 
                         cell.type = towerType;
@@ -2619,6 +3333,7 @@
                         [CELL_TYPES.TOWER_DRONE]: 'tower_drone',
                         [CELL_TYPES.TOWER_SANCTUARY]: 'tower_sanctuary',
                         [CELL_TYPES.TOWER_MISSILE]: 'tower_missile',
+                        [CELL_TYPES.TOWER_PRISMA]: 'tower_prisma',
                         [CELL_TYPES.FARM]: 'farm'
                     };
                     refund = Math.floor((COSTS[costKeyMap[cell.structure.type]] || 50) * 0.75);
@@ -2694,6 +3409,7 @@
                     [CELL_TYPES.TOWER_DRONE]: t.level === 4 ? 'TORRE HELI' : 'TORRE DRONE',
                     [CELL_TYPES.TOWER_SANCTUARY]: 'TORRE SANTUÁRIO',
                     [CELL_TYPES.TOWER_MISSILE]: 'TORRE MÍSSIL',
+                    [CELL_TYPES.TOWER_PRISMA]: 'TORRE PRISMA',
                     [CELL_TYPES.FARM]: 'FAZENDA'
                 };
 
@@ -2715,17 +3431,17 @@
                         <span class="font-bold text-white">${stats.rangeStr} ${isBuffed ? '(+50%)' : ''}</span>
                     </div>
                     <div class="flex justify-between py-0.5 border-b border-neutral-800">
-                        <span class="text-neutral-500">REGEN.:</span>
+                        <span class="text-neutral-500">DANO/EF:</span>
                         <span class="font-bold text-white">${stats.powerStr}</span>
                     </div>
                     <div class="flex justify-between py-0.5 border-b border-neutral-800">
-                        <span class="text-neutral-500">BUFF TORRES:</span>
+                        <span class="text-neutral-500">VELOCIDADE:</span>
                         <span class="font-bold text-white">${stats.speedStr}</span>
                     </div>
                 `;
 
                 if (isStunned) {
-                    detailsHtml += `<div class="text-red-400 font-bold mt-1 text-[9px]">⚠️ DESATIVADA POR EMP!</div>`;
+                    detailsHtml += `<div class="text-red-400 font-bold mt-1 text-[9px]">⚠️ DESATIVADA POR EMP/DESATIVADOR!</div>`;
                 }
 
                 panelDetails.innerHTML = detailsHtml;
@@ -2749,6 +3465,7 @@
                     [CELL_TYPES.TOWER_DRONE]: 'tower_drone',
                     [CELL_TYPES.TOWER_SANCTUARY]: 'tower_sanctuary',
                     [CELL_TYPES.TOWER_MISSILE]: 'tower_missile',
+                    [CELL_TYPES.TOWER_PRISMA]: 'tower_prisma',
                     [CELL_TYPES.FARM]: 'farm'
                 };
                 const sellVal = Math.floor((COSTS[costKeyMap[t.type]] || 50) * 0.75);
@@ -2864,7 +3581,7 @@
 
             if (isWin) {
                 title.innerText = 'VITÓRIA!';
-                desc.innerText = 'Você defendeu sua base com sucesso contra todas as 30 ondas!';
+                desc.innerText = 'Você defendeu sua base com sucesso contra todas as 50 ondas!';
             } else {
                 title.innerText = 'FIM DE JOGO';
                 desc.innerText = 'A base foi destruída pelas hordas inimigas.';
@@ -2879,16 +3596,21 @@
             allWaveEnemiesSpawned = false;
             gameOver = false;
             gameWon = false;
+            isVictorySequenceActive = false;
 
             towers = [];
             enemies = [];
             allies = [];
             drones = [];
             projectiles = [];
+            prismBeams = [];
             particles = [];
             selectedGridPos = null;
 
             document.getElementById('game-overlay').classList.add('hidden');
+            const bossBar = document.getElementById('boss-bar-container');
+            if (bossBar) bossBar.classList.add('hidden');
+
             const btn = document.getElementById('btn-start-wave');
             const lbl = document.getElementById('start-wave-label');
             btn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -2922,7 +3644,7 @@
                     allWaveEnemiesSpawned = true;
                 }
 
-                if (allWaveEnemiesSpawned && enemies.length === 0) {
+                if (allWaveEnemiesSpawned && enemies.length === 0 && !isVictorySequenceActive) {
                     completeWave();
                 }
             }
@@ -2953,6 +3675,12 @@
                 }
             }
 
+            for (let i = prismBeams.length - 1; i >= 0; i--) {
+                if (!prismBeams[i].update()) {
+                    prismBeams.splice(i, 1);
+                }
+            }
+
             for (let i = particles.length - 1; i >= 0; i--) {
                 if (!particles[i].update()) {
                     particles.splice(i, 1);
@@ -2964,6 +3692,7 @@
             allies.forEach(a => a.draw());
             drones.forEach(d => d.draw());
             projectiles.forEach(p => p.draw());
+            prismBeams.forEach(b => b.draw());
             particles.forEach(p => p.draw());
 
             updateHUD();
