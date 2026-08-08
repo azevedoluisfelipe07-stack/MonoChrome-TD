@@ -16,6 +16,7 @@
             touch-action: manipulation;
         }
 
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -46,6 +47,7 @@
             fill: #000000 !important;
         }
 
+        /* Square Tool Button Styling */
         .btn-tool-square {
             width: 52px;
             height: 52px;
@@ -76,6 +78,7 @@
             transform-origin: center center;
         }
 
+        /* Pastel theme accents */
         .pastel-gray-card {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             border: 1px solid #334155;
@@ -93,6 +96,7 @@
             box-shadow: 0 0 15px rgba(203, 213, 225, 0.4);
         }
 
+        /* Floating Tower Inspector Pop-Up */
         #floating-inspector {
             position: fixed;
             z-index: 50;
@@ -101,6 +105,7 @@
             box-shadow: 0 20px 30px -10px rgba(0,0,0,0.8), 0 0 15px rgba(255,255,255,0.05);
         }
 
+        /* MOBILE MODE REFINEMENTS */
         body.mobile-mode {
             height: 100vh;
             height: 100dvh;
@@ -207,7 +212,7 @@
             </div>
 
             <p class="text-xs text-slate-400 max-w-xs leading-relaxed">
-                Construa estradas, fusões de torres no nível máximo, lasers e proteja sua base contra chefes colossais.
+                Construa estradas, armadilhas, mísseis, santuários, torres de prisma e proteja sua base contra chefes colossais.
             </p>
 
             <div class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-2.5 flex justify-around items-center text-xs">
@@ -233,6 +238,7 @@
                     JOGAR NOVA PARTIDA
                 </button>
 
+                <!-- Saves Menu Toggle -->
                 <button onclick="openSavesModal()" class="w-full py-2.5 px-4 bg-slate-800 border border-slate-700 text-cyan-300 font-bold rounded-xl text-xs uppercase tracking-wider hover:bg-slate-700 transition flex items-center justify-center gap-2">
                     <svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                     PARTIDAS SALVAS
@@ -259,7 +265,9 @@
                 </button>
             </div>
 
-            <div id="saves-list" class="max-h-60 overflow-y-auto flex flex-col gap-2 pr-1"></div>
+            <div id="saves-list" class="max-h-60 overflow-y-auto flex flex-col gap-2 pr-1">
+                <!-- Save items populated dynamically -->
+            </div>
 
             <button onclick="closeSavesModal()" class="w-full py-2 bg-slate-800 text-slate-300 font-bold rounded-xl text-xs uppercase hover:bg-slate-700">
                 VOLTAR
@@ -275,6 +283,7 @@
             <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700 hover:border-white">MENU</span>
         </div>
 
+        <!-- Dynamic Game Stats -->
         <div class="flex items-center gap-1.5 md:gap-3 text-xs shrink-0">
             <div class="stat-box flex items-center gap-1 bg-neutral-900 border border-neutral-800 px-2 py-1 rounded-md">
                 <span class="text-neutral-500 font-bold text-[10px]">VIDA:</span>
@@ -297,6 +306,7 @@
             </div>
         </div>
 
+        <!-- Controls -->
         <div class="flex items-center gap-1 shrink-0">
             <button onclick="saveCurrentMatchPrompt()" class="p-1.5 border border-cyan-800 bg-cyan-950/40 hover:border-cyan-400 text-cyan-300 rounded text-[10px] uppercase font-bold transition flex items-center gap-1">
                 <svg class="w-3 h-3 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17a5 5 0 01-.916-9.916 5.002 5.002 0 019.832 0A5.002 5.002 0 0116 17m-7-5l3 3m0 0l3-3m-3 3V8"/></svg>
@@ -327,8 +337,10 @@
 
     <main class="flex-1 flex flex-col lg:flex-row gap-3 p-3 items-stretch w-full max-w-7xl mx-auto overflow-hidden">
         
+        <!-- Canvas Container Area -->
         <div id="canvas-wrapper" class="flex-1 w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2 flex items-center justify-center relative min-h-[300px] overflow-hidden">
             
+            <!-- Top Final Boss Bar Overlay -->
             <div id="boss-bar-container" class="hidden absolute top-3 left-1/2 -translate-x-1/2 z-30 w-11/12 max-w-lg bg-black/90 border border-purple-500/80 rounded-xl p-2.5 shadow-2xl backdrop-blur-md flex flex-col gap-1">
                 <div class="flex justify-between items-center text-[11px] font-black tracking-wider uppercase">
                     <span id="boss-bar-name" class="text-purple-300 flex items-center gap-1.5">
@@ -344,6 +356,7 @@
 
             <canvas id="gameCanvas" class="block cursor-crosshair max-w-full h-auto bg-black border border-neutral-900 rounded select-none"></canvas>
 
+            <!-- Final Victory Full-screen Overlay -->
             <div id="victory-modal" class="hidden absolute inset-0 z-40 bg-white transition-opacity duration-1000 flex flex-col items-center justify-center p-6 text-center text-slate-900">
                 <div id="victory-content" class="max-w-md flex flex-col items-center gap-4 opacity-0 transition-opacity duration-1000">
                     <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">MISSÃO CUMPRIDA</span>
@@ -354,7 +367,7 @@
                         As cores retornaram ao mundo.
                     </p>
                     <p class="text-xs text-slate-600 leading-relaxed max-w-sm">
-                        Você derrotou o <strong class="text-purple-700">Coração da Monocromia</strong> e restaurou todas as cores!
+                        Você derrotou o <strong class="text-purple-700">Coração da Monocromia</strong> e restaurou todas as cores. Obrigado por jogar Monochrome TD!
                     </p>
                     <button onclick="closeVictoryAndReturnMenu()" class="mt-3 px-6 py-3 bg-slate-900 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:bg-slate-800 transition shadow-xl flex items-center gap-2">
                         VOLTAR AO MENU PRINCIPAL
@@ -362,6 +375,7 @@
                 </div>
             </div>
 
+            <!-- Pop-up Floating Inspector -->
             <div id="floating-inspector" class="hidden bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-xl p-3 text-xs min-w-[200px] flex flex-col gap-2">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-1">
                     <div>
@@ -376,6 +390,9 @@
                 <div id="float-inspect-details" class="text-[10px] text-slate-300 flex flex-col gap-1 my-0.5"></div>
 
                 <div id="float-inspect-actions" class="flex flex-col gap-1.5 pt-1 border-t border-slate-800">
+                    <button id="float-btn-fuse" onclick="fuseSelectedTowers()" class="hidden w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white py-1.5 px-2 font-extrabold hover:brightness-110 rounded-lg text-[10px] uppercase transition flex items-center justify-center gap-1 shadow animate-pulse">
+                        <span id="float-fuse-text">⚡ FUNDIR</span>
+                    </button>
                     <button id="float-btn-upgrade" onclick="upgradeSelectedTile()" class="w-full bg-emerald-200 text-slate-900 py-1.5 px-2 font-extrabold hover:bg-emerald-100 rounded-lg text-[10px] uppercase transition flex items-center justify-center gap-1 shadow">
                         <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 3l-8 8h5v10h6V11h5z"/></svg>
                         <span id="float-upgrade-text">UPGRADE ($50)</span>
@@ -388,6 +405,7 @@
                 </div>
             </div>
 
+            <!-- Overlay Banner for Game Over / Victory -->
             <div id="game-overlay" class="hidden absolute inset-0 bg-black/90 flex-col items-center justify-center gap-4 z-20 text-center p-6 rounded-lg">
                 <h2 id="overlay-title" class="text-3xl md:text-4xl font-extrabold tracking-widest text-white uppercase">FIM DE JOGO</h2>
                 <p id="overlay-desc" class="text-neutral-400 text-xs md:text-sm max-w-md">Sua base foi destruída pelas hordas inimigas.</p>
@@ -398,6 +416,7 @@
             </div>
         </div>
 
+        <!-- Dynamic Inspector Panel -->
         <aside class="w-full lg:w-72 bg-neutral-950 border border-neutral-800 rounded-lg p-3 flex flex-col gap-2 select-none text-xs">
             <div id="inspector-panel" class="bg-neutral-900 border border-neutral-800 rounded p-3 flex flex-col gap-2 h-full justify-between">
                 <div>
@@ -406,12 +425,15 @@
                         <span id="inspect-subtitle" class="text-neutral-400 font-normal">Nenhum</span>
                     </div>
                     <div id="inspect-details" class="text-neutral-400 text-[11px] leading-relaxed mt-2">
-                        Combine torres no NÍVEL MÁXIMO e lado a lado para criar Super Fusões!
+                        Arraste ou clique para construir. Selecione qualquer elemento para ver opções de upgrade ou remoção.
                     </div>
                     <div id="status-notice" class="text-yellow-400 text-[10px] hidden font-semibold bg-neutral-950 p-2 rounded border border-neutral-800 mt-2"></div>
                 </div>
 
                 <div id="inspect-actions" class="hidden flex flex-col gap-2 pt-2 border-t border-neutral-800">
+                    <button id="btn-fuse" onclick="fuseSelectedTowers()" class="hidden w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white py-2 px-3 font-bold hover:brightness-110 rounded text-[11px] uppercase transition flex items-center justify-center gap-1.5 animate-pulse">
+                        <span id="fuse-btn-text">⚡ FUNDIR</span>
+                    </button>
                     <button id="btn-upgrade" onclick="upgradeSelectedTile()" class="w-full bg-white text-black py-2 px-3 font-bold hover:bg-neutral-200 rounded text-[11px] uppercase transition flex items-center justify-center gap-1.5">
                         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3l-8 8h5v10h6V11h5z"/></svg>
                         <span id="upgrade-btn-text">UPGRADE ($50)</span>
@@ -427,16 +449,20 @@
 
     <!-- Toolbar Footer -->
     <footer class="fixed bottom-3 left-1/2 -translate-x-1/2 z-30 bg-neutral-950/95 backdrop-blur-md border border-neutral-800 p-2 rounded-xl shadow-2xl flex items-center gap-2 max-w-[98vw] overflow-x-auto select-none">
+        
+        <!-- Tool: Path -->
         <button onclick="selectTool('path')" id="tool-path" title="Pista ($10)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19h16M4 5h16M12 5v14" stroke-dasharray="2 2"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$10</span>
         </button>
 
+        <!-- Tool: Wall -->
         <button onclick="selectTool('wall')" id="tool-wall" title="Parede ($15)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$15</span>
         </button>
 
+        <!-- Tool: Spikes -->
         <button onclick="selectTool('spikes')" id="tool-spikes" title="Espinhos ($25)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M4 20l4-8 4 8 4-8 4 8M2 20h20"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$25</span>
@@ -444,41 +470,49 @@
 
         <div class="h-6 w-[1px] bg-neutral-800 mx-0.5"></div>
 
+        <!-- Tool: Moss Tower -->
         <button onclick="selectTool('tower_moss')" id="tool-tower_moss" title="Torre Musgo ($75)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-emerald-400 fill-none" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="9" cy="10" r="2.5" fill="#10b981"/><circle cx="15" cy="11" r="2" fill="#34d399"/><circle cx="12" cy="15" r="2" fill="#059669"/></svg>
             <span class="text-[9px] font-extrabold text-emerald-400 mt-1">$75</span>
         </button>
 
+        <!-- Tool: Long Range Tower -->
         <button onclick="selectTool('tower_long')" id="tool-tower_long" title="Torre Longa ($60)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="#FFFFFF"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$60</span>
         </button>
 
+        <!-- Tool: Summoner Tower -->
         <button onclick="selectTool('tower_summon')" id="tool-tower_summon" title="Torre Sumonadora ($90)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" fill="#FFFFFF"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$90</span>
         </button>
 
+        <!-- Tool: Drone Tower -->
         <button onclick="selectTool('tower_drone')" id="tool-tower_drone" title="Torre Drone ($120)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="#FFFFFF"/><path d="M6 6l4 4M18 6l-4 4M6 18l4-4M18 18l-4-4"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$120</span>
         </button>
 
+        <!-- Tool: Sanctuary Tower -->
         <button onclick="selectTool('tower_sanctuary')" id="tool-tower_sanctuary" title="Torre Santuário ($130)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-blue-400 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V7l-9-5z"/><polygon points="12,6 15,12 12,18 9,12" fill="#60a5fa"/></svg>
             <span class="text-[9px] font-extrabold text-blue-400 mt-1">$130</span>
         </button>
 
+        <!-- Tool: Missile Tower -->
         <button onclick="selectTool('tower_missile')" id="tool-tower_missile" title="Torre Míssil ($150)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-red-400 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M8 7l4-5 4 5M8 17l4 5 4-5"/><path d="M9 12h6"/></svg>
             <span class="text-[9px] font-extrabold text-red-400 mt-1">$150</span>
         </button>
 
+        <!-- Tool: Prisma Tower (NEW) -->
         <button onclick="selectTool('tower_prisma')" id="tool-tower_prisma" title="Torre Prisma ($3000)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-fuchsia-400 fill-none" stroke-width="2" viewBox="0 0 24 24"><polygon points="12,2 20,20 4,20" fill="#e879f9" opacity="0.3"/><polygon points="12,2 20,20 4,20"/><line x1="12" y1="2" x2="12" y2="20" stroke="#f43f5e"/><line x1="12" y1="10" x2="18" y2="15" stroke="#38bdf8"/><line x1="12" y1="10" x2="6" y2="15" stroke="#facc15"/></svg>
             <span class="text-[9px] font-extrabold text-fuchsia-400 mt-1">$3000</span>
         </button>
 
+        <!-- Tool: Farm -->
         <button onclick="selectTool('farm')" id="tool-farm" title="Fazenda ($100)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">$100</span>
@@ -486,6 +520,7 @@
 
         <div class="h-6 w-[1px] bg-neutral-800 mx-0.5"></div>
 
+        <!-- Tool: Demolish / Sell -->
         <button onclick="selectTool('sell')" id="tool-sell" title="Vender / Remover (75%)" class="btn-tool btn-tool-square bg-neutral-900 border border-neutral-800 rounded-lg hover:border-neutral-500">
             <svg class="w-5 h-5 stroke-neutral-300 fill-none" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
             <span class="text-[9px] font-extrabold text-neutral-400 mt-1">75%</span>
@@ -529,6 +564,7 @@
             document.getElementById('stat-best-score').innerText = `${bestScoreValue} pts`;
         }
 
+        /* LocalStorage Game Saves System */
         function getSavedMatches() {
             try {
                 return JSON.parse(localStorage.getItem(STORAGE_KEY_SAVES) || '[]');
@@ -734,10 +770,14 @@
             tower_sanctuary: 130,
             tower_missile: 150,
             tower_prisma: 3000,
-            farm: 100
+            farm: 100,
+            syn_growth: 3500,
+            syn_barracks: 5000,
+            syn_swamp: 6000,
+            syn_prosperity: 3000,
+            syn_chroma: 12000
         };
 
-        // TIPOS DE CELULAS INCLUINDO AS COMBINAÇÕES
         const CELL_TYPES = {
             EMPTY: 0,
             PATH: 1,
@@ -752,12 +792,151 @@
             TOWER_MOSS: 10,
             TOWER_SANCTUARY: 11,
             TOWER_PRISMA: 12,
-            // NOVAS FUSÕES:
-            TOWER_SUPER_PRISMA: 13,
-            FARM_FAST: 14,
-            GROUND_LASER: 15,
-            TOWER_COMBAT: 16
+            SYN_GROWTH: 13,      // Crescimento Acelerado (Musgo + Santuário)
+            SYN_BARRACKS: 14,    // Forte do Quartel (Drone/Heli + Sumonadora/Tanque)
+            SYN_SWAMP: 15,       // Pântano Incendiário (Musgo + Míssil)
+            SYN_PROSPERITY: 16,  // Prosperidade (Fazenda + Santuário)
+            SYN_CHROMA: 17       // Domínio Cromático (Prisma + Musgo + Santuário)
         };
+
+        // ================================
+        // SISTEMA DE FUSÃO DE TORRES (SINERGIAS)
+        // ================================
+        const SYNERGY_RECIPES = [
+            {
+                id: 'growth',
+                cellType: CELL_TYPES.SYN_GROWTH,
+                name: 'Crescimento Acelerado',
+                requires: [CELL_TYPES.TOWER_MOSS, CELL_TYPES.TOWER_SANCTUARY],
+                baseType: CELL_TYPES.TOWER_MOSS,
+                color: '#2dd4bf',
+                icon: '🌱',
+                cost: 3500
+            },
+            {
+                id: 'barracks',
+                cellType: CELL_TYPES.SYN_BARRACKS,
+                name: 'Forte do Quartel ⚔️',
+                requires: [CELL_TYPES.TOWER_DRONE, CELL_TYPES.TOWER_SUMMON],
+                baseType: null,
+                color: '#7e22ce',
+                icon: '⚔️',
+                cost: 5000
+            },
+            {
+                id: 'swamp',
+                cellType: CELL_TYPES.SYN_SWAMP,
+                name: 'Pântano Incendiário',
+                requires: [CELL_TYPES.TOWER_MOSS, CELL_TYPES.TOWER_MISSILE],
+                baseType: CELL_TYPES.TOWER_MISSILE,
+                color: '#f97316',
+                icon: '🔥',
+                cost: 6000
+            },
+            {
+                id: 'prosperity',
+                cellType: CELL_TYPES.SYN_PROSPERITY,
+                name: 'Prosperidade',
+                requires: [CELL_TYPES.FARM, CELL_TYPES.TOWER_SANCTUARY],
+                baseType: CELL_TYPES.FARM,
+                color: '#a3e635',
+                icon: '💰',
+                cost: 3000
+            },
+            {
+                id: 'chroma',
+                cellType: CELL_TYPES.SYN_CHROMA,
+                name: 'Domínio Cromático',
+                requires: [CELL_TYPES.TOWER_PRISMA, CELL_TYPES.TOWER_MOSS, CELL_TYPES.TOWER_SANCTUARY],
+                baseType: CELL_TYPES.TOWER_PRISMA,
+                color: '#22d3ee',
+                icon: '💠',
+                cost: 12000
+            }
+        ];
+        const SYNERGY_CELL_TYPES = SYNERGY_RECIPES.map(r => r.cellType);
+        let currentFusionOpportunity = null;
+
+        function getAdjacentTowers(col, row) {
+            const dirs = [[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];
+            const result = [];
+            for (const [dc, dr] of dirs) {
+                const c = col + dc, r = row + dr;
+                if (c >= 0 && c < COLS && r >= 0 && r < ROWS) {
+                    const cell = grid[r][c];
+                    if (cell && cell.structure) result.push(cell.structure);
+                }
+            }
+            return result;
+        }
+
+        // Verifica se a torre selecionada faz parte de uma combinação de fusão válida
+        // (todas as torres envolvidas precisam estar no nível máximo e adjacentes entre si)
+        function findFusionForTower(tower) {
+            if (!tower || SYNERGY_CELL_TYPES.includes(tower.type)) return null;
+            if (tower.level < tower.maxLevel) return null;
+
+            const neighbors = getAdjacentTowers(tower.col, tower.row);
+
+            for (const recipe of SYNERGY_RECIPES) {
+                if (!recipe.requires.includes(tower.type)) continue;
+
+                const remaining = recipe.requires.slice();
+                remaining.splice(remaining.indexOf(tower.type), 1);
+
+                const participants = [tower];
+                const usedNeighbors = new Set();
+                let ok = true;
+
+                for (const reqType of remaining) {
+                    const found = neighbors.find(n => n.type === reqType && !usedNeighbors.has(n) && n.level >= n.maxLevel);
+                    if (!found) { ok = false; break; }
+                    usedNeighbors.add(found);
+                    participants.push(found);
+                }
+
+                if (ok) {
+                    return { recipe, participants };
+                }
+            }
+            return null;
+        }
+
+        function fuseSelectedTowers() {
+            if (!currentFusionOpportunity) return;
+            const { recipe, participants } = currentFusionOpportunity;
+
+            if (gold < recipe.cost) {
+                showNotice('Energia insuficiente para realizar a fusão!');
+                return;
+            }
+
+            gold -= recipe.cost;
+
+            let hub = participants.find(p => p.type === recipe.baseType) || participants[0];
+            const hubCol = hub.col;
+            const hubRow = hub.row;
+
+            for (const p of participants) {
+                const idx = towers.indexOf(p);
+                if (idx > -1) towers.splice(idx, 1);
+                grid[p.row][p.col].structure = null;
+                grid[p.row][p.col].type = CELL_TYPES.EMPTY;
+            }
+
+            const synTower = new Tower(hubCol, hubRow, recipe.cellType);
+            towers.push(synTower);
+            grid[hubRow][hubCol].structure = synTower;
+            grid[hubRow][hubCol].type = recipe.cellType;
+
+            createParticles((hubCol + 0.5) * cellWidth, (hubRow + 0.5) * cellHeight, 35, recipe.color);
+            playSound('build');
+            showNotice(`✨ Fusão concluída: ${recipe.name}!`);
+
+            selectedGridPos = { col: hubCol, row: hubRow };
+            currentFusionOpportunity = null;
+            updateInspector();
+        }
 
         let canvas, ctx;
         let cellWidth = 0;
@@ -800,7 +979,9 @@
         let hoverCell = null;
         let audioCtx = null;
 
+        /* Visual State Variables for Final Boss & Victory Sequence */
         let bossAudioThemeActive = false;
+        let colorRestorationProgress = 0; // 0 = monochrome, 1 = full color restored
         let isVictorySequenceActive = false;
         let victoryWhiteFlashRadius = 0;
         let finalBossRef = null;
@@ -840,14 +1021,6 @@
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
                     osc.start(now);
                     osc.stop(now + 0.2);
-                } else if (type === 'fusion') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(300, now);
-                    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.4);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                    osc.start(now);
-                    osc.stop(now + 0.4);
                 } else if (type === 'missile') {
                     osc.type = 'triangle';
                     osc.frequency.setValueAtTime(150, now);
@@ -942,7 +1115,7 @@
             noticeEl.classList.remove('hidden');
             setTimeout(() => {
                 noticeEl.classList.add('hidden');
-            }, 3500);
+            }, 3000);
         }
 
         function resizeCanvas() {
@@ -976,7 +1149,6 @@
             }
         }
 
-        // MAPA INICIALMENTE SEM GRAMA
         function initGrid() {
             grid = [];
             grassMap = [];
@@ -1002,9 +1174,8 @@
                         });
                     }
 
-                    // COMEÇA SEM GRAMA NENHUMA
                     grassRow.push({
-                        hasGrass: false,
+                        hasGrass: Math.random() > 0.45,
                         color: ['#091b12', '#0d2818', '#11321f', '#08170f'][Math.floor(Math.random() * 4)],
                         blades: blades
                     });
@@ -1037,7 +1208,7 @@
 
         function evolveGrass() {
             const greens = ['#0d2818', '#11321f', '#154127', '#1b5232'];
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 25; i++) {
                 let r = Math.floor(Math.random() * ROWS);
                 let c = Math.floor(Math.random() * COLS);
                 if (grid[r][c].type === CELL_TYPES.EMPTY && !grassMap[r][c].hasGrass) {
@@ -1074,7 +1245,7 @@
                     if (n.col >= 0 && n.col < COLS && n.row >= 0 && n.row < ROWS) {
                         if (!visited[n.row][n.col]) {
                             const type = grid[n.row][n.col].type;
-                            if (type === CELL_TYPES.PATH || type === CELL_TYPES.SPIKES || type === CELL_TYPES.GROUND_LASER) {
+                            if (type === CELL_TYPES.PATH || type === CELL_TYPES.SPIKES) {
                                 visited[n.row][n.col] = true;
                                 queue.push([...currentPath, n]);
                             }
@@ -1096,13 +1267,40 @@
                 this.row = row;
                 this.type = type;
                 this.level = 1;
-                this.maxLevel = (type === CELL_TYPES.FARM || type === CELL_TYPES.TOWER_MOSS || type === CELL_TYPES.TOWER_SANCTUARY) ? 3 : (type === CELL_TYPES.TOWER_PRISMA ? 5 : (type === CELL_TYPES.TOWER_SUPER_PRISMA || type === CELL_TYPES.FARM_FAST || type === CELL_TYPES.TOWER_COMBAT ? 1 : 4));
+                this.maxLevel = SYNERGY_CELL_TYPES.includes(type) ? 1 : ((type === CELL_TYPES.FARM || type === CELL_TYPES.TOWER_MOSS || type === CELL_TYPES.TOWER_SANCTUARY) ? 3 : (type === CELL_TYPES.TOWER_PRISMA ? 5 : 4));
                 this.cooldown = 0;
                 this.disabledTimer = 0;
                 this.farmTimer = 0;
-                this.angle = 0; // MIRA DA TORRE LONGA
 
-                if (type === CELL_TYPES.TOWER_MOSS) {
+                if (type === CELL_TYPES.SYN_GROWTH) {
+                    // Crescimento Acelerado: Torre Musgo com +25% de alcance
+                    this.baseRangeCells = 3.2 * 1.25;
+                    this.fireRate = 33;
+                    this.damage = 18;
+                } else if (type === CELL_TYPES.SYN_BARRACKS) {
+                    // Forte do Quartel: gera Tanques e Helicópteros reforçados
+                    this.baseRangeCells = 3;
+                    this.spawnRate = 150;
+                    this.tankHealth = 95 * 1.3;
+                    this.tankDamage = 20;
+                    this.droneHealth = 30;
+                    this.droneSpeed = 1.4 * 1.2;
+                    this.droneDamage = 12 * 1.25;
+                } else if (type === CELL_TYPES.SYN_SWAMP) {
+                    // Pântano Incendiário: base Torre de Mísseis + lentidão/queimadura
+                    this.baseRangeCells = 999;
+                    this.fireRate = 260;
+                    this.damage = 220;
+                } else if (type === CELL_TYPES.SYN_PROSPERITY) {
+                    // Prosperidade: base Fazenda, gera renda e reforça fazendas próximas
+                    this.baseRangeCells = 3;
+                    this.income = 50;
+                } else if (type === CELL_TYPES.SYN_CHROMA) {
+                    // Domínio Cromático: base Torre Prisma, pulso com alcance infinito
+                    this.baseRangeCells = 999;
+                    this.fireRate = 100;
+                    this.damage = 150;
+                } else if (type === CELL_TYPES.TOWER_MOSS) {
                     this.baseRangeCells = 3.2;
                     this.fireRate = 60;
                     this.damage = 9;
@@ -1122,25 +1320,15 @@
                     this.droneSpeed = 1.4;
                     this.droneDamage = 12;
                 } else if (type === CELL_TYPES.TOWER_SANCTUARY) {
-                    this.baseRangeCells = 2;
+                    this.baseRangeCells = 2; // Lv1: 2 blocos, Lv2: 3, Lv3: 4
                 } else if (type === CELL_TYPES.TOWER_MISSILE) {
                     this.baseRangeCells = 999;
                     this.fireRate = 300;
                     this.damage = 180;
                 } else if (type === CELL_TYPES.TOWER_PRISMA) {
                     this.baseRangeCells = 5.5;
-                    this.fireRate = 72;
+                    this.fireRate = 72; // Lv1: 1.2s (72 ticks)
                     this.damage = 180;
-                } else if (type === CELL_TYPES.TOWER_SUPER_PRISMA) {
-                    this.baseRangeCells = 7.5;
-                    this.fireRate = 24; // Dispara raio massivo muito rápido
-                    this.damage = 2200;
-                } else if (type === CELL_TYPES.FARM_FAST) {
-                    this.baseRangeCells = 0;
-                    this.income = 25; // Gera a cada 0.5s
-                } else if (type === CELL_TYPES.TOWER_COMBAT) {
-                    this.baseRangeCells = 3.5;
-                    this.spawnRate = 180;
                 } else if (type === CELL_TYPES.FARM) {
                     this.baseRangeCells = 0;
                     this.income = 2;
@@ -1149,8 +1337,6 @@
 
             getUpgradeCost() {
                 if (this.level >= this.maxLevel) return 0;
-                if (this.type === CELL_TYPES.TOWER_SUPER_PRISMA || this.type === CELL_TYPES.FARM_FAST || this.type === CELL_TYPES.TOWER_COMBAT) return 0;
-
                 if (this.type === CELL_TYPES.FARM) {
                     return this.level === 1 ? 200 : 600;
                 }
@@ -1174,7 +1360,7 @@
             }
 
             hasWallBuff() {
-                if (this.type === CELL_TYPES.FARM || this.type === CELL_TYPES.FARM_FAST || this.type === CELL_TYPES.TOWER_SANCTUARY) return false;
+                if (this.type === CELL_TYPES.FARM || this.type === CELL_TYPES.TOWER_SANCTUARY || this.type === CELL_TYPES.SYN_PROSPERITY) return false;
                 const adj = [
                     { c: this.col + 1, r: this.row }, { c: this.col - 1, r: this.row },
                     { c: this.col, r: this.row + 1 }, { c: this.col, r: this.row - 1 },
@@ -1211,10 +1397,10 @@
             }
 
             getEffectiveRange() {
-                if (this.type === CELL_TYPES.FARM || this.type === CELL_TYPES.FARM_FAST) return 0;
-                if (this.type === CELL_TYPES.TOWER_MISSILE) return 9999;
+                if (this.type === CELL_TYPES.FARM) return 0;
+                if (this.type === CELL_TYPES.TOWER_MISSILE || this.type === CELL_TYPES.SYN_SWAMP || this.type === CELL_TYPES.SYN_CHROMA) return 9999;
                 if (this.type === CELL_TYPES.TOWER_SANCTUARY) {
-                    const rangeCells = 1 + this.level;
+                    const rangeCells = 1 + this.level; // Nível 1: 2 blocos, Nível 2: 3, Nível 3: 4
                     return rangeCells * cellWidth;
                 }
                 let rangeCells = this.baseRangeCells * (1 + (this.level - 1) * 0.2);
@@ -1227,18 +1413,7 @@
                 let powerStr = '';
                 let speedStr = '';
 
-                if (this.type === CELL_TYPES.TOWER_SUPER_PRISMA) {
-                    rangeStr = '7.5 blocos';
-                    powerStr = '2200 Dano Cósmico Piercing AoE';
-                    speedStr = '1/ 0.4s (Ultra Rápido)';
-                } else if (this.type === CELL_TYPES.FARM_FAST) {
-                    rangeStr = 'N/A';
-                    powerStr = '+$25 a cada 0.5s';
-                    speedStr = '0.5s';
-                } else if (this.type === CELL_TYPES.TOWER_COMBAT) {
-                    powerStr = '3000 HP Super Tanque (Empurra Inimigos)';
-                    speedStr = '1/ 3.0s';
-                } else if (this.type === CELL_TYPES.TOWER_MOSS) {
+                if (this.type === CELL_TYPES.TOWER_MOSS) {
                     const dmgs = [9, 13, 18];
                     const speeds = ['1.0s', '0.8s', '0.55s'];
                     const slows = ['Sem lentidão', '15% (1.8s)', '40% (2.8s)'];
@@ -1268,12 +1443,38 @@
                 } else if (this.type === CELL_TYPES.TOWER_PRISMA) {
                     const prismaDmgs = [180, 260, 380, 550, 800];
                     const prismaSpeeds = ['1.2s', '1.0s', '0.8s', '0.65s', '0.5s'];
-                    powerStr = `${prismaDmgs[this.level - 1]} Dano (Feixe Rainbow)`;
+                    const prismaEffects = [
+                        'Atravessa até 3 inimigos',
+                        'Atravessa até 5 inimigos',
+                        'Atravessa TODOS em linha',
+                        'AoE 30% nos alvos',
+                        'AoE 50% + Igno. 40% Def'
+                    ];
+                    powerStr = `${prismaDmgs[this.level - 1]} Dano (${prismaEffects[this.level - 1]})`;
                     speedStr = `Feixe 1/ ${prismaSpeeds[this.level - 1]}`;
                 } else if (this.type === CELL_TYPES.FARM) {
                     rangeStr = 'N/A';
                     powerStr = `+$${this.income}/s`;
                     speedStr = 'Contínuo';
+                } else if (this.type === CELL_TYPES.SYN_GROWTH) {
+                    powerStr = `${this.damage} Dano | Lentidão 40% (área: -10% permanente)`;
+                    speedStr = `1/ ${(this.fireRate / 60).toFixed(1)}s`;
+                } else if (this.type === CELL_TYPES.SYN_BARRACKS) {
+                    rangeStr = 'N/A';
+                    powerStr = `Tanque +30% Vida | Heli +25% Dano`;
+                    speedStr = `Spawn Duplo 1/ ${(this.spawnRate / 60).toFixed(1)}s`;
+                } else if (this.type === CELL_TYPES.SYN_SWAMP) {
+                    rangeStr = 'GLOBAL';
+                    powerStr = `${this.damage} Dano + Queimadura em lentos`;
+                    speedStr = `1/ ${(this.fireRate / 60).toFixed(1)}s`;
+                } else if (this.type === CELL_TYPES.SYN_PROSPERITY) {
+                    rangeStr = `${(this.baseRangeCells).toFixed(1)} blocos (buff)`;
+                    powerStr = `+$${this.income}/s | Fazendas próximas +50%`;
+                    speedStr = 'Contínuo';
+                } else if (this.type === CELL_TYPES.SYN_CHROMA) {
+                    rangeStr = 'GLOBAL (∞)';
+                    powerStr = `${this.damage} Dano + Lentidão em TODOS os inimigos`;
+                    speedStr = `Pulso 1/ ${(this.fireRate / 60).toFixed(1)}s`;
                 }
 
                 return { rangeStr, powerStr, speedStr };
@@ -1294,78 +1495,14 @@
                 const posY = (this.row + 0.5) * cellHeight;
                 const effectiveRange = this.getEffectiveRange();
 
-                // FUSÃO: SUPER PRISMA
-                if (this.type === CELL_TYPES.TOWER_SUPER_PRISMA) {
-                    if (this.cooldown <= 0 && enemies.length > 0) {
-                        let target = enemies[0];
-                        for (let e of enemies) {
-                            if (Math.hypot(e.x - posX, e.y - posY) <= effectiveRange) {
-                                target = e;
-                                break;
-                            }
-                        }
-
-                        if (target) {
-                            const dx = target.x - posX;
-                            const dy = target.y - posY;
-                            const angle = Math.atan2(dy, dx);
-                            const endX = posX + Math.cos(angle) * (effectiveRange * 1.5);
-                            const endY = posY + Math.sin(angle) * (effectiveRange * 1.5);
-
-                            for (let enemy of enemies) {
-                                const ex = enemy.x;
-                                const ey = enemy.y;
-                                const lineDist = Math.abs((endY - posY) * ex - (endX - posX) * ey + endX * posY - endY * posX) / Math.hypot(endY - posY, endX - posX);
-                                if (lineDist <= enemy.size + 15) {
-                                    enemy.health -= this.damage;
-                                    createParticles(enemy.x, enemy.y, 8, '#f43f5e');
-                                }
-                            }
-                            prismBeams.push(new PrismBeamEffect(posX, posY, endX, endY, 5));
-                            this.cooldown = this.fireRate;
-                            playSound('prisma_beam');
-                        }
-                    }
-
-                // FUSÃO: FAZENDA RÁPIDA (A cada 0.5s = 30 ticks)
-                } else if (this.type === CELL_TYPES.FARM_FAST) {
-                    if (isWaveActive) {
-                        this.farmTimer += gameSpeed;
-                        if (this.farmTimer >= 30) {
-                            gold += this.income;
-                            this.farmTimer = 0;
-                            createParticles(posX, posY, 3, '#facc15');
-                        }
-                    }
-
-                // FUSÃO: TORRE DE COMBATE
-                } else if (this.type === CELL_TYPES.TOWER_COMBAT) {
-                    if (isWaveActive && this.cooldown <= 0 && cachedPath.length > 0) {
-                        let nearestPathIndex = 0;
-                        let minDist = Infinity;
-
-                        cachedPath.forEach((pt, index) => {
-                            const px = (pt.col + 0.5) * cellWidth;
-                            const py = (pt.row + 0.5) * cellHeight;
-                            const d = Math.hypot(px - posX, py - posY);
-                            if (d < minDist) {
-                                minDist = d;
-                                nearestPathIndex = index;
-                            }
-                        });
-
-                        allies.push(new HeavyTankAlly(nearestPathIndex));
-                        this.cooldown = this.spawnRate;
-                        playSound('spawn_tank');
-                    }
-
-                } else if (this.type === CELL_TYPES.TOWER_MOSS) {
+                if (this.type === CELL_TYPES.TOWER_MOSS) {
                     if (this.cooldown <= 0) {
                         let target = null;
                         let minDist = Infinity;
 
                         for (let enemy of enemies) {
                             if (enemy.isShadow && this.level < 2) continue;
+
                             const d = Math.hypot(enemy.x - posX, enemy.y - posY);
                             if (d <= effectiveRange && d < minDist) {
                                 minDist = d;
@@ -1379,31 +1516,31 @@
                             const slows = [0, 0.15, 0.40];
                             const durations = [0, 108, 168];
 
-                            projectiles.push(new SporeProjectile(posX, posY, target, dmgs[this.level - 1], slows[this.level - 1], durations[this.level - 1], this.level));
+                            const currentDmg = dmgs[this.level - 1];
+                            const currentSlow = slows[this.level - 1];
+                            const currentDur = durations[this.level - 1];
+
+                            projectiles.push(new SporeProjectile(posX, posY, target, currentDmg, currentSlow, currentDur, this.level));
                             this.cooldown = rates[this.level - 1];
                             playSound('laser');
                         }
                     }
-
-                // TORRE LONGA: MIRA NO INIMIGO
                 } else if (this.type === CELL_TYPES.TOWER_LONG) {
-                    let target = null;
-                    let minDist = Infinity;
+                    if (this.cooldown <= 0) {
+                        let target = null;
+                        let minDist = Infinity;
 
-                    for (let enemy of enemies) {
-                        if (enemy.isShadow && this.level < 2) continue;
-                        const d = Math.hypot(enemy.x - posX, enemy.y - posY);
-                        if (d <= effectiveRange && d < minDist) {
-                            minDist = d;
-                            target = enemy;
+                        for (let enemy of enemies) {
+                            if (enemy.isShadow && this.level < 2) continue;
+
+                            const d = Math.hypot(enemy.x - posX, enemy.y - posY);
+                            if (d <= effectiveRange && d < minDist) {
+                                minDist = d;
+                                target = enemy;
+                            }
                         }
-                    }
 
-                    if (target) {
-                        // ATUALIZA MIRA
-                        this.angle = Math.atan2(target.y - posY, target.x - posX);
-
-                        if (this.cooldown <= 0) {
+                        if (target) {
                             const dmg = this.damage * (1 + (this.level - 1) * 0.45);
                             projectiles.push(new Projectile(posX, posY, target, dmg, this.level));
                             const rateBonus = 1 - (this.level - 1) * 0.15;
@@ -1411,7 +1548,6 @@
                             playSound('laser');
                         }
                     }
-
                 } else if (this.type === CELL_TYPES.TOWER_PRISMA) {
                     if (this.cooldown <= 0 && enemies.length > 0) {
                         let primaryTarget = null;
@@ -1426,13 +1562,14 @@
                         }
 
                         if (primaryTarget) {
-                            const fireIntervals = [72, 60, 48, 39, 30];
+                            const fireIntervals = [72, 60, 48, 39, 30]; // 1.2s, 1.0s, 0.8s, 0.65s, 0.5s
                             const prismaDmgs = [180, 260, 380, 550, 800];
                             const pierceCap = [3, 5, 999, 999, 999];
 
                             const baseDmg = prismaDmgs[this.level - 1];
                             const maxHits = pierceCap[this.level - 1];
                             const splashRatio = this.level >= 5 ? 0.50 : (this.level === 4 ? 0.30 : 0);
+                            const ignoreArmor = this.level >= 5;
 
                             const dx = primaryTarget.x - posX;
                             const dy = primaryTarget.y - posY;
@@ -1445,8 +1582,10 @@
 
                             for (let enemy of enemies) {
                                 if (hitEnemies.length >= maxHits) break;
+
                                 const ex = enemy.x;
                                 const ey = enemy.y;
+
                                 const lineDist = Math.abs((endY - posY) * ex - (endX - posX) * ey + endX * posY - endY * posX) / Math.hypot(endY - posY, endX - posX);
 
                                 if (lineDist <= enemy.size + 8) {
@@ -1459,11 +1598,30 @@
 
                             hitEnemies.forEach(e => {
                                 let finalDmg = baseDmg;
+
                                 if (e.aoeResistance > 0 && splashRatio > 0) {
                                     finalDmg *= (1 - e.aoeResistance);
                                 }
-                                e.health -= finalDmg;
+
+                                if (ignoreArmor) {
+                                    e.health -= finalDmg;
+                                } else {
+                                    e.health -= finalDmg;
+                                }
+
                                 createParticles(e.x, e.y, 6, '#f0abfc');
+
+                                if (splashRatio > 0) {
+                                    const splashRadius = cellWidth * 1.6;
+                                    for (let other of enemies) {
+                                        if (other !== e && Math.hypot(other.x - e.x, other.y - e.y) <= splashRadius) {
+                                            let sDmg = baseDmg * splashRatio;
+                                            if (other.aoeResistance > 0) sDmg *= (1 - other.aoeResistance);
+                                            other.health -= sDmg;
+                                            createParticles(other.x, other.y, 3, '#c084fc');
+                                        }
+                                    }
+                                }
                             });
 
                             prismBeams.push(new PrismBeamEffect(posX, posY, endX, endY, this.level));
@@ -1484,14 +1642,20 @@
                         }
 
                         if (target) {
-                            if (this.level === 1) projectiles.push(new MissileProjectile(posX, posY, target, 180, false, 12));
-                            else if (this.level === 2) projectiles.push(new MissileProjectile(posX, posY, target, 320, true, 12));
-                            else if (this.level === 3) projectiles.push(new MissileProjectile(posX, posY, target, 320, true, 12));
-                            else if (this.level === 4) {
+                            if (this.level === 1) {
+                                projectiles.push(new MissileProjectile(posX, posY, target, 180, false, 12));
+                                this.cooldown = 300;
+                            } else if (this.level === 2) {
+                                projectiles.push(new MissileProjectile(posX, posY, target, 320, true, 12));
+                                this.cooldown = 150;
+                            } else if (this.level === 3) {
+                                projectiles.push(new MissileProjectile(posX, posY, target, 320, true, 12));
+                                this.cooldown = 60;
+                            } else if (this.level === 4) {
                                 projectiles.push(new MissileProjectile(posX - 6, posY, target, 450, true, 7));
                                 projectiles.push(new MissileProjectile(posX + 6, posY, target, 450, true, 7));
+                                this.cooldown = 60;
                             }
-                            this.cooldown = [300, 150, 60, 60][this.level - 1];
                             playSound('missile');
                         }
                     }
@@ -1534,9 +1698,96 @@
                     if (isWaveActive) {
                         this.farmTimer += gameSpeed;
                         if (this.farmTimer >= 60) {
+                            let incomeMult = 1;
+                            for (let t2 of towers) {
+                                if (t2.type === CELL_TYPES.SYN_PROSPERITY && t2.disabledTimer <= 0) {
+                                    const d = Math.hypot(posX - (t2.col + 0.5) * cellWidth, posY - (t2.row + 0.5) * cellHeight);
+                                    if (d <= t2.getEffectiveRange()) { incomeMult = 1.5; break; }
+                                }
+                            }
+                            gold += this.income * incomeMult;
+                            this.farmTimer = 0;
+                        }
+                    }
+                } else if (this.type === CELL_TYPES.SYN_GROWTH) {
+                    // Crescimento Acelerado: aura permanente de -10% velocidade para inimigos no alcance
+                    for (let enemy of enemies) {
+                        const d = Math.hypot(enemy.x - posX, enemy.y - posY);
+                        if (d <= effectiveRange) {
+                            enemy.applyMossSlow(Math.max(enemy.mossSlowFactor, 0.10), 20);
+                        }
+                    }
+                    if (this.cooldown <= 0) {
+                        let target = null, minDist = Infinity;
+                        for (let enemy of enemies) {
+                            const d = Math.hypot(enemy.x - posX, enemy.y - posY);
+                            if (d <= effectiveRange && d < minDist) { minDist = d; target = enemy; }
+                        }
+                        if (target) {
+                            projectiles.push(new SporeProjectile(posX, posY, target, this.damage, 0.40, 168, 3));
+                            this.cooldown = this.fireRate;
+                            playSound('laser');
+                        }
+                    }
+                } else if (this.type === CELL_TYPES.SYN_BARRACKS) {
+                    // Forte do Quartel: gera Tanques e Helicópteros reforçados simultaneamente
+                    if (isWaveActive && this.cooldown <= 0 && cachedPath.length > 0) {
+                        let nearestPathIndex = 0, minDist = Infinity;
+                        cachedPath.forEach((pt, index) => {
+                            const px = (pt.col + 0.5) * cellWidth;
+                            const py = (pt.row + 0.5) * cellHeight;
+                            const d = Math.hypot(px - posX, py - posY);
+                            if (d < minDist) { minDist = d; nearestPathIndex = index; }
+                        });
+
+                        const tank = new TankAlly(nearestPathIndex, this.tankHealth, this.tankDamage, 1);
+                        tank.speed *= 1.15;
+                        allies.push(tank);
+
+                        const heli = new DroneAlly(posX, posY, this.droneHealth, this.droneSpeed, this.droneDamage, 4);
+                        heli.atkSpeedMult = 1.2;
+                        drones.push(heli);
+
+                        this.cooldown = this.spawnRate;
+                        playSound('spawn_tank');
+                    }
+                } else if (this.type === CELL_TYPES.SYN_SWAMP) {
+                    // Pântano Incendiário: queimadura contínua em inimigos sob efeito de lentidão
+                    for (let enemy of enemies) {
+                        if (enemy.mossSlowTimer > 0) {
+                            enemy.health -= 0.6 * gameSpeed;
+                            if (Math.random() < 0.15) createParticles(enemy.x, enemy.y, 1, '#f97316');
+                        }
+                    }
+                    if (this.cooldown <= 0 && enemies.length > 0) {
+                        let target = null, maxPathIdx = -1;
+                        for (let e of enemies) {
+                            if (e.pathIndex > maxPathIdx) { maxPathIdx = e.pathIndex; target = e; }
+                        }
+                        if (target) {
+                            projectiles.push(new MissileProjectile(posX, posY, target, this.damage, true, 12, true));
+                            this.cooldown = this.fireRate;
+                            playSound('missile');
+                        }
+                    }
+                } else if (this.type === CELL_TYPES.SYN_PROSPERITY) {
+                    if (isWaveActive) {
+                        this.farmTimer += gameSpeed;
+                        if (this.farmTimer >= 60) {
                             gold += this.income;
                             this.farmTimer = 0;
                         }
+                    }
+                } else if (this.type === CELL_TYPES.SYN_CHROMA) {
+                    // Domínio Cromático: pulso de dano + lentidão com alcance infinito pelo mapa
+                    if (this.cooldown <= 0 && enemies.length > 0) {
+                        for (let enemy of enemies) {
+                            enemy.health -= this.damage;
+                            enemy.applyMossSlow(Math.max(enemy.mossSlowFactor, 0.35), 90);
+                            createParticles(enemy.x, enemy.y, 3, '#22d3ee');
+                        }
+                        playSound('prisma_beam');
+                        this.cooldown = this.fireRate;
                     }
                 }
             }
@@ -1551,51 +1802,7 @@
                 const levelColors = ['#FFFFFF', '#38bdf8', '#facc15', '#f43f5e', '#a855f7'];
                 const accentColor = levelColors[this.level - 1];
 
-                // FUSÃO: SUPER PRISMA
-                if (this.type === CELL_TYPES.TOWER_SUPER_PRISMA) {
-                    const rot = Date.now() / 150;
-                    ctx.rotate(rot);
-                    ctx.fillStyle = '#f43f5e';
-                    ctx.shadowColor = '#e879f9';
-                    ctx.shadowBlur = 20;
-
-                    ctx.beginPath();
-                    ctx.arc(0, 0, cellWidth * 0.48, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    ctx.strokeStyle = '#ffffff';
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(-cellWidth * 0.25, -cellWidth * 0.25, cellWidth * 0.5, cellWidth * 0.5);
-                    ctx.shadowBlur = 0;
-
-                // FUSÃO: FAZENDA RÁPIDA
-                } else if (this.type === CELL_TYPES.FARM_FAST) {
-                    ctx.fillStyle = '#065f46';
-                    ctx.fillRect(-cellWidth * 0.4, -cellHeight * 0.4, cellWidth * 0.8, cellHeight * 0.8);
-                    ctx.strokeStyle = '#facc15';
-                    ctx.lineWidth = 2.5;
-                    ctx.strokeRect(-cellWidth * 0.4, -cellHeight * 0.4, cellWidth * 0.8, cellHeight * 0.8);
-
-                    ctx.fillStyle = '#34d399';
-                    ctx.font = 'bold 12px monospace';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText('$$$', 0, 0);
-
-                // FUSÃO: TORRE DE COMBATE
-                } else if (this.type === CELL_TYPES.TOWER_COMBAT) {
-                    ctx.fillStyle = '#1e1b4b';
-                    ctx.fillRect(-cellWidth * 0.4, -cellHeight * 0.4, cellWidth * 0.8, cellHeight * 0.8);
-                    ctx.strokeStyle = '#818cf8';
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(-cellWidth * 0.4, -cellHeight * 0.4, cellWidth * 0.8, cellHeight * 0.8);
-
-                    ctx.fillStyle = '#c7d2fe';
-                    ctx.beginPath();
-                    ctx.arc(0, 0, cellWidth * 0.2, 0, Math.PI * 2);
-                    ctx.fill();
-
-                } else if (this.type === CELL_TYPES.TOWER_MOSS) {
+                if (this.type === CELL_TYPES.TOWER_MOSS) {
                     const colors = ['#9ca3af', '#86efac', '#10b981'];
                     const mossColor = colors[this.level - 1];
 
@@ -1610,7 +1817,20 @@
                     ctx.arc(0, 0, cellWidth * 0.38, 0, Math.PI * 2);
                     ctx.stroke();
 
-                // TORRE LONGA GIRATÓRIA
+                    ctx.fillStyle = mossColor;
+                    const angles = [0, 1.25, 2.5, 3.75, 5.0];
+                    const r = cellWidth * 0.18;
+                    for (let a of angles) {
+                        ctx.beginPath();
+                        ctx.arc(Math.cos(a) * r, Math.sin(a) * r, cellWidth * 0.09, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    ctx.fillStyle = this.level === 3 ? '#ffffff' : '#047857';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cellWidth * 0.11, 0, Math.PI * 2);
+                    ctx.fill();
+
                 } else if (this.type === CELL_TYPES.TOWER_LONG) {
                     ctx.fillStyle = '#1e293b';
                     ctx.beginPath();
@@ -1620,65 +1840,291 @@
                     ctx.lineWidth = 1.5;
                     ctx.stroke();
 
-                    // GIRA O CANHÃO PARA O INIMIGO
-                    ctx.rotate(this.angle);
+                    ctx.fillStyle = '#0f172a';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cellWidth * 0.25, 0, Math.PI * 2);
+                    ctx.fill();
 
                     ctx.fillStyle = accentColor;
-                    ctx.fillRect(0, -cellWidth * 0.08, cellWidth * 0.45, cellWidth * 0.16);
+                    ctx.fillRect(-cellWidth * 0.05, -cellWidth * 0.38, cellWidth * 0.1, cellWidth * 0.3);
 
                     ctx.fillStyle = '#000000';
                     ctx.beginPath();
-                    ctx.arc(0, 0, cellWidth * 0.18, 0, Math.PI * 2);
+                    ctx.arc(0, 0, cellWidth * 0.1, 0, Math.PI * 2);
                     ctx.fill();
 
                 } else if (this.type === CELL_TYPES.TOWER_SANCTUARY) {
                     const r = cellWidth * 0.38;
-                    ctx.fillStyle = '#1d4ed8';
-                    ctx.beginPath();
-                    ctx.arc(0, 0, r, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.strokeStyle = '#60a5fa';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
+
+                    if (this.level === 1) {
+                        ctx.fillStyle = '#334155';
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.strokeStyle = '#94a3b8';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#cbd5e1';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.12);
+                        ctx.lineTo(cellWidth * 0.08, 0);
+                        ctx.lineTo(0, cellWidth * 0.12);
+                        ctx.lineTo(-cellWidth * 0.08, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+
+                    } else if (this.level === 2) {
+                        ctx.fillStyle = '#1e3a8a';
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.strokeStyle = '#93c5fd';
+                        ctx.lineWidth = 2.5;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r * 0.75, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#bfdbfe';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.18);
+                        ctx.lineTo(cellWidth * 0.12, 0);
+                        ctx.lineTo(0, cellWidth * 0.18);
+                        ctx.lineTo(-cellWidth * 0.12, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                    } else if (this.level === 3) {
+                        const pulse = Math.sin(Date.now() / 250) * 2;
+
+                        ctx.fillStyle = '#1d4ed8';
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.strokeStyle = '#60a5fa';
+                        ctx.lineWidth = 3;
+                        ctx.shadowColor = '#3b82f6';
+                        ctx.shadowBlur = 10 + pulse;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r * 0.8, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+
+                        ctx.fillStyle = '#60a5fa';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.22);
+                        ctx.lineTo(cellWidth * 0.15, 0);
+                        ctx.lineTo(0, cellWidth * 0.22);
+                        ctx.lineTo(-cellWidth * 0.15, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
 
                 } else if (this.type === CELL_TYPES.TOWER_PRISMA) {
                     const r = cellWidth * 0.42;
+
+                    // Base escura tática
                     ctx.fillStyle = '#18181b';
                     ctx.beginPath();
                     ctx.arc(0, 0, r, 0, Math.PI * 2);
                     ctx.fill();
 
-                    const rot = Date.now() / 400;
-                    ctx.rotate(rot);
-                    ctx.strokeStyle = '#facc15';
-                    ctx.strokeRect(-cellWidth * 0.2, -cellWidth * 0.2, cellWidth * 0.4, cellWidth * 0.4);
+                    if (this.level === 1) {
+                        // Nível 1: Cristal cinza
+                        ctx.strokeStyle = '#71717a';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#9ca3af';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.28);
+                        ctx.lineTo(cellWidth * 0.18, cellWidth * 0.18);
+                        ctx.lineTo(-cellWidth * 0.18, cellWidth * 0.18);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#e4e4e7';
+                        ctx.stroke();
+
+                    } else if (this.level === 2) {
+                        // Nível 2: Cristal com tom pastel brilhante
+                        ctx.strokeStyle = '#a5f3fc';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#67e8f9';
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.30);
+                        ctx.lineTo(cellWidth * 0.20, cellWidth * 0.20);
+                        ctx.lineTo(-cellWidth * 0.20, cellWidth * 0.20);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#f472b6';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                    } else if (this.level === 3) {
+                        // Nível 3: Prisma colorido
+                        ctx.strokeStyle = '#facc15';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        const rot = Date.now() / 600;
+                        ctx.rotate(rot);
+
+                        const grad = ctx.createLinearGradient(-cellWidth * 0.2, -cellWidth * 0.2, cellWidth * 0.2, cellWidth * 0.2);
+                        grad.addColorStop(0, '#f43f5e');
+                        grad.addColorStop(0.5, '#38bdf8');
+                        grad.addColorStop(1, '#facc15');
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.32);
+                        ctx.lineTo(cellWidth * 0.22, cellWidth * 0.22);
+                        ctx.lineTo(-cellWidth * 0.22, cellWidth * 0.22);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                    } else if (this.level === 4) {
+                        // Nível 4: Prisma maior com anel luminoso
+                        const rot = Date.now() / 400;
+
+                        ctx.strokeStyle = '#c084fc';
+                        ctx.lineWidth = 2.5;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r * 1.1, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        ctx.rotate(rot);
+                        const grad = ctx.createLinearGradient(-cellWidth * 0.25, -cellWidth * 0.25, cellWidth * 0.25, cellWidth * 0.25);
+                        grad.addColorStop(0, '#ec4899');
+                        grad.addColorStop(0.33, '#8b5cf6');
+                        grad.addColorStop(0.66, '#06b6d4');
+                        grad.addColorStop(1, '#10b981');
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.35);
+                        ctx.lineTo(cellWidth * 0.24, cellWidth * 0.24);
+                        ctx.lineTo(-cellWidth * 0.24, cellWidth * 0.24);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                    } else if (this.level === 5) {
+                        // Nível 5: Prisma Ultra Bright Multicolorido com Halo e Partículas
+                        const pulse = Math.sin(Date.now() / 150) * 3;
+                        const rot = Date.now() / 250;
+
+                        ctx.shadowColor = '#e879f9';
+                        ctx.shadowBlur = 12 + pulse;
+
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r * 1.25, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        ctx.rotate(rot);
+
+                        const grad = ctx.createConicGradient(rot, 0, 0);
+                        grad.addColorStop(0, '#f43f5e');
+                        grad.addColorStop(0.2, '#38bdf8');
+                        grad.addColorStop(0.4, '#a855f7');
+                        grad.addColorStop(0.6, '#facc15');
+                        grad.addColorStop(0.8, '#34d399');
+                        grad.addColorStop(1, '#f43f5e');
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -cellWidth * 0.38);
+                        ctx.lineTo(cellWidth * 0.26, cellWidth * 0.26);
+                        ctx.lineTo(-cellWidth * 0.26, cellWidth * 0.26);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 2.5;
+                        ctx.stroke();
+
+                        ctx.shadowBlur = 0;
+
+                        if (Math.random() < 0.4) {
+                            createParticles(cx + (Math.random() - 0.5) * cellWidth, cy + (Math.random() - 0.5) * cellHeight, 1, '#f0abfc');
+                        }
+                    }
 
                 } else if (this.type === CELL_TYPES.TOWER_MISSILE) {
                     const w = cellWidth * 0.7;
                     const h = cellHeight * 0.7;
+                    
                     ctx.fillStyle = '#1e1e1e';
                     ctx.fillRect(-w/2, -h/2, w, h);
                     ctx.strokeStyle = '#ef4444';
                     ctx.lineWidth = 2;
                     ctx.strokeRect(-w/2, -h/2, w, h);
 
+                    ctx.fillStyle = '#404040';
+                    ctx.fillRect(-w * 0.35, -h * 0.35, w * 0.3, h * 0.7);
+                    ctx.fillRect(w * 0.05, -h * 0.35, w * 0.3, h * 0.7);
+
+                    ctx.fillStyle = accentColor;
+                    ctx.beginPath();
+                    ctx.arc(-w * 0.2, -h * 0.1, cellWidth * 0.08, 0, Math.PI * 2);
+                    ctx.arc(w * 0.2, -h * 0.1, cellWidth * 0.08, 0, Math.PI * 2);
+                    ctx.fill();
+
                 } else if (this.type === CELL_TYPES.TOWER_SUMMON) {
                     const w = cellWidth * 0.65;
                     const h = cellHeight * 0.65;
+                    
                     ctx.fillStyle = '#0f172a';
                     ctx.fillRect(-w / 2, -h / 2, w, h);
                     ctx.strokeStyle = accentColor;
                     ctx.lineWidth = 2;
                     ctx.strokeRect(-w / 2, -h / 2, w, h);
 
+                    ctx.fillStyle = accentColor;
+                    ctx.fillRect(-w * 0.3, -h * 0.1, w * 0.6, h * 0.2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(-w * 0.1, -h * 0.3, w * 0.2, h * 0.6);
+
                 } else if (this.type === CELL_TYPES.TOWER_DRONE) {
                     const w = cellWidth * 0.7;
                     const h = cellHeight * 0.7;
+
                     ctx.fillStyle = '#111827';
                     ctx.fillRect(-w / 2, -h / 2, w, h);
                     ctx.strokeStyle = accentColor;
                     ctx.lineWidth = 2;
                     ctx.strokeRect(-w / 2, -h / 2, w, h);
+
+                    const rot = Date.now() / 150;
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(Math.cos(rot) * (w*0.4), Math.sin(rot) * (h*0.4));
+                    ctx.lineTo(-Math.cos(rot) * (w*0.4), -Math.sin(rot) * (h*0.4));
+                    ctx.stroke();
+
+                    ctx.fillStyle = accentColor;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cellWidth * 0.12, 0, Math.PI * 2);
+                    ctx.fill();
 
                 } else if (this.type === CELL_TYPES.FARM) {
                     const isMultiBlock = this.level >= 2;
@@ -1690,6 +2136,66 @@
                     ctx.strokeStyle = '#22c55e';
                     ctx.lineWidth = 1.5;
                     ctx.strokeRect(-cellWidth * 0.35, -h / 2, w, h);
+
+                    ctx.fillStyle = '#facc15';
+                    for (let i = 0; i < 3; i++) {
+                        ctx.fillRect(-cellWidth * 0.25 + i * 10, -h * 0.25, 4, h * 0.5);
+                    }
+
+                } else if (SYNERGY_CELL_TYPES.includes(this.type)) {
+                    const recipe = SYNERGY_RECIPES.find(r => r.cellType === this.type);
+                    const synColor = recipe ? recipe.color : '#ffffff';
+                    const r = cellWidth * 0.42;
+                    const rot = Date.now() / 600;
+
+                    // Núcleo hexagonal com a cor da sinergia
+                    ctx.save();
+                    ctx.rotate(rot);
+                    ctx.fillStyle = '#0a0a0a';
+                    ctx.strokeStyle = synColor;
+                    ctx.lineWidth = 2.5;
+                    ctx.beginPath();
+                    for (let i = 0; i < 6; i++) {
+                        const ang = (Math.PI / 3) * i;
+                        const px = Math.cos(ang) * r;
+                        const py = Math.sin(ang) * r;
+                        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.restore();
+
+                    // Anel externo giratório (sinal de torre fundida/elite)
+                    ctx.save();
+                    ctx.rotate(-rot * 1.4);
+                    ctx.strokeStyle = synColor;
+                    ctx.globalAlpha = 0.55;
+                    ctx.lineWidth = 1.5;
+                    ctx.setLineDash([4, 5]);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, r * 1.3, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    ctx.globalAlpha = 1.0;
+                    ctx.restore();
+
+                    // Núcleo pulsante central
+                    const pulse = 1 + Math.sin(Date.now() / 250) * 0.15;
+                    ctx.fillStyle = synColor;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cellWidth * 0.14 * pulse, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Ícone/símbolo específico de cada sinergia
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = `${Math.round(cellWidth * 0.34)}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(recipe ? recipe.icon : '★', 0, -cellWidth * 0.02);
                 }
 
                 if (this.disabledTimer > 0) {
@@ -1700,123 +2206,17 @@
                     ctx.stroke();
                 }
 
+                if (this.hasWallBuff()) {
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.lineWidth = 1.5;
+                    ctx.setLineDash([2, 2]);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cellWidth * 0.48, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
                 ctx.restore();
-            }
-        }
-
-        // SISTEMA DE VERIFICAÇÃO DE COMBINAÇÕES DE TORRES ADJACENTES
-        function checkTowerCombinations() {
-            // Auxiliar para obter posições vizinhas
-            const getAdjacent = (c, r) => [
-                { c: c + 1, r: r }, { c: c - 1, r: r },
-                { c: c, r: r + 1 }, { c: c, r: r - 1 },
-                { c: c + 1, r: r + 1 }, { c: c - 1, r: r - 1 },
-                { c: c + 1, r: r - 1 }, { c: c - 1, r: r + 1 }
-            ].filter(p => p.c >= 0 && p.c < COLS && p.r >= 0 && p.r < ROWS);
-
-            for (let i = towers.length - 1; i >= 0; i--) {
-                const t = towers[i];
-                if (!t) continue;
-
-                // 1. FUSÃO: PRISMA MAX (Nv 5) + 2 FOGUETES MAX (Nv 4) -> SUPER PRISMA
-                if (t.type === CELL_TYPES.TOWER_PRISMA && t.level === 5) {
-                    const neighbors = getAdjacent(t.col, t.row);
-                    const missileNeighbors = neighbors.filter(p => {
-                        const cell = grid[p.r][p.c];
-                        return cell.structure && cell.structure.type === CELL_TYPES.TOWER_MISSILE && cell.structure.level === 4;
-                    });
-
-                    if (missileNeighbors.length >= 2) {
-                        // Consome as 2 torres de míssil
-                        for (let k = 0; k < 2; k++) {
-                            const p = missileNeighbors[k];
-                            const targetTower = grid[p.r][p.c].structure;
-                            const idx = towers.indexOf(targetTower);
-                            if (idx > -1) towers.splice(idx, 1);
-                            grid[p.r][p.c].structure = null;
-                            grid[p.r][p.c].type = CELL_TYPES.EMPTY;
-                            createParticles((p.c + 0.5) * cellWidth, (p.r + 0.5) * cellHeight, 15, '#ef4444');
-                        }
-
-                        // Transforma em Super Prisma
-                        t.type = CELL_TYPES.TOWER_SUPER_PRISMA;
-                        t.level = 1;
-                        t.maxLevel = 1;
-                        t.baseRangeCells = 7.5;
-                        t.fireRate = 24;
-                        t.damage = 2200;
-
-                        grid[t.row][t.col].type = CELL_TYPES.TOWER_SUPER_PRISMA;
-                        playSound('fusion');
-                        createParticles((t.col + 0.5) * cellWidth, (t.row + 0.5) * cellHeight, 30, '#f43f5e');
-                        showNotice("⚡ COMBINAÇÃO! SUPER PRISMA CRIADO!");
-                    }
-                }
-
-                // 2. FUSÃO: FAZENDA MAX (Nv 3) + SANTUÁRIO MAX (Nv 3) -> FAZENDA RÁPIDA
-                if (t.type === CELL_TYPES.FARM && t.level === 3) {
-                    const neighbors = getAdjacent(t.col, t.row);
-                    const sanctuary = neighbors.find(p => {
-                        const cell = grid[p.r][p.c];
-                        return cell.structure && cell.structure.type === CELL_TYPES.TOWER_SANCTUARY && cell.structure.level === 3;
-                    });
-
-                    if (sanctuary) {
-                        const targetTower = grid[sanctuary.r][sanctuary.c].structure;
-                        const idx = towers.indexOf(targetTower);
-                        if (idx > -1) towers.splice(idx, 1);
-                        grid[sanctuary.r][sanctuary.c].structure = null;
-                        grid[sanctuary.r][sanctuary.c].type = CELL_TYPES.EMPTY;
-
-                        t.type = CELL_TYPES.FARM_FAST;
-                        t.income = 25;
-                        grid[t.row][t.col].type = CELL_TYPES.FARM_FAST;
-
-                        playSound('fusion');
-                        createParticles((t.col + 0.5) * cellWidth, (t.row + 0.5) * cellHeight, 25, '#facc15');
-                        showNotice("⚡ COMBINAÇÃO! FAZENDA RÁPIDA CRIADA ($25 / 0.5s)!");
-                    }
-                }
-
-                // 3. FUSÃO: SUMONADORA DE TANQUES MAX (Nv 4) + SUMONADORA DE HELICÓPTEROS/DRONES MAX (Nv 4) -> TORRE DE COMBATE
-                if (t.type === CELL_TYPES.TOWER_SUMMON && t.level === 4) {
-                    const neighbors = getAdjacent(t.col, t.row);
-                    const droneTower = neighbors.find(p => {
-                        const cell = grid[p.r][p.c];
-                        return cell.structure && cell.structure.type === CELL_TYPES.TOWER_DRONE && cell.structure.level === 4;
-                    });
-
-                    if (droneTower) {
-                        const targetTower = grid[droneTower.r][droneTower.c].structure;
-                        const idx = towers.indexOf(targetTower);
-                        if (idx > -1) towers.splice(idx, 1);
-                        grid[droneTower.r][droneTower.c].structure = null;
-                        grid[droneTower.r][droneTower.c].type = CELL_TYPES.EMPTY;
-
-                        t.type = CELL_TYPES.TOWER_COMBAT;
-                        t.level = 1;
-                        t.maxLevel = 1;
-                        t.spawnRate = 180;
-                        grid[t.row][t.col].type = CELL_TYPES.TOWER_COMBAT;
-
-                        playSound('fusion');
-                        createParticles((t.col + 0.5) * cellWidth, (t.row + 0.5) * cellHeight, 25, '#818cf8');
-                        showNotice("⚡ COMBINAÇÃO! TORRE DE COMBATE CRIADA!");
-                    }
-                }
-            }
-
-            // 4. COMBINAÇÃO DE PISO: ESPINHOS + RUA ASFALTADA = LASER NO CHÃO
-            for (let r = 0; r < ROWS; r++) {
-                for (let c = 0; c < COLS; c++) {
-                    const cell = grid[r][c];
-                    if (cell.type === CELL_TYPES.SPIKES && cell.isUpgradedPath) {
-                        cell.type = CELL_TYPES.GROUND_LASER;
-                        playSound('fusion');
-                        createParticles((c + 0.5) * cellWidth, (r + 0.5) * cellHeight, 15, '#ef4444');
-                        showNotice("⚡ COMBINAÇÃO! LASER NO CHÃO CRIADO!");
-                    }
-                }
             }
         }
 
@@ -1834,11 +2234,13 @@
                 this.isShadow = (type === 'sombra');
                 this.empCooldown = 0;
 
+                // Resistências e temporizadores especiais
                 this.slowResistance = 0;
                 this.aoeResistance = 0;
-                this.shockwaveTimer = 0;
-                this.disableTowerTimer = 0;
-                this.summonMinionsTimer = 0;
+                this.shockwaveTimer = 0; // Colosso de Ferro
+                this.disableTowerTimer = 0; // Devorador Cromático
+                this.summonMinionsTimer = 0; // Coração da Monocromia
+                this.towerBreakCooldown = 0; // Cooldown de quebra de torres (Aura da Ruína) — 1 torre a cada 10s
 
                 if (type === 'scout') {
                     this.speed = 2.2;
@@ -1882,16 +2284,56 @@
                     this.reward = 200;
                     this.color = '#f43f5e';
                     this.baseDamage = Math.floor(6 + wave / 2);
+
+                /* ========================
+                   NOVOS BOSSES DO JOGO
+                   ======================== */
+                } else if (type === 'colosso_ferro') {
+                    // Boss Onda 40
+                    this.speed = 0.55;
+                    this.maxHealth = 40000;
+                    this.sizeRatio = 0.58;
+                    this.reward = 1000;
+                    this.color = '#71717a';
+                    this.baseDamage = 20;
+                    this.slowResistance = 0.50; // 50% de resistência à lentidão
+                    this.aoeResistance = 0.20;  // 20% a menos de dano em área
+                    this.shockwaveTimer = 0;
+
+                } else if (type === 'devorador_cromatico') {
+                    // Boss Onda 45
+                    this.speed = 1.0;
+                    this.maxHealth = 120000;
+                    this.sizeRatio = 0.62;
+                    this.reward = 2500;
+                    this.color = '#ec4899';
+                    this.baseDamage = 50;
+                    this.slowResistance = 1.0;  // Totalmente imune à lentidão
+                    this.aoeResistance = 0.50;  // Metade do dano de explosões
+                    this.disableTowerTimer = 0;
+
                 } else if (type === 'coracao_monocromia') {
+                    // Chefe Final
                     this.speed = 0.35;
                     this.maxHealth = 1500000;
                     this.sizeRatio = 0.75;
                     this.reward = 10000;
                     this.color = '#9333ea';
-                    this.baseDamage = 9999;
-                    this.slowResistance = 1.0;
-                    this.aoeResistance = 0.30;
+                    this.baseDamage = 9999;     // Derrota instantânea na base
+                    this.slowResistance = 1.0;  // Imune a lentidão/stun
+                    this.aoeResistance = 0.30;  // 30% resistência a AoE
+                    this.summonMinionsTimer = 0;
                     finalBossRef = this;
+
+                } else if (type === 'eco_monocromatico') {
+                    // Minion do Chefe Final
+                    this.speed = 2.4;
+                    this.maxHealth = 1;
+                    this.sizeRatio = 0.20;
+                    this.reward = 1;
+                    this.color = '#334155';
+                    this.baseDamage = 0;        // Apenas distração
+
                 } else {
                     this.speed = 1.3;
                     this.maxHealth = 90 * healthMultiplier;
@@ -1906,11 +2348,14 @@
             }
 
             applyMossSlow(factor, duration) {
-                if (this.slowResistance >= 1.0) return;
+                if (this.slowResistance >= 1.0) return; // Imune total
+
                 const effectiveFactor = factor * (1 - this.slowResistance);
                 if (effectiveFactor >= this.mossSlowFactor || this.mossSlowTimer <= 0) {
                     this.mossSlowFactor = effectiveFactor;
                     this.mossSlowTimer = duration;
+                } else {
+                    this.mossSlowTimer = Math.max(this.mossSlowTimer, duration);
                 }
             }
 
@@ -1938,33 +2383,180 @@
                     if (tile.type === CELL_TYPES.SPIKES) {
                         tileSlow = 1.0 - (0.5 * (1 - this.slowResistance));
                         this.health -= 0.35 * gameSpeed;
-                    } else if (tile.type === CELL_TYPES.GROUND_LASER) {
-                        // LASER NO CHÃO: BEM RÁPIDO E COM ALTO DANO
-                        this.health -= 3.5 * gameSpeed;
-                        tileSlow = 0.3;
-                        if (Math.random() < 0.4) createParticles(this.x, this.y, 2, '#ef4444');
                     } else if (tile.isUpgradedPath) {
                         tileSlow = 1.0 - (0.3 * (1 - this.slowResistance));
                     }
                 }
-
                 let mossSlow = 1.0;
                 if (this.mossSlowTimer > 0) {
                     this.mossSlowTimer -= gameSpeed;
                     mossSlow = 1.0 - this.mossSlowFactor;
+                } else {
+                    this.mossSlowFactor = 0;
                 }
 
                 this.slowFactor = tileSlow * mossSlow;
 
                 if (this.health <= 0) {
                     gold += this.reward;
-                    createParticles(this.x, this.y, 8, this.color);
+                    createParticles(this.x, this.y, this.type.includes('boss') || this.type.includes('colosso') || this.type.includes('devorador') || this.type.includes('coracao') ? 25 : 8, this.color);
                     playSound('hit');
 
+                    // Morte do Chefe Final despoja a Sequência Épica de Vitória
                     if (this.type === 'coracao_monocromia') {
                         startVictorySequence(this.x, this.y);
                     }
+
                     return false;
+                }
+
+                /* ================================
+                   HABILIDADES ESPECIAIS DOS BOSSES
+                   ================================ */
+
+                // Colosso de Ferro: Onda de Choque a cada 10s (600 ticks)
+                if (this.type === 'colosso_ferro') {
+                    this.shockwaveTimer += gameSpeed;
+                    if (this.shockwaveTimer >= 600) {
+                        this.shockwaveTimer = 0;
+                        playSound('emp');
+                        const shockRadius = cellWidth * 3.5;
+
+                        createParticles(this.x, this.y, 20, '#94a3b8');
+
+                        // Empurra/destrói helicópteros e tanques próximos
+                        for (let i = allies.length - 1; i >= 0; i--) {
+                            if (Math.hypot(allies[i].x - this.x, allies[i].y - this.y) <= shockRadius) {
+                                allies[i].health -= 80;
+                            }
+                        }
+                        for (let i = drones.length - 1; i >= 0; i--) {
+                            if (Math.hypot(drones[i].x - this.x, drones[i].y - this.y) <= shockRadius) {
+                                drones[i].health -= 80;
+                            }
+                        }
+                        showNotice("Colosso de Ferro lançou uma Onda de Choque!");
+                    }
+                }
+
+                // Devorador Cromático: Regeneração e Desativação de Torres a cada 8s (480 ticks)
+                if (this.type === 'devorador_cromatico') {
+                    this.disableTowerTimer += gameSpeed;
+                    if (this.disableTowerTimer >= 480) {
+                        this.disableTowerTimer = 0;
+                        if (towers.length > 0) {
+                            const randomTower = towers[Math.floor(Math.random() * towers.length)];
+                            randomTower.disabledTimer = 300; // 5 segundos
+                            createParticles((randomTower.col + 0.5) * cellWidth, (randomTower.row + 0.5) * cellHeight, 12, '#ec4899');
+                            playSound('emp');
+                            showNotice("Devorador Cromático desativou uma torre!");
+                        }
+                    }
+
+                    // Recupera 500 HP/s se existir qualquer outro inimigo comum vivo
+                    const otherEnemiesAlive = enemies.some(e => e !== this && e.type !== 'eco_monocromatico');
+                    if (otherEnemiesAlive && this.health < this.maxHealth) {
+                        this.health = Math.min(this.maxHealth, this.health + (500 / 60) * gameSpeed);
+                        if (Math.random() < 0.2) {
+                            createParticles(this.x, this.y, 1, '#10b981');
+                        }
+                    }
+                }
+
+                // Coração da Monocromia: Invocação de Ecos e Aura da Ruína
+                if (this.type === 'coracao_monocromia') {
+                    // Atualiza Barra Superior do Boss
+                    const bossBar = document.getElementById('boss-bar-container');
+                    const bossFill = document.getElementById('boss-bar-fill');
+                    const bossHpText = document.getElementById('boss-bar-hp-text');
+
+                    if (bossBar && bossFill && bossHpText) {
+                        bossBar.classList.remove('hidden');
+                        const pct = Math.max(0, (this.health / this.maxHealth) * 100);
+                        bossFill.style.width = `${pct}%`;
+                        bossHpText.innerText = `${Math.ceil(this.health).toLocaleString('pt-BR')} / 1.500.000`;
+                    }
+
+                    // Invocação a cada 15 segundos (900 ticks)
+                    this.summonMinionsTimer += gameSpeed;
+                    if (this.summonMinionsTimer >= 900) {
+                        this.summonMinionsTimer = 0;
+                        for (let i = 0; i < 6; i++) {
+                            const eco = new Enemy('eco_monocromatico', 1);
+                            eco.x = this.x + (Math.random() - 0.5) * 30;
+                            eco.y = this.y + (Math.random() - 0.5) * 30;
+                            eco.pathIndex = this.pathIndex;
+                            enemies.push(eco);
+                        }
+                        playSound('boss_roar');
+                        showNotice("Coração da Monocromia invocou 6 Ecos!");
+                    }
+
+                    // Destrói instantaneamente tanques e drones que se aproximam
+                    const killRadius = this.size + 10;
+                    for (let a of allies) {
+                        if (Math.hypot(a.x - this.x, a.y - this.y) <= killRadius) a.health = 0;
+                    }
+                    for (let d of drones) {
+                        if (Math.hypot(d.x - this.x, d.y - this.y) <= killRadius) d.health = 0;
+                    }
+
+                    // Aura da Ruína: Destrói no máximo 1 torre a cada 10 segundos (600 ticks)
+                    // dentro de um raio de 2 blocos. Não pode destruir a Torre Prisma nem
+                    // as Torres Sumonadoras.
+                    if (this.towerBreakCooldown > 0) {
+                        this.towerBreakCooldown -= gameSpeed;
+                    } else {
+                        const auraDist = cellWidth * 2.2;
+                        let targetTile = null;
+
+                        outerBreakLoop:
+                        for (let r = 0; r < ROWS; r++) {
+                            for (let c = 0; c < COLS; c++) {
+                                const tile = grid[r][c];
+                                if (tile.structure &&
+                                    tile.type !== CELL_TYPES.TOWER_PRISMA &&
+                                    tile.type !== CELL_TYPES.TOWER_SUMMON) {
+                                    const tx = (c + 0.5) * cellWidth;
+                                    const ty = (r + 0.5) * cellHeight;
+                                    if (Math.hypot(tx - this.x, ty - this.y) <= auraDist) {
+                                        targetTile = tile;
+                                        break outerBreakLoop;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (targetTile) {
+                            const tx = (targetTile.structure.col + 0.5) * cellWidth;
+                            const ty = (targetTile.structure.row + 0.5) * cellHeight;
+                            const index = towers.indexOf(targetTile.structure);
+                            if (index > -1) towers.splice(index, 1);
+                            targetTile.structure = null;
+                            targetTile.type = CELL_TYPES.EMPTY;
+                            createParticles(tx, ty, 15, '#a855f7');
+                            playSound('hit');
+                            showNotice("Uma torre foi destruída pela Aura da Ruína!");
+                            this.towerBreakCooldown = 600;
+                        }
+                    }
+                }
+
+                if (this.type === 'torpedo') {
+                    this.empCooldown += gameSpeed;
+                    if (this.empCooldown >= 180) {
+                        const empRange = cellWidth * 2.8;
+                        for (let t of towers) {
+                            const tx = (t.col + 0.5) * cellWidth;
+                            const ty = (t.row + 0.5) * cellHeight;
+                            if (Math.hypot(tx - this.x, ty - this.y) <= empRange) {
+                                t.disabledTimer = 120;
+                                playSound('emp');
+                                createParticles(tx, ty, 8, '#a855f7');
+                            }
+                        }
+                        this.empCooldown = 0;
+                    }
                 }
 
                 if (this.isBlockedByTank) {
@@ -1997,109 +2589,156 @@
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
+
+                if (this.type === 'colosso_ferro') {
+                    // Colosso de Ferro: Robô gigante blindado cinza com núcleo vermelho
+                    ctx.fillStyle = '#3f3f46';
+                    ctx.strokeStyle = '#71717a';
+                    ctx.lineWidth = 3;
+
+                    const size = this.size;
+                    ctx.fillRect(-size, -size, size * 2, size * 2);
+                    ctx.strokeRect(-size, -size, size * 2, size * 2);
+
+                    // Núcleo vermelho pulsante
+                    const pulse = Math.sin(Date.now() / 150) * 2;
+                    ctx.fillStyle = '#ef4444';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, size * 0.4 + pulse, 0, Math.PI * 2);
+                    ctx.fill();
+
+                } else if (this.type === 'devorador_cromatico') {
+                    // Devorador Cromático: Cristal flutuante gigante com anéis coloridos
+                    const size = this.size;
+                    const rot = Date.now() / 300;
+
+                    ctx.rotate(rot);
+                    ctx.strokeStyle = '#f43f5e';
+                    ctx.lineWidth = 2.5;
+                    ctx.strokeRect(-size * 0.8, -size * 0.8, size * 1.6, size * 1.6);
+
+                    ctx.rotate(-rot * 2);
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.strokeRect(-size * 0.6, -size * 0.6, size * 1.2, size * 1.2);
+
+                    // Cristal Central Rainbow
+                    const grad = ctx.createLinearGradient(-size, -size, size, size);
+                    grad.addColorStop(0, '#f43f5e');
+                    grad.addColorStop(0.5, '#38bdf8');
+                    grad.addColorStop(1, '#facc15');
+
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -size);
+                    ctx.lineTo(size * 0.7, 0);
+                    ctx.lineTo(0, size);
+                    ctx.lineTo(-size * 0.7, 0);
+                    ctx.closePath();
+                    ctx.fill();
+
+                } else if (this.type === 'coracao_monocromia') {
+                    // Coração da Monocromia: Coração escuro pulsante com energia roxa
+                    const size = this.size;
+                    const pulse = Math.sin(Date.now() / 120) * 4;
+
+                    ctx.fillStyle = '#18181b';
+                    ctx.strokeStyle = '#a855f7';
+                    ctx.lineWidth = 3.5;
+
+                    ctx.shadowColor = '#9333ea';
+                    ctx.shadowBlur = 15 + pulse;
+
+                    // Forma do Coração Escuro
+                    ctx.beginPath();
+                    ctx.moveTo(0, size * 0.6);
+                    ctx.bezierCurveTo(-size * 1.2, -size * 0.2, -size * 0.8, -size * 1.1, 0, -size * 0.5);
+                    ctx.bezierCurveTo(size * 0.8, -size * 1.1, size * 1.2, -size * 0.2, 0, size * 0.6);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.shadowBlur = 0;
+
+                } else if (this.type === 'eco_monocromatico') {
+                    ctx.fillStyle = '#000000';
+                    ctx.strokeStyle = '#64748b';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                } else if (this.type === 'super_boss') {
+                    const pulse = Math.sin(Date.now() / 200) * 4;
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size + 6 + pulse, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    ctx.rotate(Date.now() / 400);
+                    ctx.strokeStyle = '#facc15';
+                    ctx.strokeRect(-this.size * 0.6, -this.size * 0.6, this.size * 1.2, this.size * 1.2);
+                } else if (this.type === 'torpedo') {
+                    const empRange = cellWidth * 2.8 * Math.pow(1.1, wave - 1);
+                    ctx.strokeStyle = 'rgba(168, 85, 247, 0.25)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, empRange, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
                 ctx.rotate(this.angle);
+
+                if (this.isShadow) {
+                    ctx.globalAlpha = 0.5;
+                }
 
                 ctx.fillStyle = COLORS.enemy;
                 ctx.strokeStyle = this.color;
-                ctx.lineWidth = 2;
+                ctx.lineWidth = this.type.includes('boss') || this.type.includes('colosso') ? 3 : 2;
 
-                ctx.beginPath();
-                ctx.moveTo(this.size * 1.3, 0);
-                ctx.lineTo(-this.size, -this.size * 0.85);
-                ctx.lineTo(-this.size * 0.4, 0);
-                ctx.lineTo(-this.size, this.size * 0.85);
-                ctx.closePath();
-                ctx.fill();
-                ctx.stroke();
+                if (this.type === 'scout') {
+                    ctx.beginPath();
+                    ctx.moveTo(this.size * 1.4, 0);
+                    ctx.lineTo(-this.size, -this.size * 0.7);
+                    ctx.lineTo(-this.size * 0.4, 0);
+                    ctx.lineTo(-this.size, this.size * 0.7);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                } else if (this.type === 'torpedo') {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size * 0.8, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.fillStyle = '#a855f7';
+                    ctx.fillRect(-this.size * 0.3, -this.size * 0.3, this.size * 0.6, this.size * 0.6);
+                } else if (!['colosso_ferro', 'devorador_cromatico', 'coracao_monocromia', 'eco_monocromatico'].includes(this.type)) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.size * 1.3, 0);
+                    ctx.lineTo(-this.size, -this.size * 0.85);
+                    ctx.lineTo(-this.size * 0.4, 0);
+                    ctx.lineTo(-this.size, this.size * 0.85);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                }
 
                 ctx.restore();
-            }
-        }
 
-        // SUPER TANQUE PESADO (CRIADO PELA TORRE DE COMBATE)
-        class HeavyTankAlly {
-            constructor(pathIndex) {
-                this.pathIndex = pathIndex;
-                this.x = (cachedPath[pathIndex].col + 0.5) * cellWidth;
-                this.y = (cachedPath[pathIndex].row + 0.5) * cellHeight;
-                this.maxHealth = 3000;
-                this.health = 3000;
-                this.damage = 180;
-                this.speed = 0.7;
-            }
+                if (this.health < this.maxHealth) {
+                    const barW = cellWidth * (this.type.includes('boss') || this.type.includes('colosso') ? 1.2 : 0.6);
+                    const barH = this.type.includes('boss') || this.type.includes('colosso') ? 6 : 4;
+                    const hRatio = Math.max(0, this.health / this.maxHealth);
 
-            get size() {
-                return cellWidth * 0.42;
-            }
-
-            update() {
-                if (this.health <= 0) {
-                    createParticles(this.x, this.y, 12, '#818cf8');
-                    return false;
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(this.x - barW / 2, this.y - this.size - 10, barW, barH);
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(this.x - barW / 2, this.y - this.size - 10, barW * hRatio, barH);
+                    ctx.strokeStyle = '#FFFFFF';
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeRect(this.x - barW / 2, this.y - this.size - 10, barW, barH);
                 }
-
-                let engagedEnemy = null;
-                for (let enemy of enemies) {
-                    const dist = Math.hypot(enemy.x - this.x, enemy.y - this.y);
-                    if (dist < (this.size + enemy.size + 6)) {
-                        engagedEnemy = enemy;
-                        break;
-                    }
-                }
-
-                if (engagedEnemy) {
-                    engagedEnemy.isBlockedByTank = true;
-                    engagedEnemy.health -= this.damage * 0.1 * gameSpeed;
-                    this.health -= 1.0 * gameSpeed;
-
-                    // RECUA OS INIMIGOS (KNOCKBACK)
-                    if (engagedEnemy.pathIndex > 0) {
-                        engagedEnemy.pathIndex = Math.max(0, engagedEnemy.pathIndex - 0.05 * gameSpeed);
-                        const prevTile = cachedPath[Math.floor(engagedEnemy.pathIndex)];
-                        if (prevTile) {
-                            engagedEnemy.x = (prevTile.col + 0.5) * cellWidth;
-                            engagedEnemy.y = (prevTile.row + 0.5) * cellHeight;
-                        }
-                    }
-                } else if (this.pathIndex > 0) {
-                    const targetTile = cachedPath[this.pathIndex - 1];
-                    const targetX = (targetTile.col + 0.5) * cellWidth;
-                    const targetY = (targetTile.row + 0.5) * cellHeight;
-
-                    const dx = targetX - this.x;
-                    const dy = targetY - this.y;
-                    const dist = Math.hypot(dx, dy);
-
-                    const step = this.speed * gameSpeed;
-                    if (dist <= step) {
-                        this.x = targetX;
-                        this.y = targetY;
-                        this.pathIndex--;
-                    } else {
-                        this.x += (dx / dist) * step;
-                        this.y += (dy / dist) * step;
-                    }
-                }
-
-                return true;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-
-                ctx.fillStyle = '#312e81';
-                ctx.strokeStyle = '#c7d2fe';
-                ctx.lineWidth = 2.5;
-
-                const half = this.size / 2;
-                ctx.fillRect(-half, -half, this.size, this.size);
-                ctx.strokeRect(-half, -half, this.size, this.size);
-
-                ctx.fillStyle = '#e0e7ff';
-                ctx.fillRect(-half * 0.5, -half * 0.5, this.size * 0.5, this.size * 0.5);
-
-                ctx.restore();
             }
         }
 
@@ -2113,6 +2752,7 @@
                 this.damage = damage;
                 this.level = level;
                 this.target = null;
+                this.atkSpeedMult = 1;
             }
 
             get size() {
@@ -2144,7 +2784,7 @@
                     const dist = Math.hypot(dx, dy);
 
                     if (dist <= cellWidth * 1.5) {
-                        this.target.health -= this.damage * 0.05 * gameSpeed;
+                        this.target.health -= this.damage * 0.05 * this.atkSpeedMult * gameSpeed;
                     } else {
                         const step = this.speed * gameSpeed;
                         this.x += (dx / dist) * step;
@@ -2158,10 +2798,28 @@
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.fillStyle = '#38bdf8';
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                ctx.fill();
+
+                const colors = ['#FFFFFF', '#38bdf8', '#facc15', '#f43f5e'];
+                ctx.fillStyle = colors[this.level - 1];
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = 1;
+
+                if (this.level === 4) {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    const rot = (Date.now() / 80);
+                    ctx.strokeStyle = '#FFFFFF';
+                    ctx.beginPath();
+                    ctx.moveTo(Math.cos(rot) * 10, Math.sin(rot) * 10);
+                    ctx.lineTo(-Math.cos(rot) * 10, -Math.sin(rot) * 10);
+                    ctx.stroke();
+                } else {
+                    ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                    ctx.strokeRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                }
+
                 ctx.restore();
             }
         }
@@ -2201,23 +2859,29 @@
                     engagedEnemy.isBlockedByTank = true;
                     engagedEnemy.health -= this.damage * 0.08 * gameSpeed;
                     this.health -= 1.4 * gameSpeed;
-                } else if (this.pathIndex > 0) {
-                    const targetTile = cachedPath[this.pathIndex - 1];
-                    const targetX = (targetTile.col + 0.5) * cellWidth;
-                    const targetY = (targetTile.row + 0.5) * cellHeight;
+                } else {
+                    if (this.pathIndex > 0) {
+                        const targetTile = cachedPath[this.pathIndex - 1];
+                        const targetX = (targetTile.col + 0.5) * cellWidth;
+                        const targetY = (targetTile.row + 0.5) * cellHeight;
 
-                    const dx = targetX - this.x;
-                    const dy = targetY - this.y;
-                    const dist = Math.hypot(dx, dy);
+                        const dx = targetX - this.x;
+                        const dy = targetY - this.y;
+                        const dist = Math.hypot(dx, dy);
 
-                    const step = this.speed * gameSpeed;
-                    if (dist <= step) {
-                        this.x = targetX;
-                        this.y = targetY;
-                        this.pathIndex--;
+                        const step = this.speed * gameSpeed;
+                        if (dist <= step) {
+                            this.x = targetX;
+                            this.y = targetY;
+                            this.pathIndex--;
+                        } else {
+                            this.x += (dx / dist) * step;
+                            this.y += (dy / dist) * step;
+                        }
                     } else {
-                        this.x += (dx / dist) * step;
-                        this.y += (dy / dist) * step;
+                        // Chegou ao ponto de entrada (IN) sem inimigos para enfrentar: o tanque morre.
+                        createParticles(this.x, this.y, 6, COLORS.ally);
+                        return false;
                     }
                 }
 
@@ -2227,9 +2891,28 @@
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.fillStyle = '#808080';
-                ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+
+                const levelColors = ['#808080', '#38bdf8', '#facc15', '#f43f5e'];
+                ctx.fillStyle = levelColors[this.level - 1];
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 1.5;
+
+                const half = this.size / 2;
+                ctx.fillRect(-half, -half, this.size, this.size);
+                ctx.strokeRect(-half, -half, this.size, this.size);
+
                 ctx.restore();
+
+                if (this.health < this.maxHealth) {
+                    const barW = cellWidth * 0.5;
+                    const barH = 3;
+                    const ratio = Math.max(0, this.health / this.maxHealth);
+
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(this.x - barW / 2, this.y - this.size - 6, barW, barH);
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fillRect(this.x - barW / 2, this.y - this.size - 6, barW * ratio, barH);
+                }
             }
         }
 
@@ -2249,11 +2932,13 @@
                 const dx = this.target.x - this.x;
                 const dy = this.target.y - this.y;
                 const dist = Math.hypot(dx, dy);
+
                 const step = this.speed * gameSpeed;
 
                 if (dist <= step) {
                     this.target.health -= this.damage;
-                    createParticles(this.target.x, this.target.y, 4, '#FFFFFF');
+                    const levelColors = ['#FFFFFF', '#38bdf8', '#facc15', '#f43f5e'];
+                    createParticles(this.target.x, this.target.y, 4, levelColors[this.level - 1]);
                     return false;
                 }
 
@@ -2264,7 +2949,8 @@
 
             draw() {
                 if (!this.target) return;
-                ctx.strokeStyle = '#FFFFFF';
+                const levelColors = ['#FFFFFF', '#38bdf8', '#facc15', '#f43f5e'];
+                ctx.strokeStyle = levelColors[this.level - 1];
                 ctx.lineWidth = 2.5;
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
@@ -2292,53 +2978,111 @@
             draw() {
                 ctx.save();
                 ctx.globalAlpha = Math.max(0, this.life);
+
+                const widths = [3, 4, 5, 7, 9];
+                const w = widths[this.level - 1] || 4;
+
                 const grad = ctx.createLinearGradient(this.startX, this.startY, this.endX, this.endY);
                 grad.addColorStop(0, '#f43f5e');
-                grad.addColorStop(0.5, '#38bdf8');
-                grad.addColorStop(1, '#facc15');
+                grad.addColorStop(0.33, '#38bdf8');
+                grad.addColorStop(0.66, '#facc15');
+                grad.addColorStop(1, '#e879f9');
 
                 ctx.strokeStyle = grad;
-                ctx.lineWidth = 6;
+                ctx.lineWidth = w;
                 ctx.beginPath();
                 ctx.moveTo(this.startX, this.startY);
                 ctx.lineTo(this.endX, this.endY);
                 ctx.stroke();
+
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = Math.max(1, w * 0.4);
+                ctx.beginPath();
+                ctx.moveTo(this.startX, this.startY);
+                ctx.lineTo(this.endX, this.endY);
+                ctx.stroke();
+
                 ctx.restore();
             }
         }
 
         class MissileProjectile {
-            constructor(x, y, target, damage, isBig = false, speed = 12) {
+            constructor(x, y, target, damage, isBig = false, speed = 12, slowOnHit = false) {
                 this.x = x;
                 this.y = y;
                 this.target = target;
                 this.damage = damage;
                 this.isBig = isBig;
                 this.speed = speed;
+                this.angle = 0;
+                this.slowOnHit = slowOnHit;
             }
 
             update() {
-                if (!this.target || this.target.health <= 0) return false;
+                if (!this.target || this.target.health <= 0) {
+                    let closest = null;
+                    let minDist = Infinity;
+                    for (let e of enemies) {
+                        const d = Math.hypot(e.x - this.x, e.y - this.y);
+                        if (d < minDist) {
+                            minDist = d;
+                            closest = e;
+                        }
+                    }
+                    if (closest) this.target = closest;
+                    else return false;
+                }
+
                 const dx = this.target.x - this.x;
                 const dy = this.target.y - this.y;
                 const dist = Math.hypot(dx, dy);
+                this.angle = Math.atan2(dy, dx);
+
                 const step = this.speed * gameSpeed;
 
                 if (dist <= step) {
-                    this.target.health -= this.damage;
-                    createParticles(this.target.x, this.target.y, 8, '#f87171');
+                    let finalDmg = this.damage;
+                    if (this.target.aoeResistance > 0) finalDmg *= (1 - this.target.aoeResistance);
+                    this.target.health -= finalDmg;
+                    if (this.slowOnHit) {
+                        this.target.applyMossSlow(0.35, 168);
+                    }
+
+                    createParticles(this.target.x, this.target.y, this.isBig ? 14 : 8, '#f87171');
                     playSound('hit');
                     return false;
                 }
 
                 this.x += (dx / dist) * step;
                 this.y += (dy / dist) * step;
+
+                if (Math.random() < 0.6) {
+                    createParticles(this.x, this.y, 1, '#f97316');
+                }
+
                 return true;
             }
 
             draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+
+                const size = this.isBig ? 12 : 7;
                 ctx.fillStyle = '#ef4444';
-                ctx.fillRect(this.x - 3, this.y - 3, 6, 6);
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+
+                ctx.beginPath();
+                ctx.moveTo(size, 0);
+                ctx.lineTo(-size, -size / 2);
+                ctx.lineTo(-size / 2, 0);
+                ctx.lineTo(-size, size / 2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.restore();
             }
         }
 
@@ -2356,15 +3100,23 @@
 
             update() {
                 if (!this.target || this.target.health <= 0) return false;
+
                 const dx = this.target.x - this.x;
                 const dy = this.target.y - this.y;
                 const dist = Math.hypot(dx, dy);
                 const step = this.speed * gameSpeed;
 
+                if (this.level === 3 && Math.random() < 0.65) {
+                    particles.push(new Particle(this.x, this.y, '#22c55e'));
+                }
+
                 if (dist <= step) {
                     this.target.health -= this.damage;
-                    if (this.slowFactor > 0) this.target.applyMossSlow(this.slowFactor, this.slowDuration);
-                    createParticles(this.target.x, this.target.y, 5, '#10b981');
+                    if (this.slowFactor > 0) {
+                        this.target.applyMossSlow(this.slowFactor, this.slowDuration);
+                    }
+                    const sporeColors = ['#9ca3af', '#86efac', '#22c55e'];
+                    createParticles(this.target.x, this.target.y, 5, sporeColors[this.level - 1]);
                     return false;
                 }
 
@@ -2374,10 +3126,15 @@
             }
 
             draw() {
-                ctx.fillStyle = '#10b981';
+                if (!this.target) return;
+                const colors = ['#9ca3af', '#86efac', '#22c55e'];
+                ctx.fillStyle = colors[this.level - 1];
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, cellWidth * 0.12, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, cellWidth * (this.level === 3 ? 0.15 : 0.11), 0, Math.PI * 2);
                 ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
             }
         }
 
@@ -2417,6 +3174,28 @@
             ctx.fillStyle = COLORS.bg;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Renderização de Auras de Torres de Santuário
+            towers.forEach(t => {
+                if (t.type === CELL_TYPES.TOWER_SANCTUARY && t.level === 3) {
+                    const cx = (t.col + 0.5) * cellWidth;
+                    const cy = (t.row + 0.5) * cellHeight;
+                    const range = t.getEffectiveRange();
+
+                    ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, range, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.strokeStyle = 'rgba(96, 165, 250, 0.25)';
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([4, 4]);
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, range, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            });
+
             for (let r = 0; r < ROWS; r++) {
                 for (let c = 0; c < COLS; c++) {
                     const x = c * cellWidth;
@@ -2427,14 +3206,31 @@
                     if (cell.type === CELL_TYPES.EMPTY && grass.hasGrass) {
                         ctx.fillStyle = grass.color;
                         ctx.fillRect(x, y, cellWidth, cellHeight);
-                    } else if (cell.type === CELL_TYPES.PATH || cell.type === CELL_TYPES.SPIKES || cell.type === CELL_TYPES.GROUND_LASER) {
+
+                        ctx.strokeStyle = '#1b432c';
+                        ctx.lineWidth = 1.2;
+                        const cx = x + cellWidth * 0.5;
+                        const cy = y + cellHeight * 0.5;
+
+                        for (let b of grass.blades) {
+                            const bx = cx + b.ox * cellWidth;
+                            const by = cy + b.oy * cellHeight;
+                            ctx.beginPath();
+                            ctx.moveTo(bx, by);
+                            ctx.lineTo(bx + b.slant * cellWidth, by - b.h * cellHeight);
+                            ctx.stroke();
+                        }
+                    } else if (cell.type === CELL_TYPES.PATH || cell.type === CELL_TYPES.SPIKES) {
                         ctx.fillStyle = cell.isUpgradedPath ? COLORS.pathUpgraded : COLORS.path;
                         ctx.fillRect(x, y, cellWidth, cellHeight);
 
                         if (cell.isUpgradedPath) {
                             ctx.strokeStyle = '#38bdf8';
                             ctx.lineWidth = 1;
-                            ctx.strokeRect(x + 1, y + 1, cellWidth - 2, cellHeight - 2);
+                            ctx.beginPath();
+                            ctx.moveTo(x + 2, y + cellHeight / 2);
+                            ctx.lineTo(x + cellWidth - 2, y + cellHeight / 2);
+                            ctx.stroke();
                         }
 
                         if (cell.type === CELL_TYPES.SPIKES) {
@@ -2448,19 +3244,13 @@
                                 ctx.lineTo(x + i * spacing + 3, y + cellHeight - 4);
                                 ctx.stroke();
                             }
-                        } else if (cell.type === CELL_TYPES.GROUND_LASER) {
-                            // DESENHO DO LASER NO CHÃO
-                            ctx.fillStyle = '#ef4444';
-                            ctx.fillRect(x + cellWidth * 0.1, y + cellHeight * 0.4, cellWidth * 0.8, cellHeight * 0.2);
-                            ctx.shadowColor = '#f43f5e';
-                            ctx.shadowBlur = 8;
-                            ctx.fillStyle = '#ffffff';
-                            ctx.fillRect(x + cellWidth * 0.2, y + cellHeight * 0.45, cellWidth * 0.6, cellHeight * 0.1);
-                            ctx.shadowBlur = 0;
                         }
                     } else if (cell.type === CELL_TYPES.WALL) {
                         ctx.fillStyle = COLORS.wall;
                         ctx.fillRect(x + 1, y + 1, cellWidth - 2, cellHeight - 2);
+                        ctx.strokeStyle = '#FFFFFF';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(x + 3, y + 3, cellWidth - 6, cellHeight - 6);
                     }
 
                     ctx.strokeStyle = COLORS.gridLines;
@@ -2475,31 +3265,168 @@
             ctx.beginPath();
             ctx.arc(startX, startY, cellWidth * 0.35, 0, Math.PI * 2);
             ctx.fill();
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 9px monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('IN', startX, startY);
 
             const endX = (endCell.col + 0.5) * cellWidth;
             const endY = (endCell.row + 0.5) * cellHeight;
             ctx.fillStyle = '#f43f5e';
             ctx.fillRect(endX - cellWidth * 0.35, endY - cellHeight * 0.35, cellWidth * 0.7, cellHeight * 0.7);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillText('BASE', endX, endY);
+
+            if (cachedPath.length > 0) {
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                cachedPath.forEach((pt, i) => {
+                    const px = (pt.col + 0.5) * cellWidth;
+                    const py = (pt.row + 0.5) * cellHeight;
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                });
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
 
             towers.forEach(t => t.draw());
+
+            if (hoverCell) {
+                const hx = hoverCell.col * cellWidth;
+                const hy = hoverCell.row * cellHeight;
+                
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(hx, hy, cellWidth, cellHeight);
+
+                if (['tower_moss', 'tower_long', 'tower_summon', 'tower_drone', 'tower_sanctuary', 'tower_missile', 'tower_prisma'].includes(activeTool)) {
+                    const dummyMap = {
+                        tower_moss: CELL_TYPES.TOWER_MOSS,
+                        tower_long: CELL_TYPES.TOWER_LONG,
+                        tower_summon: CELL_TYPES.TOWER_SUMMON,
+                        tower_drone: CELL_TYPES.TOWER_DRONE,
+                        tower_sanctuary: CELL_TYPES.TOWER_SANCTUARY,
+                        tower_missile: CELL_TYPES.TOWER_MISSILE,
+                        tower_prisma: CELL_TYPES.TOWER_PRISMA
+                    };
+                    const dummyTower = new Tower(hoverCell.col, hoverCell.row, dummyMap[activeTool]);
+                    const range = dummyTower.getEffectiveRange();
+                    if (range < 5000) {
+                        const isBuffed = dummyTower.hasWallBuff();
+                        ctx.strokeStyle = isBuffed ? COLORS.buffedRangeIndicator : COLORS.rangeIndicator;
+                        ctx.fillStyle = isBuffed ? 'rgba(56, 189, 248, 0.05)' : 'transparent';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.arc(hx + cellWidth / 2, hy + cellHeight / 2, range, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            if (selectedGridPos) {
+                const sx = selectedGridPos.col * cellWidth;
+                const sy = selectedGridPos.row * cellHeight;
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(sx + 2, sy + 2, cellWidth - 4, cellHeight - 4);
+
+                let selectedCell = grid[selectedGridPos.row][selectedGridPos.col];
+                if (selectedCell.type === CELL_TYPES.FARM_EXTENSION && selectedCell.parentCell) {
+                    selectedCell = selectedCell.parentCell;
+                }
+
+                if (selectedCell.structure && selectedCell.structure.baseRangeCells > 0 && selectedCell.structure.baseRangeCells < 500) {
+                    const range = selectedCell.structure.getEffectiveRange();
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+                    ctx.setLineDash([3, 3]);
+                    ctx.beginPath();
+                    ctx.arc((selectedCell.structure.col + 0.5) * cellWidth, (selectedCell.structure.row + 0.5) * cellHeight, range, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
         }
 
         function generateWaveEnemies(waveNum) {
             let list = [];
+
+            // ONDAS ESPECIAIS COM OS NOVOS BOSSES
+            if (waveNum === 40) {
+                list.push(new Enemy('colosso_ferro', 1));
+                return list;
+            }
+
+            if (waveNum === 45) {
+                list.push(new Enemy('devorador_cromatico', 1));
+                return list;
+            }
+
+            if (waveNum === 50) {
+                // Chefe Final
+                list.push(new Enemy('coracao_monocromia', 1));
+                return list;
+            }
+
             let count = 8 + waveNum * 3;
             let healthMult = Math.pow(1.3, waveNum - 1);
 
+            let isSuperBossWave = (waveNum === 10 || waveNum === 20 || waveNum === 35);
+            let isNormalBossWave = (waveNum === 5 || waveNum === 15 || waveNum === 25 || waveNum === 30);
+
+            if (waveNum > 5) {
+                list.push(new Enemy('mini_boss', healthMult));
+            }
+
             for (let i = 0; i < count; i++) {
-                if (waveNum >= 3 && i % 4 === 0) list.push(new Enemy('scout', healthMult));
-                else list.push(new Enemy('soldier', healthMult));
+                if (isSuperBossWave && i === count - 1) {
+                    list.push(new Enemy('super_boss', healthMult));
+                } else if (isNormalBossWave && i === count - 1) {
+                    list.push(new Enemy('boss_normal', healthMult));
+                } else if (waveNum >= 15 && i % 5 === 0) {
+                    list.push(new Enemy('sombra', healthMult));
+                } else if (waveNum >= 10 && i % 6 === 0) {
+                    list.push(new Enemy('torpedo', healthMult));
+                } else if (waveNum >= 6 && i % 4 === 0) {
+                    list.push(new Enemy('scout', healthMult));
+                } else {
+                    list.push(new Enemy('soldier', healthMult));
+                }
             }
             return list;
         }
 
         function startWave() {
-            if (isWaveActive) return;
+            if (isWaveActive) {
+                if (allWaveEnemiesSpawned) {
+                    forceNextWave();
+                }
+                return;
+            }
+
             if (!recalculatePath()) {
-                showNotice('Caminho inválido!');
+                showNotice('Caminho inválido! Conecte a Entrada (IN) até a BASE.');
+                return;
+            }
+
+            // ONDA DO CHEFE FINAL (ONDA 50): remove os inimigos restantes e ajusta a tela
+            if (wave === 50) {
+                enemies = [];
+                waveEnemiesToSpawn = [new Enemy('coracao_monocromia', 1)];
+                isWaveActive = true;
+                allWaveEnemiesSpawned = false;
+                spawnTimer = 0;
+                playSound('boss_roar');
+                showNotice("O Coração da Monocromia despertou!");
+
+                const btn = document.getElementById('btn-start-wave');
+                const lbl = document.getElementById('start-wave-label');
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                lbl.innerText = 'ONDA FINAL';
                 return;
             }
 
@@ -2514,10 +3441,31 @@
             lbl.innerText = 'EM ONDA...';
         }
 
+        function forceNextWave() {
+            completeWave();
+            startWave();
+        }
+
         function completeWave() {
             isWaveActive = false;
             allWaveEnemiesSpawned = false;
             gold += 60 + wave * 14;
+
+            // Esconde barra do boss se estivesse ativa
+            const bossBar = document.getElementById('boss-bar-container');
+            if (bossBar) bossBar.classList.add('hidden');
+
+            towers.forEach(t => {
+                if (t.type === CELL_TYPES.TOWER_SANCTUARY && t.disabledTimer <= 0) {
+                    const interval = t.level === 1 ? 5 : (t.level === 2 ? 3 : 2);
+                    if (wave % interval === 0) {
+                        lives++;
+                        createParticles((t.col + 0.5) * cellWidth, (t.row + 0.5) * cellHeight, 10, '#60a5fa');
+                        showNotice("Santuário regenerou +1 Vida para a Base!");
+                    }
+                }
+            });
+
             wave++;
             evolveGrass();
 
@@ -2525,19 +3473,60 @@
             const lbl = document.getElementById('start-wave-label');
             btn.classList.remove('opacity-50', 'cursor-not-allowed');
             lbl.innerText = 'INICIAR ONDA';
+
+            if (wave > maxWaves) {
+                triggerGameOver(true);
+            } else if (autoSkip) {
+                setTimeout(() => {
+                    if (!gameOver && !isWaveActive) startWave();
+                }, 1000);
+            }
         }
 
+        /* ========================================================
+           SEQUÊNCIA DE VITÓRIA DO CHEFE FINAL (CORAÇÃO DA MONOCROMIA)
+           ======================================================== */
         function startVictorySequence(centerX, centerY) {
             isVictorySequenceActive = true;
             isWaveActive = false;
+            allWaveEnemiesSpawned = true;
+
+            // Para inimigos, partículas e limpa projeções
             enemies = [];
-            showVictoryOverlay();
+            projectiles = [];
+            prismBeams = [];
+            particles = [];
+
+            const bossBar = document.getElementById('boss-bar-container');
+            if (bossBar) bossBar.classList.add('hidden');
+
+            let flashRadius = 10;
+            const maxRadius = Math.hypot(canvas.width, canvas.height) * 1.5;
+
+            const interval = setInterval(() => {
+                flashRadius += 25;
+                victoryWhiteFlashRadius = flashRadius;
+
+                // Desenha feixe radiante branco a partir da posição do boss
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, flashRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                if (flashRadius >= maxRadius) {
+                    clearInterval(interval);
+                    showVictoryOverlay();
+                }
+            }, 20);
         }
 
         function showVictoryOverlay() {
             saveStats();
             const modal = document.getElementById('victory-modal');
             const content = document.getElementById('victory-content');
+
             if (modal && content) {
                 modal.classList.remove('hidden');
                 setTimeout(() => {
@@ -2556,7 +3545,12 @@
 
         function selectTool(toolName) {
             initAudio();
-            activeTool = (activeTool === toolName) ? null : toolName;
+            if (activeTool === toolName) {
+                activeTool = null;
+            } else {
+                activeTool = toolName;
+            }
+
             document.querySelectorAll('.btn-tool').forEach(btn => btn.classList.remove('active'));
             if (activeTool) {
                 const activeBtn = document.getElementById(`tool-${activeTool}`);
@@ -2568,6 +3562,10 @@
             initAudio();
             selectedGridPos = { col, row };
             let cell = grid[row][col];
+
+            if (cell.type === CELL_TYPES.FARM_EXTENSION && cell.parentCell) {
+                cell = cell.parentCell;
+            }
 
             if (activeTool) {
                 if (activeTool === 'sell') {
@@ -2586,6 +3584,7 @@
                         cell.type = CELL_TYPES.PATH;
                         if (!recalculatePath()) {
                             cell.type = CELL_TYPES.EMPTY;
+                            if (!isDrag) showNotice('Construção inválida! Não bloqueie o caminho.');
                             return;
                         }
                         gold -= cost;
@@ -2594,6 +3593,11 @@
                 } else if (activeTool === 'wall') {
                     if (cell.type === CELL_TYPES.EMPTY) {
                         cell.type = CELL_TYPES.WALL;
+                        if (!recalculatePath()) {
+                            cell.type = CELL_TYPES.EMPTY;
+                            if (!isDrag) showNotice('Não é possível colocar parede aqui!');
+                            return;
+                        }
                         gold -= cost;
                         playSound('build');
                     }
@@ -2602,26 +3606,28 @@
                         cell.type = CELL_TYPES.SPIKES;
                         gold -= cost;
                         playSound('build');
-                        checkTowerCombinations(); // TESTA FUSÃO DE ESPINHOS + RUA ASFALTADA
+                    } else {
+                        if (!isDrag) showNotice('Espinhos só podem ser construídos sobre a PISTA.');
                     }
                 } else if (['tower_moss', 'tower_long', 'tower_summon', 'tower_drone', 'tower_sanctuary', 'tower_missile', 'tower_prisma', 'farm'].includes(activeTool)) {
                     if (cell.type === CELL_TYPES.EMPTY) {
-                        let towerType = CELL_TYPES.TOWER_LONG;
+                        let towerType;
                         if (activeTool === 'tower_moss') towerType = CELL_TYPES.TOWER_MOSS;
-                        if (activeTool === 'tower_summon') towerType = CELL_TYPES.TOWER_SUMMON;
-                        if (activeTool === 'tower_drone') towerType = CELL_TYPES.TOWER_DRONE;
-                        if (activeTool === 'tower_sanctuary') towerType = CELL_TYPES.TOWER_SANCTUARY;
-                        if (activeTool === 'tower_missile') towerType = CELL_TYPES.TOWER_MISSILE;
-                        if (activeTool === 'tower_prisma') towerType = CELL_TYPES.TOWER_PRISMA;
-                        if (activeTool === 'farm') towerType = CELL_TYPES.FARM;
+                        else if (activeTool === 'tower_long') towerType = CELL_TYPES.TOWER_LONG;
+                        else if (activeTool === 'tower_summon') towerType = CELL_TYPES.TOWER_SUMMON;
+                        else if (activeTool === 'tower_drone') towerType = CELL_TYPES.TOWER_DRONE;
+                        else if (activeTool === 'tower_sanctuary') towerType = CELL_TYPES.TOWER_SANCTUARY;
+                        else if (activeTool === 'tower_missile') towerType = CELL_TYPES.TOWER_MISSILE;
+                        else if (activeTool === 'tower_prisma') towerType = CELL_TYPES.TOWER_PRISMA;
+                        else towerType = CELL_TYPES.FARM;
 
                         cell.type = towerType;
                         cell.structure = new Tower(col, row, towerType);
                         towers.push(cell.structure);
                         gold -= cost;
                         playSound('build');
-
-                        checkTowerCombinations(); // TESTA FUSÕES
+                    } else {
+                        if (!isDrag) showNotice('Torres só podem ser construídas em espaços vazios.');
                     }
                 }
             }
@@ -2633,27 +3639,44 @@
             if (!selectedGridPos) return;
             let cell = grid[selectedGridPos.row][selectedGridPos.col];
 
+            if (cell.type === CELL_TYPES.FARM_EXTENSION && cell.parentCell) {
+                cell = cell.parentCell;
+            }
+
             if (cell.structure) {
                 const t = cell.structure;
                 const cost = t.getUpgradeCost();
 
                 if (cost > 0 && gold >= cost) {
+                    if (t.type === CELL_TYPES.FARM && t.level === 1) {
+                        if (t.col + 1 < COLS && grid[t.row][t.col + 1].type === CELL_TYPES.EMPTY) {
+                            grid[t.row][t.col + 1].type = CELL_TYPES.FARM_EXTENSION;
+                            grid[t.row][t.col + 1].parentCell = cell;
+                            t.income = 10;
+                        } else {
+                            showNotice('Espaço insuficiente! A Fazenda precisa de 2 blocos livres.');
+                            return;
+                        }
+                    } else if (t.type === CELL_TYPES.FARM && t.level === 2) {
+                        t.income = 50;
+                    }
+
                     gold -= cost;
                     t.level++;
                     playSound('build');
-                    checkTowerCombinations(); // VERIFICA FUSÕES AO SUBIR PARA O NÍVEL MÁXIMO
                     updateInspector();
+                } else if (cost > 0) {
+                    showNotice('Moedas insuficientes para upgrade!');
                 }
             } else if (cell.type === CELL_TYPES.PATH && !cell.isUpgradedPath) {
                 if (gold >= COSTS.pathUpgrade) {
                     gold -= COSTS.pathUpgrade;
                     cell.isUpgradedPath = true;
                     playSound('build');
-                    checkTowerCombinations(); // TESTA ESPINHOS + RUA ASFALTADA
                     updateInspector();
+                } else {
+                    showNotice('Moedas insuficientes para asfaltar!');
                 }
-            } else if (cell.type === CELL_TYPES.SPIKES && cell.isUpgradedPath) {
-                checkTowerCombinations();
             }
         }
 
@@ -2662,15 +3685,61 @@
             const { col, row } = selectedGridPos;
             let cell = grid[row][col];
 
+            if (cell.type === CELL_TYPES.FARM_EXTENSION && cell.parentCell) {
+                cell = cell.parentCell;
+            }
+
+            if ((col === startCell.col && row === startCell.row) || (col === endCell.col && row === endCell.row)) {
+                return;
+            }
+
             if (cell.type !== CELL_TYPES.EMPTY) {
+                let refund = 0;
                 if (cell.structure) {
                     const index = towers.indexOf(cell.structure);
                     if (index > -1) towers.splice(index, 1);
+                    
+                    const costKeyMap = {
+                        [CELL_TYPES.TOWER_MOSS]: 'tower_moss',
+                        [CELL_TYPES.TOWER_LONG]: 'tower_long',
+                        [CELL_TYPES.TOWER_SUMMON]: 'tower_summon',
+                        [CELL_TYPES.TOWER_DRONE]: 'tower_drone',
+                        [CELL_TYPES.TOWER_SANCTUARY]: 'tower_sanctuary',
+                        [CELL_TYPES.TOWER_MISSILE]: 'tower_missile',
+                        [CELL_TYPES.TOWER_PRISMA]: 'tower_prisma',
+                        [CELL_TYPES.FARM]: 'farm',
+                        [CELL_TYPES.SYN_GROWTH]: 'syn_growth',
+                        [CELL_TYPES.SYN_BARRACKS]: 'syn_barracks',
+                        [CELL_TYPES.SYN_SWAMP]: 'syn_swamp',
+                        [CELL_TYPES.SYN_PROSPERITY]: 'syn_prosperity',
+                        [CELL_TYPES.SYN_CHROMA]: 'syn_chroma'
+                    };
+                    refund = Math.floor((COSTS[costKeyMap[cell.structure.type]] || 50) * 0.75);
+
+                    if (cell.structure.type === CELL_TYPES.FARM && cell.structure.col + 1 < COLS) {
+                        if (grid[cell.structure.row][cell.structure.col + 1].type === CELL_TYPES.FARM_EXTENSION) {
+                            grid[cell.structure.row][cell.structure.col + 1].type = CELL_TYPES.EMPTY;
+                            grid[cell.structure.row][cell.structure.col + 1].parentCell = null;
+                        }
+                    }
+                } else if (cell.type === CELL_TYPES.WALL) refund = Math.floor(COSTS.wall * 0.75);
+                else if (cell.type === CELL_TYPES.SPIKES) {
+                    refund = Math.floor(COSTS.spikes * 0.75);
+                    cell.type = CELL_TYPES.PATH;
+                } else if (cell.type === CELL_TYPES.PATH) {
+                    refund = Math.floor(COSTS.path * 0.75);
+                    cell.type = CELL_TYPES.EMPTY;
+                    if (!recalculatePath()) {
+                        cell.type = CELL_TYPES.PATH;
+                        if (!isDrag) showNotice('Não é possível remover este caminho pois desconectará a base!');
+                        return;
+                    }
                 }
-                cell.type = CELL_TYPES.EMPTY;
+
+                gold += refund;
+                if (cell.type !== CELL_TYPES.SPIKES) cell.type = CELL_TYPES.EMPTY;
                 cell.structure = null;
                 cell.isUpgradedPath = false;
-                recalculatePath();
                 playSound('build');
                 updateInspector();
             }
@@ -2683,31 +3752,253 @@
             const panelActions = document.getElementById('inspect-actions');
             const btnUpgrade = document.getElementById('btn-upgrade');
             const upgradeText = document.getElementById('upgrade-btn-text');
+            const sellText = document.getElementById('sell-btn-text');
 
-            if (!selectedGridPos) return;
+            const floatInspector = document.getElementById('floating-inspector');
+            const floatTitle = document.getElementById('float-inspect-title');
+            const floatSubtitle = document.getElementById('float-inspect-subtitle');
+            const floatDetails = document.getElementById('float-inspect-details');
+            const floatBtnUpgrade = document.getElementById('float-btn-upgrade');
+            const floatUpgradeText = document.getElementById('float-upgrade-text');
+            const floatSellText = document.getElementById('float-sell-text');
+
+            currentFusionOpportunity = null;
+            const btnFuseDefault = document.getElementById('btn-fuse');
+            const floatBtnFuseDefault = document.getElementById('float-btn-fuse');
+            if (btnFuseDefault) btnFuseDefault.classList.add('hidden');
+            if (floatBtnFuseDefault) floatBtnFuseDefault.classList.add('hidden');
+
+            if (!selectedGridPos) {
+                panelTitle.innerText = 'INSPEÇÃO';
+                panelSubtitle.innerText = 'Nenhum';
+                panelDetails.innerText = 'Clique em qualquer estrutura ou espaço para inspecionar.';
+                panelActions.classList.add('hidden');
+                if (floatInspector) floatInspector.classList.add('hidden');
+                return;
+            }
+
             const { col, row } = selectedGridPos;
             let cell = grid[row][col];
 
+            if (cell.type === CELL_TYPES.FARM_EXTENSION && cell.parentCell) {
+                cell = cell.parentCell;
+            }
+
             if (cell.structure) {
                 const t = cell.structure;
-                panelTitle.innerText = "TORRE";
-                panelSubtitle.innerText = `Nível ${t.level} / ${t.maxLevel}`;
-                panelActions.classList.remove('hidden');
+                const titles = {
+                    [CELL_TYPES.TOWER_MOSS]: 'TORRE MUSGO',
+                    [CELL_TYPES.TOWER_LONG]: 'TORRE LONGA',
+                    [CELL_TYPES.TOWER_SUMMON]: 'TORRE SUMONADORA',
+                    [CELL_TYPES.TOWER_DRONE]: t.level === 4 ? 'TORRE HELI' : 'TORRE DRONE',
+                    [CELL_TYPES.TOWER_SANCTUARY]: 'TORRE SANTUÁRIO',
+                    [CELL_TYPES.TOWER_MISSILE]: 'TORRE MÍSSIL',
+                    [CELL_TYPES.TOWER_PRISMA]: 'TORRE PRISMA',
+                    [CELL_TYPES.FARM]: 'FAZENDA',
+                    [CELL_TYPES.SYN_GROWTH]: '🌱 CRESCIMENTO ACELERADO',
+                    [CELL_TYPES.SYN_BARRACKS]: '⚔️ FORTE DO QUARTEL',
+                    [CELL_TYPES.SYN_SWAMP]: '🔥 PÂNTANO INCENDIÁRIO',
+                    [CELL_TYPES.SYN_PROSPERITY]: '💰 PROSPERIDADE',
+                    [CELL_TYPES.SYN_CHROMA]: '💠 DOMÍNIO CROMÁTICO'
+                };
+
+                const titleStr = titles[t.type] || 'TORRE';
+                const subStr = SYNERGY_CELL_TYPES.includes(t.type) ? 'Torre de Sinergia' : `Nível ${t.level} / ${t.maxLevel}`;
+
+                panelTitle.innerText = titleStr;
+                panelSubtitle.innerText = subStr;
+                floatTitle.innerText = titleStr;
+                floatSubtitle.innerText = subStr;
+
+                const stats = t.getStatDetails();
+                const isBuffed = t.hasWallBuff();
+                const isStunned = t.disabledTimer > 0;
+
+                let detailsHtml = `
+                    <div class="flex justify-between py-0.5 border-b border-neutral-800">
+                        <span class="text-neutral-500">ALCANCE:</span>
+                        <span class="font-bold text-white">${stats.rangeStr} ${isBuffed ? '(+50%)' : ''}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5 border-b border-neutral-800">
+                        <span class="text-neutral-500">DANO/EF:</span>
+                        <span class="font-bold text-white">${stats.powerStr}</span>
+                    </div>
+                    <div class="flex justify-between py-0.5 border-b border-neutral-800">
+                        <span class="text-neutral-500">VELOCIDADE:</span>
+                        <span class="font-bold text-white">${stats.speedStr}</span>
+                    </div>
+                `;
+
+                if (isStunned) {
+                    detailsHtml += `<div class="text-red-400 font-bold mt-1 text-[9px]">⚠️ DESATIVADA POR EMP/DESATIVADOR!</div>`;
+                }
+
+                panelDetails.innerHTML = detailsHtml;
+                floatDetails.innerHTML = detailsHtml;
 
                 const upCost = t.getUpgradeCost();
                 if (upCost > 0) {
                     btnUpgrade.classList.remove('hidden');
+                    floatBtnUpgrade.classList.remove('hidden');
                     upgradeText.innerText = `UPGRADE ($${upCost})`;
+                    floatUpgradeText.innerText = `UPGRADE ($${upCost})`;
                 } else {
                     btnUpgrade.classList.add('hidden');
+                    floatBtnUpgrade.classList.add('hidden');
                 }
+
+                // Verifica oportunidade de fusão (sinergia) para a torre selecionada
+                currentFusionOpportunity = findFusionForTower(t);
+                const btnFuse = document.getElementById('btn-fuse');
+                const fuseText = document.getElementById('fuse-btn-text');
+                const floatBtnFuse = document.getElementById('float-btn-fuse');
+                const floatFuseText = document.getElementById('float-fuse-text');
+
+                if (currentFusionOpportunity) {
+                    const r = currentFusionOpportunity.recipe;
+                    const fuseLabel = `⚡ FUNDIR: ${r.name} ($${r.cost})`;
+                    if (btnFuse) { btnFuse.classList.remove('hidden'); }
+                    if (fuseText) fuseText.innerText = fuseLabel;
+                    if (floatBtnFuse) { floatBtnFuse.classList.remove('hidden'); }
+                    if (floatFuseText) floatFuseText.innerText = fuseLabel;
+                } else {
+                    if (btnFuse) btnFuse.classList.add('hidden');
+                    if (floatBtnFuse) floatBtnFuse.classList.add('hidden');
+                }
+
+                const costKeyMap = {
+                    [CELL_TYPES.TOWER_MOSS]: 'tower_moss',
+                    [CELL_TYPES.TOWER_LONG]: 'tower_long',
+                    [CELL_TYPES.TOWER_SUMMON]: 'tower_summon',
+                    [CELL_TYPES.TOWER_DRONE]: 'tower_drone',
+                    [CELL_TYPES.TOWER_SANCTUARY]: 'tower_sanctuary',
+                    [CELL_TYPES.TOWER_MISSILE]: 'tower_missile',
+                    [CELL_TYPES.TOWER_PRISMA]: 'tower_prisma',
+                    [CELL_TYPES.FARM]: 'farm',
+                    [CELL_TYPES.SYN_GROWTH]: 'syn_growth',
+                    [CELL_TYPES.SYN_BARRACKS]: 'syn_barracks',
+                    [CELL_TYPES.SYN_SWAMP]: 'syn_swamp',
+                    [CELL_TYPES.SYN_PROSPERITY]: 'syn_prosperity',
+                    [CELL_TYPES.SYN_CHROMA]: 'syn_chroma'
+                };
+                const sellVal = Math.floor((COSTS[costKeyMap[t.type]] || 50) * 0.75);
+                sellText.innerText = `VENDER ($${sellVal})`;
+                floatSellText.innerText = `VENDER ($${sellVal})`;
+                panelActions.classList.remove('hidden');
+
+            } else if (cell.type === CELL_TYPES.PATH) {
+                panelTitle.innerText = 'PISTA (RUA)';
+                panelSubtitle.innerText = cell.isUpgradedPath ? 'Asfaltada (-30%)' : 'Padrão';
+                floatTitle.innerText = 'PISTA (RUA)';
+                floatSubtitle.innerText = cell.isUpgradedPath ? 'Asfaltada (-30%)' : 'Padrão';
+
+                const pathDesc = cell.isUpgradedPath ? 'Esta rua desacelera inimigos em 30%.' : 'Pode ser asfaltada para desacelerar inimigos.';
+                panelDetails.innerText = pathDesc;
+                floatDetails.innerText = pathDesc;
+                
+                panelActions.classList.remove('hidden');
+                if (!cell.isUpgradedPath) {
+                    btnUpgrade.classList.remove('hidden');
+                    floatBtnUpgrade.classList.remove('hidden');
+                    upgradeText.innerText = `ASFALTAR ($${COSTS.pathUpgrade})`;
+                    floatUpgradeText.innerText = `ASFALTAR ($${COSTS.pathUpgrade})`;
+                } else {
+                    btnUpgrade.classList.add('hidden');
+                    floatBtnUpgrade.classList.add('hidden');
+                }
+                const pathSell = Math.floor(COSTS.path * 0.75);
+                sellText.innerText = `DESTRUIR ($${pathSell})`;
+                floatSellText.innerText = `DESTRUIR ($${pathSell})`;
+
+            } else if (cell.type === CELL_TYPES.WALL) {
+                panelTitle.innerText = 'PAREDE (BUFF)';
+                panelSubtitle.innerText = 'Estrutura';
+                floatTitle.innerText = 'PAREDE (BUFF)';
+                floatSubtitle.innerText = 'Estrutura';
+
+                panelDetails.innerText = 'Concede +50% de Alcance para qualquer torre adjacente.';
+                floatDetails.innerText = 'Concede +50% de Alcance para qualquer torre adjacente.';
+
+                panelActions.classList.remove('hidden');
+                btnUpgrade.classList.add('hidden');
+                floatBtnUpgrade.classList.add('hidden');
+                const wallSell = Math.floor(COSTS.wall * 0.75);
+                sellText.innerText = `VENDER ($${wallSell})`;
+                floatSellText.innerText = `VENDER ($${wallSell})`;
+
+            } else if (cell.type === CELL_TYPES.SPIKES) {
+                panelTitle.innerText = 'ESPINHOS';
+                panelSubtitle.innerText = 'Armadilha';
+                floatTitle.innerText = 'ESPINHOS';
+                floatSubtitle.innerText = 'Armadilha';
+
+                panelDetails.innerText = 'Aplica 50% de lentidão e dano contínuo aos inimigos.';
+                floatDetails.innerText = 'Aplica 50% de lentidão e dano contínuo aos inimigos.';
+
+                panelActions.classList.remove('hidden');
+                btnUpgrade.classList.add('hidden');
+                floatBtnUpgrade.classList.add('hidden');
+                const spikeSell = Math.floor(COSTS.spikes * 0.75);
+                sellText.innerText = `REMOVER ($${spikeSell})`;
+                floatSellText.innerText = `REMOVER ($${spikeSell})`;
+
+            } else {
+                panelTitle.innerText = 'ESPAÇO VAZIO';
+                panelSubtitle.innerText = `[${col}, ${row}]`;
+                panelDetails.innerText = 'Selecione uma ferramenta no painel inferior para construir.';
+                panelActions.classList.add('hidden');
+                if (floatInspector) floatInspector.classList.add('hidden');
+                return;
+            }
+
+            if (floatInspector && canvas) {
+                floatInspector.classList.remove('hidden');
+
+                const canvasRect = canvas.getBoundingClientRect();
+                const tileCenterX = canvasRect.left + (col + 0.5) * cellWidth;
+                const tileTopY = canvasRect.top + row * cellHeight;
+                const tileBottomY = canvasRect.top + (row + 1) * cellHeight;
+
+                const inspectorWidth = floatInspector.offsetWidth || 210;
+                const inspectorHeight = floatInspector.offsetHeight || 160;
+
+                const margin = 10;
+                const screenW = window.innerWidth;
+                const screenH = window.innerHeight;
+
+                let posX = tileCenterX - inspectorWidth / 2;
+                let posY = tileTopY - inspectorHeight - 8;
+
+                if (posY < margin) {
+                    posY = tileBottomY + 8;
+                }
+
+                posY = Math.max(margin, Math.min(screenH - inspectorHeight - margin, posY));
+                posX = Math.max(margin, Math.min(screenW - inspectorWidth - margin, posX));
+
+                floatInspector.style.left = `${posX}px`;
+                floatInspector.style.top = `${posY}px`;
             }
         }
 
         function triggerGameOver(isWin) {
             gameOver = true;
+            gameWon = isWin;
             saveStats();
-            document.getElementById('game-overlay').classList.remove('hidden');
+            const overlay = document.getElementById('game-overlay');
+            const title = document.getElementById('overlay-title');
+            const desc = document.getElementById('overlay-desc');
+
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+
+            if (isWin) {
+                title.innerText = 'VITÓRIA!';
+                desc.innerText = 'Você defendeu sua base com sucesso contra todas as 50 ondas!';
+            } else {
+                title.innerText = 'FIM DE JOGO';
+                desc.innerText = 'A base foi destruída pelas hordas inimigas.';
+            }
         }
 
         function restartGame() {
@@ -2715,7 +4006,11 @@
             lives = 20;
             wave = 1;
             isWaveActive = false;
+            allWaveEnemiesSpawned = false;
             gameOver = false;
+            gameWon = false;
+            isVictorySequenceActive = false;
+
             towers = [];
             enemies = [];
             allies = [];
@@ -2723,22 +4018,38 @@
             projectiles = [];
             prismBeams = [];
             particles = [];
+            selectedGridPos = null;
+
             document.getElementById('game-overlay').classList.add('hidden');
+            const bossBar = document.getElementById('boss-bar-container');
+            if (bossBar) bossBar.classList.add('hidden');
+
+            const btn = document.getElementById('btn-start-wave');
+            const lbl = document.getElementById('start-wave-label');
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            lbl.innerText = 'INICIAR ONDA';
+
             initGrid();
+            updateInspector();
         }
 
         function updateHUD() {
-            document.getElementById('stat-lives').innerText = lives;
+            document.getElementById('stat-lives').innerText = Math.max(0, lives);
             document.getElementById('stat-gold').innerText = `$${gold}`;
             document.getElementById('stat-wave').innerText = `${wave} / ${maxWaves}`;
             document.getElementById('stat-enemies').innerText = enemies.length + waveEnemiesToSpawn.length;
         }
 
         function gameLoop() {
+            enemies.forEach(e => e.isBlockedByTank = false);
+
             if (isWaveActive) {
                 if (waveEnemiesToSpawn.length > 0) {
                     spawnTimer += gameSpeed;
-                    if (spawnTimer >= 35) {
+
+                    const baseSpawnInterval = wave > 5 ? Math.max(12, 38 - Math.floor((wave - 5) * 1.8)) : 38;
+
+                    if (spawnTimer >= baseSpawnInterval) {
                         enemies.push(waveEnemiesToSpawn.shift());
                         spawnTimer = 0;
                     }
@@ -2746,31 +4057,49 @@
                     allWaveEnemiesSpawned = true;
                 }
 
-                if (allWaveEnemiesSpawned && enemies.length === 0) {
+                if (allWaveEnemiesSpawned && enemies.length === 0 && !isVictorySequenceActive) {
                     completeWave();
                 }
             }
 
-            for (let i = enemies.length - 1; i >= 0; i--) {
-                if (!enemies[i].update()) enemies.splice(i, 1);
-            }
+            // Tanques atualizam primeiro para marcar quais inimigos estão sendo bloqueados
+            // nesta rodada — assim os inimigos realmente param enquanto são atacados.
             for (let i = allies.length - 1; i >= 0; i--) {
-                if (!allies[i].update()) allies.splice(i, 1);
+                if (!allies[i].update()) {
+                    allies.splice(i, 1);
+                }
             }
+
+            for (let i = enemies.length - 1; i >= 0; i--) {
+                if (!enemies[i].update()) {
+                    enemies.splice(i, 1);
+                }
+            }
+
             for (let i = drones.length - 1; i >= 0; i--) {
-                if (!drones[i].update()) drones.splice(i, 1);
+                if (!drones[i].update()) {
+                    drones.splice(i, 1);
+                }
             }
 
             towers.forEach(t => t.update());
 
             for (let i = projectiles.length - 1; i >= 0; i--) {
-                if (!projectiles[i].update()) projectiles.splice(i, 1);
+                if (!projectiles[i].update()) {
+                    projectiles.splice(i, 1);
+                }
             }
+
             for (let i = prismBeams.length - 1; i >= 0; i--) {
-                if (!prismBeams[i].update()) prismBeams.splice(i, 1);
+                if (!prismBeams[i].update()) {
+                    prismBeams.splice(i, 1);
+                }
             }
+
             for (let i = particles.length - 1; i >= 0; i--) {
-                if (!particles[i].update()) particles.splice(i, 1);
+                if (!particles[i].update()) {
+                    particles.splice(i, 1);
+                }
             }
 
             renderMap();
@@ -2782,22 +4111,39 @@
             particles.forEach(p => p.draw());
 
             updateHUD();
+
             requestAnimationFrame(gameLoop);
         }
 
         function getGridCoordinates(e) {
             const rect = canvas.getBoundingClientRect();
-            let clientX = e.clientX || (e.touches && e.touches[0].clientX);
-            let clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            let clientX = e.clientX;
+            let clientY = e.clientY;
+
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else if (e.changedTouches && e.changedTouches.length > 0) {
+                clientX = e.changedTouches[0].clientX;
+                clientY = e.changedTouches[0].clientY;
+            }
+
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            const col = Math.floor(x / cellWidth);
+            const row = Math.floor(y / cellHeight);
+
             return {
-                col: Math.max(0, Math.min(COLS - 1, Math.floor((clientX - rect.left) / cellWidth))),
-                row: Math.max(0, Math.min(ROWS - 1, Math.floor((clientY - rect.top) / cellHeight)))
+                col: Math.max(0, Math.min(COLS - 1, col)),
+                row: Math.max(0, Math.min(ROWS - 1, row))
             };
         }
 
         window.onload = function() {
             canvas = document.getElementById('gameCanvas');
             ctx = canvas.getContext('2d');
+
             loadStats();
             initGrid();
             resizeCanvas();
@@ -2807,10 +4153,54 @@
             canvas.addEventListener('mousedown', (e) => {
                 isMouseDown = true;
                 const { col, row } = getGridCoordinates(e);
+                lastPaintedCell = { col, row };
                 handleGridClick(col, row, false);
             });
 
-            window.addEventListener('mouseup', () => { isMouseDown = false; });
+            canvas.addEventListener('mousemove', (e) => {
+                const { col, row } = getGridCoordinates(e);
+                hoverCell = { col, row };
+
+                if (isMouseDown && (lastPaintedCell?.col !== col || lastPaintedCell?.row !== row)) {
+                    lastPaintedCell = { col, row };
+                    handleGridClick(col, row, true);
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                isMouseDown = false;
+                lastPaintedCell = null;
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                hoverCell = null;
+            });
+
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isMouseDown = true;
+                const { col, row } = getGridCoordinates(e);
+                lastPaintedCell = { col, row };
+                hoverCell = { col, row };
+                handleGridClick(col, row, false);
+            }, { passive: false });
+
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const { col, row } = getGridCoordinates(e);
+                hoverCell = { col, row };
+
+                if (isMouseDown && (lastPaintedCell?.col !== col || lastPaintedCell?.row !== row)) {
+                    lastPaintedCell = { col, row };
+                    handleGridClick(col, row, true);
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('touchend', (e) => {
+                isMouseDown = false;
+                lastPaintedCell = null;
+                hoverCell = null;
+            });
 
             requestAnimationFrame(gameLoop);
         };
