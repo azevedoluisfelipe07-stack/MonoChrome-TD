@@ -1,45 +1,119 @@
-# Monochrome TD
+# 🎨 Monochrome TD
 
-**Monochrome TD** é um jogo de Tower Defense desenvolvido inteiramente em HTML, CSS e JavaScript, sem o uso de motores gráficos ou bibliotecas de jogos.
+Monochrome TD é um jogo de Tower Defense inspirado em jogos como Bloons TD, mas com uma identidade própria baseada em **cores, evolução e estratégia**.
 
-O objetivo é construir estradas, torres, armadilhas e outras estruturas para impedir que as hordas de inimigos alcancem sua base. Apesar do visual minimalista em preto e branco, o jogo possui mecânicas estratégicas, sistema de melhorias, diferentes tipos de torres, economia, múltiplas ondas de inimigos e suporte para computador e dispositivos móveis.
+No começo, o mundo é quase completamente monocromático. Conforme você avança, constrói e melhora suas torres, novas cores começam a aparecer.
 
-## Recursos
+## 🎮 Sobre o jogo
 
-* 🎮 Jogabilidade simples e estratégica.
-* 🏗️ Construção de estradas, paredes, espinhos e fazendas.
-* 🗼 Diferentes tipos de torres com funções únicas.
-* ⬆️ Sistema de upgrades.
-* 💰 Economia baseada em moedas.
-* 🌊 Sistema de ondas de inimigos.
-* 📱 Modo otimizado para celulares.
-* 💾 Salvamento de recordes localmente no navegador.
-* 🔊 Efeitos sonoros gerados pelo próprio navegador.
-* ⚡ Velocidade de jogo ajustável e início automático de ondas.
+Construa sua defesa, coloque torres estrategicamente e sobreviva a ondas cada vez mais difíceis.
 
-## Tecnologias utilizadas
+Você pode utilizar:
 
-* HTML5
-* CSS3
-* JavaScript (Vanilla)
-* Canvas API
+- 🌿 Torre Musgo
+- 🔵 Torre Santuário
+- 🔴 Torre de Mísseis
+- 🚁 Torre de Helicópteros
+- 🛡️ Torre de Tanques
+- 💎 Torre Prisma
+- 🟡 Fazenda
+- 🧩 Sinergias entre torres
 
-## Como jogar
+Cada torre possui diferentes níveis e funções, permitindo criar estratégias variadas.
 
-1. Abra o arquivo HTML em um navegador moderno.
-2. Inicie uma nova partida.
-3. Construa sua defesa utilizando os recursos disponíveis.
-4. Ganhe moedas derrotando inimigos e invista em melhorias.
-5. Sobreviva ao maior número possível de ondas.
+## 🌈 Sistema de cores
 
-## Objetivo
+As torres evoluem visualmente conforme seus upgrades.
 
-Monte uma estratégia eficiente para proteger sua base. Escolha bem onde posicionar cada estrutura, gerencie seus recursos e adapte sua defesa conforme as ondas ficam mais difíceis.
+Elas começam com aparência mais simples e acinzentada e vão adquirindo cores cada vez mais fortes e saturadas.
 
-## Projeto
+A própria progressão do jogo está ligada à recuperação das cores.
 
-Este projeto foi desenvolvido como um estudo de desenvolvimento de jogos utilizando apenas tecnologias web, buscando oferecer uma experiência leve, rápida e divertida sem necessidade de instalação.
+## 🔗 Sinergias
 
+Torres no nível máximo podem formar combinações especiais.
+
+Atualmente existem sinergias como:
+
+- 🌿 Musgo + 🔵 Santuário → **Crescimento Acelerado**
+- 🌿 Musgo + 🔴 Mísseis → **Pântano Incendiário**
+- 🟡 Fazenda + 🔵 Santuário → **Prosperidade**
+- 💎 Prisma + 🌿 Musgo + 🔵 Santuário → **Domínio Cromático**
+
+As sinergias possuem efeitos especiais e podem mudar completamente a estratégia do jogador.
+
+## 💎 Torre Prisma
+
+A Prisma é uma das torres mais poderosas do jogo e possui **5 níveis**.
+
+No nível máximo, ela possui ataques extremamente fortes, podendo atravessar vários inimigos e causar uma grande explosão.
+
+Ela também participa da sinergia **Domínio Cromático**, uma das combinações mais caras e poderosas do jogo.
+
+## 👹 Inimigos e bosses
+
+As ondas possuem diferentes tipos de inimigos, incluindo inimigos rápidos, resistentes e inimigos com habilidades especiais.
+
+O **Torpedo** é um inimigo especializado em interferir nas torres.
+
+Além dos inimigos normais, existem bosses especiais em ondas avançadas.
+
+O grande chefe final é o **Coração da Monocromia**.
+
+Derrotá-lo restaura as cores do mundo e desbloqueia a tela final de vitória.
+
+## 📱 Modo celular
+
+Monochrome TD possui um modo especialmente adaptado para celulares.
+
+Quando ativado:
+
+- A interface fica mais compacta.
+- O painel superior é reduzido.
+- O menu inicial fica adaptado para telas menores.
+- O jogo se ajusta à tela para evitar rolagem desnecessária.
+- Elementos da interface são reorganizados para facilitar o toque.
+
+Também é possível jogar com o celular na horizontal.
+
+## ⚙️ Recursos
+
+- Sistema de ondas
+- Upgrades de torres
+- Economia e dinheiro
+- Sistema de vidas
+- Bosses
+- Sinergias
+- Torre Prisma nível 5
+- Inimigos com habilidades especiais
+- Modo celular
+- Sistema de cores
+- Menu inicial
+- Inspetor de torres
+- Tela especial de vitória
+- Efeitos visuais e sonoros
+
+## 🏆 Objetivo
+
+Sobreviva às ondas, desenvolva sua defesa, descubra as melhores combinações de torres e chegue até o confronto final.
+
+No fim, existe apenas um objetivo:
+
+**🌈 trazer as cores de volta ao mundo.**
+
+---
+
+## 🚧 Status
+
+**Em desenvolvimento.**
+
+Novas torres, inimigos, sinergias, melhorias visuais e sistemas podem ser adicionados futuramente.
+
+## 📜 Créditos
+
+Projeto desenvolvido como um jogo experimental de Tower Defense.
+
+Inspirado em jogos do gênero, especialmente na série Bloons TD, mas com sistemas, estética e progressão próprios.
 ---
 
 Obrigado por jogar **Monochrome TD**! Qualquer sugestão ou feedback é sempre bem-vindo.
